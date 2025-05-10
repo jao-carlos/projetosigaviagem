@@ -2,10 +2,33 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="com.pi.FXMLController">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pi.FXMLController" prefWidth="400.0" prefHeight="300.0"
+            style="-fx-background-color: #1e1e1e;">
+    
     <children>
-        <Button layoutX="128.0" layoutY="107.0" onAction="#btnClickAction" text="Click Me!" />
-        <Label fx:id="lblOut" layoutX="53.0" layoutY="30.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
+        <VBox layoutX="50.0" layoutY="40.0" spacing="15" alignment="CENTER"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+              AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+            
+            <Label text="Siga Viagem" textFill="white" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+            
+            <TextField fx:id="loginField" promptText="Login"
+                       style="-fx-background-color: #2c2c2c; -fx-text-fill: white; -fx-prompt-text-fill: #aaaaaa;"
+                       maxWidth="250" />
+            
+            <PasswordField fx:id="senhaField" promptText="Senha"
+                           style="-fx-background-color: #2c2c2c; -fx-text-fill: white; -fx-prompt-text-fill: #aaaaaa;"
+                           maxWidth="250" />
+            
+            <Button text="Entrar" onAction="#btnLoginAction"
+                    style="-fx-background-color: #007ACC; -fx-text-fill: white; -fx-font-weight: bold;"
+                    maxWidth="150" />
+            
+            <Label fx:id="lblOut" text="" textFill="red" />
+        </VBox>
     </children>
 </AnchorPane>

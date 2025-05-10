@@ -1,35 +1,47 @@
 package com.pi;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
 
 public class PrimeiraTela {
     public static void exibir(Stage stage) {
-        BorderPane layout = new BorderPane();
+        TextField campoCodigo = new TextField();
+        campoCodigo.setPromptText("Login");
 
-        // Caixa de texto central
-        TextField caixaTexto = new TextField();
-        StackPane centro = new StackPane(caixaTexto);
-        layout.setCenter(centro);
+        TextField campoNome = new TextField();
+        campoNome.setPromptText("Senha");
 
-        // Botão no canto inferior direito
-        Button botaoIr = new Button("Ir para a outra tela");
-        BorderPane bottom = new BorderPane();
-        bottom.setRight(botaoIr);
-        layout.setBottom(bottom);
+        Button botaoOk = new Button("OK");
+        botaoOk.setPrefWidth(100);
 
-        // Ação do botão
-        botaoIr.setOnAction(e -> SegundaTela.exibir(stage));
+        botaoOk.setOnAction(e -> {
+            String login = campoCodigo.getText().trim();
+            String senha = campoNome.getText().trim();
+
+            if (login.equals("admin") && senha.equals("admin")) {
+                SegundaTela.exibir(stage);
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Erro de Login");
+                alerta.setHeaderText("Credenciais inválidas");
+                alerta.showAndWait();
+            }
+        });
+
+        VBox layout = new VBox(15);
+        layout.setPadding(new Insets(30));
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(campoCodigo, campoNome, botaoOk);
 
         Scene cena = new Scene(layout, 400, 300);
         stage.setScene(cena);
-        stage.setTitle("Primeira Tela");
+        stage.setTitle("Siga Viagem");
         stage.show();
     }
 }
-
