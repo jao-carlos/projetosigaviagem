@@ -1,7 +1,9 @@
 package com.pi;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -10,20 +12,33 @@ public class SegundaTela {
     public static void exibir(Stage stage) {
         BorderPane layout = new BorderPane();
 
-        // Botão central (não faz nada)
-        Button botaoCentral = new Button("Botão Inativo");
-        layout.setCenter(new StackPane(botaoCentral));
+        // Carrega imagem do fundo
+        Image testeFundo = new Image(App.class.getResource("/imagens/painel.jpg").toExternalForm());
 
-        // Botão no canto inferior esquerdo
-        Button botaoVoltar = new Button("Voltar");
-        BorderPane bottom = new BorderPane();
-        bottom.setLeft(botaoVoltar);
-        layout.setBottom(bottom);
+        // Cria ImageView e faz ocupar a tela toda
+        ImageView fundo = new ImageView(testeFundo);
+        fundo.setPreserveRatio(false); // cobre toda a tela mesmo que distorça
+        fundo.setFitWidth(1920);       // tamanho inicial (será ligado à tela)
+        fundo.setFitHeight(1080);
 
-        // Ação de voltar
-        botaoVoltar.setOnAction(e -> PrimeiraTela.exibir(stage));
+        // Container principal com fundo e layout sobreposto
+        StackPane root = new StackPane();
+        root.getChildren().addAll(fundo, layout); // fundo primeiro, depois conteúdo
 
-        Scene cena = new Scene(layout, 400, 300);
+        // Cena e ligação de tamanho da imagem ao tamanho da janela
+        Scene cena = new Scene(root, 500, 400);
+        fundo.fitWidthProperty().bind(cena.widthProperty());
+        fundo.fitHeightProperty().bind(cena.heightProperty());
+
+        // Clique para debug de posição
+        cena.setOnMouseClicked((MouseEvent event) -> {
+            double x = event.getX();
+            double y = event.getY();
+            System.out.println("Clique em: (" + x + ", " + y + ")");
+        });
+
+        // Força tela cheia
+        stage.setFullScreen(true);
         stage.setScene(cena);
         stage.setTitle("Segunda Tela");
         stage.show();

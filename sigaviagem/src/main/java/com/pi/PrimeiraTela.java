@@ -39,7 +39,7 @@ public class PrimeiraTela {
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(campoCodigo, campoNome, botaoOk);
 
-        Scene cena = new Scene(layout, 400, 300);
+        Scene cena = new Scene(layout, 600, 400);
         stage.setScene(cena);
         stage.setTitle("Siga Viagem");
         stage.show();
