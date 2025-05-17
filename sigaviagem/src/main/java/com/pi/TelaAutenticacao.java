@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PrimeiraTela {
+public class TelaAutenticacao {
     public static void exibir(Stage stage) {
         TextField campoCodigo = new TextField();
         campoCodigo.setPromptText("Login");
@@ -25,7 +25,7 @@ public class PrimeiraTela {
             String senha = campoNome.getText().trim();
 
             if (login.equals("admin") && senha.equals("admin")) {
-                SegundaTela.exibir(stage);
+                TelaPainelComando.exibir(stage);
             } else {
                 Alert alerta = new Alert(Alert.AlertType.ERROR);
                 alerta.setTitle("Erro de Login");

@@ -8,12 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class SegundaTela {
+public class TelaPainelComando {
     public static void exibir(Stage stage) {
         BorderPane layout = new BorderPane();
 
         // Carrega imagem do fundo
-        Image testeFundo = new Image(App.class.getResource("/imagens/painel.jpg").toExternalForm());
+        Image testeFundo = new Image(App.class.getResource("/imagens/painelatualizado.jpg").toExternalForm());
 
         // Cria ImageView e faz ocupar a tela toda
         ImageView fundo = new ImageView(testeFundo);
