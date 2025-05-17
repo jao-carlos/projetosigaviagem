@@ -24,8 +24,13 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
             <version>11</version>
-        </dependency>
-    </dependencies>
+</dependency>
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>42.7.5</version>
+    </dependency>
+</dependencies>
 
     <build>
         <plugins>

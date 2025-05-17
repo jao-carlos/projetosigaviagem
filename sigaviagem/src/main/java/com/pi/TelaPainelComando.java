@@ -12,20 +12,20 @@ public class TelaPainelComando {
     public static void exibir(Stage stage) {
         BorderPane layout = new BorderPane();
 
-        // Carrega imagem do fundo
+        
         Image testeFundo = new Image(App.class.getResource("/imagens/painelatualizado.jpg").toExternalForm());
 
-        // Cria ImageView e faz ocupar a tela toda
+        
         ImageView fundo = new ImageView(testeFundo);
-        fundo.setPreserveRatio(false); // cobre toda a tela mesmo que distorça
-        fundo.setFitWidth(1920);       // tamanho inicial (será ligado à tela)
+        fundo.setPreserveRatio(false); 
+        fundo.setFitWidth(1920);      
         fundo.setFitHeight(1080);
 
-        // Container principal com fundo e layout sobreposto
+        
         StackPane root = new StackPane();
-        root.getChildren().addAll(fundo, layout); // fundo primeiro, depois conteúdo
+        root.getChildren().addAll(fundo, layout); 
 
-        // Cena e ligação de tamanho da imagem ao tamanho da janela
+    
         Scene cena = new Scene(root, 500, 400);
         fundo.fitWidthProperty().bind(cena.widthProperty());
         fundo.fitHeightProperty().bind(cena.heightProperty());
@@ -37,7 +37,7 @@ public class TelaPainelComando {
             System.out.println("Clique em: (" + x + ", " + y + ")");
         });
 
-        // Força tela cheia
+       
         stage.setFullScreen(true);
         stage.setScene(cena);
         stage.setTitle("Segunda Tela");
