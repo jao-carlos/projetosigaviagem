@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -26,6 +27,9 @@ public class TelaCadastro {
         Button botaoCadastrar = new Button("Cadastrar");
         botaoCadastrar.setPrefWidth(100);
 
+        Hyperlink linkAdmin = new Hyperlink("Entrar como administrador");
+        linkAdmin.setOnAction(e -> TelaAdmin.exibir(stage));
+
         botaoCadastrar.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
@@ -35,20 +39,16 @@ public class TelaCadastro {
                 return;
             }
 
-            // Aqui, não faz validação manual, vai pro banco direto
             if (cadastrarUsuario(login, senha)) {
                 mostrarInfo("Cadastro realizado com sucesso!");
                 TelaAutenticacao.exibir(stage);
-            } else {
-                // O erro já foi mostrado dentro de cadastrarUsuario()
-                // só não avança
             }
         });
 
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(30));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(campoLogin, campoSenha, botaoCadastrar);
+        layout.getChildren().addAll(campoLogin, campoSenha, botaoCadastrar, linkAdmin);
 
         Scene cena = new Scene(layout, 600, 400);
         stage.setScene(cena);
@@ -72,7 +72,7 @@ public class TelaCadastro {
             String msg = e.getMessage().toLowerCase();
 
             if (msg.contains("login_metro_check")) {
-                mostrarAlerta("Erro de Cadastro", "Login deve terminar com '@metro.com.br'.");
+                mostrarAlerta("Erro de Cadastro", "Login deve terminar com '@metrosp.com.br'.");
             } else if (msg.contains("usuarios_login_key") || msg.contains("unique constraint")) {
                 mostrarAlerta("Erro de Cadastro", "Login já cadastrado.");
             } else {

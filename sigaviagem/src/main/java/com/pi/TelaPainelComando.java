@@ -30,7 +30,7 @@ public class TelaPainelComando {
         fundo.fitWidthProperty().bind(cena.widthProperty());
         fundo.fitHeightProperty().bind(cena.heightProperty());
 
-        // Clique para debug de posição
+        
         cena.setOnMouseClicked((MouseEvent event) -> {
             double x = event.getX();
             double y = event.getY();
