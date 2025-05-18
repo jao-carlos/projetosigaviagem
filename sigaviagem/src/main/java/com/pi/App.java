@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) {
-        TelaCadastro.exibir(stage);
+        TelaPainelComando.exibir(stage);
     }
 
     public static void main(String[] args) {
