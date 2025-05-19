@@ -1,9 +1,4 @@
-package com.pi;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package com.pi.telas.login;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,8 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class TelaAdmin {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
+public class TelaAutenticacao {
     public static void exibir(Stage stage) {
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
@@ -24,43 +22,38 @@ public class TelaAdmin {
         PasswordField campoSenha = new PasswordField();
         campoSenha.setPromptText("Senha");
 
-        Button botaoLogin = new Button("Entrar");
-        botaoLogin.setPrefWidth(100);
+        Button botaoOk = new Button("OK");
+        botaoOk.setPrefWidth(100);
 
-        Button botaoVoltar = new Button("Voltar");
-        botaoVoltar.setPrefWidth(100);
-
-        botaoLogin.setOnAction(e -> {
+        botaoOk.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
 
             if (login.isEmpty() || senha.isEmpty()) {
-                mostrarAlerta("Erro", "Todos os campos devem ser preenchidos.");
+                mostrarAlerta("Erro de Login", "Por favor, preencha todos os campos.");
                 return;
             }
 
-            if (validarAdmin(login, senha)) {
+            if (autenticarUsuario(login, senha)) {
                 TelaInicial.exibir(stage);
             } else {
-                mostrarAlerta("Acesso Negado", "Login ou senha de administrador incorretos.");
+                mostrarAlerta("Erro de Login", "Credenciais inválidas");
             }
         });
-
-        botaoVoltar.setOnAction(e -> TelaCadastro.exibir(stage));
 
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(30));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(campoLogin, campoSenha, botaoLogin, botaoVoltar);
+        layout.getChildren().addAll(campoLogin, campoSenha, botaoOk);
 
         Scene cena = new Scene(layout, 600, 400);
         stage.setScene(cena);
-        stage.setTitle("Login Administrador - Siga Viagem");
+        stage.setTitle("Siga Viagem");
         stage.show();
     }
 
-    private static boolean validarAdmin(String login, String senha) {
-        String sql = "SELECT * FROM administrador WHERE login = ? AND senha = ?";
+    private static boolean autenticarUsuario(String login, String senha) {
+        String sql = "SELECT * FROM usuarios WHERE login = ? AND senha = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -69,12 +62,11 @@ public class TelaAdmin {
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); 
+                return rs.next(); // se encontrar o usuário, retorna true
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            mostrarAlerta("Erro", "Erro ao conectar ao banco de dados.");
             return false;
         }
     }

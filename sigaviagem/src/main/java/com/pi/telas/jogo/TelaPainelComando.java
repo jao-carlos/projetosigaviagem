@@ -1,5 +1,8 @@
-package com.pi;
+package com.pi.telas.jogo;
 
+import com.pi.App;
+
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -23,8 +26,8 @@ public class TelaPainelComando {
 
         // Botão invisível
         Button botaoDDU = new Button();
-        botaoDDU.setOpacity(0); // invisível
-        botaoDDU.setStyle("-fx-background-color: transparent;");
+        botaoDDU.setOpacity(1); // invisível
+        botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoDDU);
 
         StackPane overlay = new StackPane(fundo, camadaInterativa);
@@ -39,6 +42,15 @@ public class TelaPainelComando {
         botaoDDU.prefHeightProperty().bind(cena.heightProperty().multiply(222.0 / 1080));
         botaoDDU.layoutXProperty().bind(cena.widthProperty().multiply(700.7 / 1920));
         botaoDDU.layoutYProperty().bind(cena.heightProperty().multiply(340.31 / 1080));
+
+        botaoDDU.setOnMouseEntered(e -> {
+            botaoDDU.setCursor(Cursor.HAND);
+            botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaoDDU.setOnMouseExited(e -> {
+            botaoDDU.setCursor(Cursor.DEFAULT);
+            botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
 
         botaoDDU.setOnAction(e -> {
             System.out.println("Botão invisível clicado!");

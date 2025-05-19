@@ -1,4 +1,6 @@
-package com.pi;
+package com.pi.telas.login;
+
+import com.pi.telas.jogo.TelaPainelComando;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

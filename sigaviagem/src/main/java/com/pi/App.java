@@ -1,5 +1,7 @@
 package com.pi;
 
+import com.pi.telas.jogo.TelaPainelComando;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 

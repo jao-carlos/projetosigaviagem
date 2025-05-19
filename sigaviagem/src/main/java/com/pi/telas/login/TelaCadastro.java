@@ -1,4 +1,4 @@
-package com.pi;
+package com.pi.telas.login;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
