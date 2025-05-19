@@ -25,10 +25,10 @@ public class TelaPainelComando {
         Pane camadaInterativa = new Pane(); // Para colocar botões sobre o fundo
 
         // Botão invisível
-        Button botaoDDU = new Button();
-        botaoDDU.setOpacity(1); // invisível
-        botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        camadaInterativa.getChildren().add(botaoDDU);
+        Button botaoADU = new Button();
+        botaoADU.setOpacity(1); // invisível
+        botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(botaoADU);
 
         StackPane overlay = new StackPane(fundo, camadaInterativa);
         root.getChildren().add(overlay);
@@ -38,23 +38,24 @@ public class TelaPainelComando {
         fundo.fitWidthProperty().bind(cena.widthProperty());
         fundo.fitHeightProperty().bind(cena.heightProperty());
 
-        botaoDDU.prefWidthProperty().bind(cena.widthProperty().multiply(423.07 / 1920));
-        botaoDDU.prefHeightProperty().bind(cena.heightProperty().multiply(222.0 / 1080));
-        botaoDDU.layoutXProperty().bind(cena.widthProperty().multiply(700.7 / 1920));
-        botaoDDU.layoutYProperty().bind(cena.heightProperty().multiply(340.31 / 1080));
+        botaoADU.prefWidthProperty().bind(cena.widthProperty().multiply(423.07 / 1920));
+        botaoADU.prefHeightProperty().bind(cena.heightProperty().multiply(222.0 / 1080));
+        botaoADU.layoutXProperty().bind(cena.widthProperty().multiply(700.7 / 1920));
+        botaoADU.layoutYProperty().bind(cena.heightProperty().multiply(340.31 / 1080));
 
-        botaoDDU.setOnMouseEntered(e -> {
-            botaoDDU.setCursor(Cursor.HAND);
-            botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        botaoADU.setOnMouseEntered(e -> {
+            botaoADU.setCursor(Cursor.HAND);
+            botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
         });
-        botaoDDU.setOnMouseExited(e -> {
-            botaoDDU.setCursor(Cursor.DEFAULT);
-            botaoDDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        botaoADU.setOnMouseExited(e -> {
+            botaoADU.setCursor(Cursor.DEFAULT);
+            botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
 
-        botaoDDU.setOnAction(e -> {
+        botaoADU.setOnAction(e -> {
             System.out.println("Botão invisível clicado!");
-            Telas_DU.exibir(stage);
+            //Telas_DU.exibir(stage);
+            TelaADU.exibir(stage);
         });
 
         stage.setTitle("Painel Responsivo");
