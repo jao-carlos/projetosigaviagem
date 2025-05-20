@@ -35,7 +35,7 @@ public class Telas_DU {
         btnDDU.setOnAction(e -> imageView.setImage(imgDDU));
         btnVDU.setOnAction(e -> imageView.setImage(imgVDU));
         btnADU.setOnAction(e -> imageView.setImage(imgADU));
-        btnVoltar.setOnAction(e -> TelaPainelComando.exibir(stage));
+        btnVoltar.setOnAction(e -> TelaPainelComando.exibir());
 
        
         HBox botoes = new HBox(20, btnDDU, btnVDU, btnADU, btnVoltar);

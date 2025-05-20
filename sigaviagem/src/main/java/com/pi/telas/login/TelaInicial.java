@@ -20,7 +20,7 @@ public class TelaInicial {
         botaoEstatisticas.setPrefWidth(200);
 
         botaoIniciarJogo.setOnAction(e -> {
-            TelaPainelComando.exibir(stage);
+            TelaPainelComando.exibir();
         });
 
         botaoEstatisticas.setOnAction(e -> {
