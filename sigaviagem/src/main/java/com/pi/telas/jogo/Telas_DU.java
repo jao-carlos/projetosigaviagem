@@ -46,9 +46,9 @@ public class Telas_DU {
         layout.setCenter(imageView);
         layout.setBottom(botoes);
 
-        StackPane cacete = new StackPane(layout);
+        StackPane raiz = new StackPane(layout);
         //Scene cena = new Scene(root, 1280, 720);
-        App.root.getChildren().setAll(cacete);
+        App.root.getChildren().setAll(raiz);
         // stage.setScene(cena);
         // stage.setFullScreen(true);
         // stage.setTitle("Visualizador de DU - Siga Viagem");
