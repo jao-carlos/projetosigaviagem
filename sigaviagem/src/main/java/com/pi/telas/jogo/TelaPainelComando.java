@@ -23,11 +23,6 @@ public class TelaPainelComando {
         botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoADU);
 
-        // Button botaoTeste = new Button("Ir pra telasDu antigo");
-        // botaoTeste.setOnAction(e -> {
-        //     Telas_DU.exibir();
-        // });
-
         botaoADU.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(423.07 / 1920));
         botaoADU.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(222.0 / 1080));
         botaoADU.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(700.7 / 1920));
@@ -49,12 +44,7 @@ public class TelaPainelComando {
         Button botaoDDu = new Button();
         botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoDDu);
-
-        botaoDDu.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(380.00 / 1920));
-        botaoDDu.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(230.00 / 1080));
-        botaoDDu.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(50.00 / 1920));
-        botaoDDu.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.00 / 1080));
-
+        botaoDDu.setRotate(-15);
         botaoDDu.setOnMouseEntered(e -> {
             botaoDDu.setCursor(Cursor.HAND);
             botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
@@ -67,6 +57,30 @@ public class TelaPainelComando {
         botaoDDu.setOnAction(e -> {
             TelaDDU.exibir(); 
         });
+
+        botaoDDu.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(380.00 / 1920));
+        botaoDDu.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(230.00 / 1080));
+        botaoDDu.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(50.00 / 1920));
+        botaoDDu.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.00 / 1080));
+
+        Button botaofinalizar = new Button();
+        botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(botaofinalizar);
+
+        botaofinalizar.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(130.00/1920));
+        botaofinalizar.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(230.00 / 1080));
+        botaofinalizar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(998.00 / 1920));
+        botaofinalizar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(630.00 / 1080));
+
+        botaofinalizar.setOnMouseEntered(e -> {
+            botaofinalizar.setCursor(Cursor.HAND);
+            botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaofinalizar.setOnMouseExited(e -> {
+            botaofinalizar.setCursor(Cursor.DEFAULT);
+            botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
         
         StackPane conteudo = new StackPane(fundo, camadaInterativa);
 
