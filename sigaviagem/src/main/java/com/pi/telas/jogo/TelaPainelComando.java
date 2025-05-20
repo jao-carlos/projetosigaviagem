@@ -5,6 +5,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 public class TelaPainelComando {
@@ -21,6 +22,11 @@ public class TelaPainelComando {
         Button botaoADU = new Button();
         botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoADU);
+
+        Button botaoTeste = new Button("Ir pra telasDu antigo");
+        botaoTeste.setOnAction(e -> {
+            Telas_DU.exibir();
+        });
 
         botaoADU.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(423.07 / 1920));
         botaoADU.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(222.0 / 1080));
@@ -39,8 +45,15 @@ public class TelaPainelComando {
         botaoADU.setOnAction(e -> {
             TelaADU.exibir(); 
         });
+        
+        StackPane conteudo = new StackPane(fundo, camadaInterativa, botaoTeste);
 
-        StackPane conteudo = new StackPane(fundo, camadaInterativa);
+        conteudo.setOnMouseClicked((MouseEvent event) -> {// função que da a posição e pixels 
+            double x = event.getX();
+            double y = event.getY();
+            System.out.println("Clique em: (" + x + ", " + y + ")");
+        });
+
         App.root.getChildren().setAll(conteudo);
     }
 }

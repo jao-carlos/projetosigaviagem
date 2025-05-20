@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Telas_DU {
 
-    public static void exibir(Stage stage) {
+    public static void exibir() {
         BorderPane layout = new BorderPane();
 
         ImageView imageView = new ImageView();
@@ -46,11 +46,12 @@ public class Telas_DU {
         layout.setCenter(imageView);
         layout.setBottom(botoes);
 
-        StackPane root = new StackPane(layout);
-        Scene cena = new Scene(root, 1280, 720);
-        stage.setScene(cena);
-        stage.setFullScreen(true);
-        stage.setTitle("Visualizador de DU - Siga Viagem");
-        stage.show();
+        StackPane cacete = new StackPane(layout);
+        //Scene cena = new Scene(root, 1280, 720);
+        App.root.getChildren().setAll(cacete);
+        // stage.setScene(cena);
+        // stage.setFullScreen(true);
+        // stage.setTitle("Visualizador de DU - Siga Viagem");
+        // stage.show();
     }
 }
