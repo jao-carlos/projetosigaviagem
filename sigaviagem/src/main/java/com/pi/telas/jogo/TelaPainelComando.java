@@ -23,10 +23,10 @@ public class TelaPainelComando {
         botaoADU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoADU);
 
-        Button botaoTeste = new Button("Ir pra telasDu antigo");
-        botaoTeste.setOnAction(e -> {
-            Telas_DU.exibir();
-        });
+        // Button botaoTeste = new Button("Ir pra telasDu antigo");
+        // botaoTeste.setOnAction(e -> {
+        //     Telas_DU.exibir();
+        // });
 
         botaoADU.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(423.07 / 1920));
         botaoADU.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(222.0 / 1080));
@@ -45,8 +45,30 @@ public class TelaPainelComando {
         botaoADU.setOnAction(e -> {
             TelaADU.exibir(); 
         });
+
+        Button botaoDDu = new Button();
+        botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(botaoDDu);
+
+        botaoDDu.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(380.00 / 1920));
+        botaoDDu.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(230.00 / 1080));
+        botaoDDu.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(50.00 / 1920));
+        botaoDDu.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.00 / 1080));
+
+        botaoDDu.setOnMouseEntered(e -> {
+            botaoDDu.setCursor(Cursor.HAND);
+            botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaoDDu.setOnMouseExited(e -> {
+            botaoDDu.setCursor(Cursor.DEFAULT);
+            botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
+        botaoDDu.setOnAction(e -> {
+            TelaDDU.exibir(); 
+        });
         
-        StackPane conteudo = new StackPane(fundo, camadaInterativa, botaoTeste);
+        StackPane conteudo = new StackPane(fundo, camadaInterativa);
 
         conteudo.setOnMouseClicked((MouseEvent event) -> {// função que da a posição e pixels 
             double x = event.getX();
