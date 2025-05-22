@@ -43,6 +43,25 @@ public class TelaPainelComando {
             TelaADU.exibir(); 
         });
 
+        Button botaoCvreversora = new Button();
+        botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(botaoCvreversora);
+        botaoCvreversora.setOnMouseEntered(e -> {
+            botaoCvreversora.setCursor(Cursor.HAND);
+            botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaoCvreversora.setOnMouseExited(e -> {
+            botaoCvreversora.setCursor(Cursor.DEFAULT);
+            botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+        botaoCvreversora.setOnAction(e -> {
+            TelaChaveReversora.exibir();
+        });
+        botaoCvreversora.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(77.00 / 1920));
+        botaoCvreversora.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(77.00/ 1080));
+        botaoCvreversora.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(597.00 / 1920));
+        botaoCvreversora.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(570.04 / 1080));
+
         Button botaoDDu = new Button();
         botaoDDu.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoDDu);
