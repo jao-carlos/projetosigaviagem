@@ -39,7 +39,7 @@ public class TelaPainelDIC {
         });
 
         chaveCBTC.setOnAction(e -> {
-            TelaADU.exibir(); 
+            TelaChaveCBTC.exibir(); 
         });
 
 
