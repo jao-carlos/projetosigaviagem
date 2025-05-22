@@ -39,11 +39,11 @@ public class TelaPainelDIC {
         });
 
         chaveCBTC.setOnAction(e -> {
-            TelaADU.exibir(); 
+            TelaChaveCBTC.exibir(); 
         });
 
 
-        Button voltar = Seta.buttonSeta("Voltar",
+        Button voltar = Seta.buttonSeta("Esquerda",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
             "esq");
@@ -53,6 +53,18 @@ public class TelaPainelDIC {
         voltar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         voltar.setOnAction(e -> {
             TelaPainelComando.exibir(); 
+        });
+
+        Button direita = Seta.buttonSeta("direita",
+            App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
+            "dir");
+        camadaInterativa.getChildren().add(direita);
+
+        direita.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1720.00 / 1920));
+        direita.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
+        direita.setOnAction(e -> {
+            TelaPortaLateralDireita.exibir(); 
         });
 
 
