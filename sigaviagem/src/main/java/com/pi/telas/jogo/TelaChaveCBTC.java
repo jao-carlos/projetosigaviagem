@@ -3,7 +3,6 @@ package com.pi.telas.jogo;
 import com.pi.App;
 import com.pi.Classes.Seta;
 
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
