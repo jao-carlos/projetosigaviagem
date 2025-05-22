@@ -1,6 +1,8 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
+import com.pi.Classes.Seta;
+
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -79,6 +81,18 @@ public class TelaPainelComando {
         botaofinalizar.setOnMouseExited(e -> {
             botaofinalizar.setCursor(Cursor.DEFAULT);
             botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
+        Button painelDIC = Seta.buttonSeta("Direita",
+            App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
+            "dir");
+        camadaInterativa.getChildren().add(painelDIC);
+
+        painelDIC.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1600.0 / 1920));
+        painelDIC.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
+        painelDIC.setOnAction(e -> {
+            TelaPainelDIC.exibir(); 
         });
 
         
