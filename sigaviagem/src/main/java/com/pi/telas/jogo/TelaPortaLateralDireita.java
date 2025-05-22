@@ -39,7 +39,7 @@ public class TelaPortaLateralDireita {
         });
 
         painelLatera.setOnAction(e -> {
-            TelaChaveCBTC.exibir(); 
+            
         });
 
         Button porta = new Button();
