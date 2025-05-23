@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 public class TelaChaveReversora {
     public static void exibir(){
-        Image imagem = new Image(App.class.getResource("/imagens/chaveReversoraneutro.jpg").toExternalForm());
+        Image imagem = new Image(App.class.getResource("/imagens/chaveReversoraneutro.png").toExternalForm());
         ImageView fundo = new ImageView(imagem);
         fundo.setPreserveRatio(false);
 
