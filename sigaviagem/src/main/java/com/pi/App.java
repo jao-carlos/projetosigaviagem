@@ -25,7 +25,7 @@ public class App extends Application {
         stage.setFullScreen(true);
         stage.show();
 
-        TelaPortaLateralDireita.exibir(); //<----- NÃO PASSA MAIS STAGE
+        TelaPainelComando.exibir(); //<----- NÃO PASSA MAIS STAGE
     }
     
 

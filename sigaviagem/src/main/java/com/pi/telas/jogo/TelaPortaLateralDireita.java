@@ -43,7 +43,7 @@ public class TelaPortaLateralDireita {
         });
 
         Button porta = new Button();
-        // porta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        porta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(porta);
 
         porta.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1100.07 / 1920));

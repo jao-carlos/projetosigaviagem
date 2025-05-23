@@ -84,6 +84,29 @@ public class TelaPainelComando {
         botaoDDu.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(50.00 / 1920));
         botaoDDu.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.00 / 1080));
 
+        Button botaoVDU = new Button();
+        botaoVDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        botaoVDU.setRotate(16);
+        camadaInterativa.getChildren().add(botaoVDU);
+
+        botaoVDU.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(400.00 / 1920));
+        botaoVDU.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(250.00 / 1080));
+        botaoVDU.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1420.00 / 1920));
+        botaoVDU.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(410.00 / 1080));
+
+        botaoVDU.setOnMouseEntered(e -> {
+            botaoVDU.setCursor(Cursor.HAND);
+            botaoVDU.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaoVDU.setOnMouseExited(e -> {
+            botaoVDU.setCursor(Cursor.DEFAULT);
+            botaoVDU.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
+        botaoVDU.setOnAction(e -> {
+            TelaVDU.exibir(); 
+        });
+        
         Button botaofinalizar = new Button();
         botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaofinalizar);
