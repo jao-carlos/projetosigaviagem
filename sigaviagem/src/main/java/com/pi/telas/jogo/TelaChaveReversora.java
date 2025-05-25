@@ -26,6 +26,7 @@ public class TelaChaveReversora {
         voltar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.0 / 1920));
         voltar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         voltar.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaPainelComando.exibir(estados); 
         });
 

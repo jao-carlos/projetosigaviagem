@@ -41,6 +41,7 @@ public class TelaPainelComando {
         });
 
         botaoADU.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaADU.exibir(estados); 
         });
 
@@ -56,6 +57,7 @@ public class TelaPainelComando {
             botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
         botaoCvreversora.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaChaveReversora.exibir(estados);
         });
         botaoCvreversora.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(77.00 / 1920));
@@ -77,6 +79,7 @@ public class TelaPainelComando {
         });
 
         botaoDDu.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaDDU.exibir(estados); 
         });
 
@@ -105,6 +108,7 @@ public class TelaPainelComando {
         });
 
         botaoVDU.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaVDU.exibir(estados); 
         });
         
@@ -135,6 +139,7 @@ public class TelaPainelComando {
         painelDIC.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1600.0 / 1920));
         painelDIC.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         painelDIC.setOnAction(e -> {
+            App.root.getChildren().clear();
             TelaPainelDIC.exibir(estados); 
         });
 

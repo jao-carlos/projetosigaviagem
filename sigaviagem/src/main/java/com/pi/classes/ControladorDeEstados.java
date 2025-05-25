@@ -11,6 +11,18 @@ public class ControladorDeEstados {
     public void setVerificouAlgoNaPorta(boolean verificouAlgoNaPorta) {
         this.verificouAlgoNaPorta = verificouAlgoNaPorta;
     }
+
+    // Painel Externo
+    private boolean painelExternoAberto = false;
+
+    public boolean isPainelExternoAberto() {
+        return painelExternoAberto;
+    }
+
+    public void setPainelExternoAberto(boolean painelExternoAberto) {
+        this.painelExternoAberto = painelExternoAberto;
+    }
+    
   
 
 }

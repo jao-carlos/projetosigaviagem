@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public class TelaPortaLateralDireita {
      public static void exibir(ControladorDeEstados estados){
@@ -79,7 +80,7 @@ public class TelaPortaLateralDireita {
         });
 
 
-        
-        App.root.getChildren().addAll(fundo,camadaInterativa);
+        StackPane conteudo = new StackPane(fundo, camadaInterativa);
+        App.root.getChildren().addAll(conteudo);
     }
 }
