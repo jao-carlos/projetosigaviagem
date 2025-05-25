@@ -61,7 +61,7 @@ public class TelaPortaLateralDireita {
         });
 
         porta.setOnAction(e -> {
-            TelaChaveCBTC.exibir(); 
+            TelaLadoDeFora.exibir(); 
         });
 
 

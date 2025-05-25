@@ -1,15 +1,13 @@
 package com.pi;
 
-import com.pi.telas.jogo.TelaPainelComando;
-import com.pi.telas.jogo.TelaPainelDIC;
-import com.pi.telas.jogo.TelaPortaLateralDireita;
+import com.pi.telas.jogo.TelaLadoDeFora;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class App extends Application {
+public class App extends Application { 
 
     public static StackPane root; 
     public static Stage primaryStage;
@@ -25,7 +23,7 @@ public class App extends Application {
         stage.setFullScreen(true);
         stage.show();
 
-        TelaPainelComando.exibir(); //<----- NÃO PASSA MAIS STAGE
+        TelaLadoDeFora.exibir(); //<----- NÃO PASSA MAIS STAGE
     }
     
 
