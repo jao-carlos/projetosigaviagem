@@ -1,4 +1,4 @@
-package com.pi.Classes;
+package com.pi.classes;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;

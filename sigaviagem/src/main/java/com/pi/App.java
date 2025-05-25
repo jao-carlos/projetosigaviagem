@@ -1,6 +1,7 @@
 package com.pi;
 
-import com.pi.telas.jogo.TelaLadoDeFora;
+import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.jogo.TelaPorta;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,7 +24,9 @@ public class App extends Application {
         stage.setFullScreen(true);
         stage.show();
 
-        TelaLadoDeFora.exibir(); //<----- NÃO PASSA MAIS STAGE
+        ControladorDeEstados estados = new ControladorDeEstados();
+
+        TelaPorta.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 

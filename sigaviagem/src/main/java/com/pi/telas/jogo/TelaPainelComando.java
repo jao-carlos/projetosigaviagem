@@ -1,7 +1,8 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
-import com.pi.Classes.Seta;
+import com.pi.classes.ControladorDeEstados;
+import com.pi.classes.Seta;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -12,8 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class TelaPainelComando {
-
-    public static void exibir() {
+    public static void exibir(ControladorDeEstados estados) {
         Image imagemFundo = new Image(App.class.getResource("/imagens/painelatualizado.jpg").toExternalForm());
         ImageView fundo = new ImageView(imagemFundo);
         fundo.setPreserveRatio(false);
@@ -41,7 +41,7 @@ public class TelaPainelComando {
         });
 
         botaoADU.setOnAction(e -> {
-            TelaADU.exibir(); 
+            TelaADU.exibir(estados); 
         });
 
         Button botaoCvreversora = new Button();
@@ -56,7 +56,7 @@ public class TelaPainelComando {
             botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
         botaoCvreversora.setOnAction(e -> {
-            TelaChaveReversora.exibir();
+            TelaChaveReversora.exibir(estados);
         });
         botaoCvreversora.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(77.00 / 1920));
         botaoCvreversora.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(77.00/ 1080));
@@ -77,7 +77,7 @@ public class TelaPainelComando {
         });
 
         botaoDDu.setOnAction(e -> {
-            TelaDDU.exibir(); 
+            TelaDDU.exibir(estados); 
         });
 
         botaoDDu.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(380.00 / 1920));
@@ -105,7 +105,7 @@ public class TelaPainelComando {
         });
 
         botaoVDU.setOnAction(e -> {
-            TelaVDU.exibir(); 
+            TelaVDU.exibir(estados); 
         });
         
         Button botaofinalizar = new Button();
@@ -135,7 +135,7 @@ public class TelaPainelComando {
         painelDIC.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1600.0 / 1920));
         painelDIC.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         painelDIC.setOnAction(e -> {
-            TelaPainelDIC.exibir(); 
+            TelaPainelDIC.exibir(estados); 
         });
 
         

@@ -1,5 +1,6 @@
 package com.pi.telas.login;
 
+import com.pi.classes.ControladorDeEstados;
 import com.pi.telas.jogo.TelaPainelComando;
 
 import javafx.geometry.Insets;
@@ -20,7 +21,8 @@ public class TelaInicial {
         botaoEstatisticas.setPrefWidth(200);
 
         botaoIniciarJogo.setOnAction(e -> {
-            TelaPainelComando.exibir();
+            ControladorDeEstados estados = new ControladorDeEstados();
+            TelaPainelComando.exibir(estados);
         });
 
         botaoEstatisticas.setOnAction(e -> {

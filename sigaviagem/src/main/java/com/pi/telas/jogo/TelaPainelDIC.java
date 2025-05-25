@@ -1,7 +1,8 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
-import com.pi.Classes.Seta;
+import com.pi.classes.ControladorDeEstados;
+import com.pi.classes.Seta;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class TelaPainelDIC {
-    public static void exibir(){
+    public static void exibir(ControladorDeEstados estados){
         Image imagemFundo = new Image(App.class.getResource("/imagens/painelDIC.jpg").toExternalForm());
         ImageView fundo = new ImageView(imagemFundo);
         fundo.setPreserveRatio(false);
@@ -39,7 +40,7 @@ public class TelaPainelDIC {
         });
 
         chaveCBTC.setOnAction(e -> {
-            TelaChaveCBTC.exibir(); 
+            TelaChaveCBTC.exibir(estados); 
         });
 
 
@@ -52,7 +53,7 @@ public class TelaPainelDIC {
         voltar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.0 / 1920));
         voltar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         voltar.setOnAction(e -> {
-            TelaPainelComando.exibir(); 
+            TelaPainelComando.exibir(estados); 
         });
 
         Button direita = Seta.buttonSeta("direita",
@@ -64,7 +65,7 @@ public class TelaPainelDIC {
         direita.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1720.00 / 1920));
         direita.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         direita.setOnAction(e -> {
-            TelaPortaLateralDireita.exibir(); 
+            TelaPortaLateralDireita.exibir(estados); 
         });
 
 
