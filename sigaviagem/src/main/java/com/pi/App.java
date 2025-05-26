@@ -27,7 +27,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaMesa.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaPainelComando.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 
