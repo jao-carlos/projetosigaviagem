@@ -154,6 +154,18 @@ public class TelaPainelComando {
             botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
 
+        Button voltar = Seta.buttonSeta("Esquerda",
+            App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
+            "esq");
+        camadaInterativa.getChildren().add(voltar);
+
+        voltar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.0 / 1920));
+        voltar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
+        voltar.setOnAction(e -> {
+            TelaMesa.exibir(estados); 
+        });
+
         Button painelDIC = Seta.buttonSeta("Direita",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
