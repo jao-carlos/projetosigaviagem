@@ -23,49 +23,31 @@ public class TelaIsolarPorta {
 
         Pane camadaInterativa = new Pane();
 
-        Button porta4 = new Button();
-        porta4.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        camadaInterativa.getChildren().add(porta4);
+        Button porta1 = new Button();
+        porta1.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(porta1);
 
-        porta4.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-        porta4.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-        porta4.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(555.00 / 1920));
-        porta4.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
+        porta1.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
+        porta1.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
+        porta1.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(555.00 / 1920));
+        porta1.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
 
-        porta4.setOnMouseEntered(e -> {
-            porta4.setCursor(Cursor.HAND);
-            porta4.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        porta1.setOnMouseEntered(e -> {
+            porta1.setCursor(Cursor.HAND);
+            porta1.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
         });
-        porta4.setOnMouseExited(e -> {
-            porta4.setCursor(Cursor.DEFAULT);
-            porta4.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        });
-
-        Button porta3 = new Button();
-        porta3.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        camadaInterativa.getChildren().add(porta3);
-
-        porta3.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-        porta3.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-        porta3.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(810.00 / 1920));
-        porta3.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
-
-        porta3.setOnMouseEntered(e -> {
-            porta3.setCursor(Cursor.HAND);
-            porta3.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
-        });
-        porta3.setOnMouseExited(e -> {
-            porta3.setCursor(Cursor.DEFAULT);
-            porta3.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        porta1.setOnMouseExited(e -> {
+            porta1.setCursor(Cursor.DEFAULT);
+            porta1.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
 
-                Button porta2 = new Button();
+        Button porta2 = new Button();
         porta2.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(porta2);
 
         porta2.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
         porta2.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-        porta2.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1065.00 / 1920));
+        porta2.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(810.00 / 1920));
         porta2.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
 
         porta2.setOnMouseEntered(e -> {
@@ -77,22 +59,40 @@ public class TelaIsolarPorta {
             porta2.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
 
-        Button porta1 = new Button();
-        porta1.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        camadaInterativa.getChildren().add(porta1);
+                Button porta3 = new Button();
+        porta3.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(porta3);
 
-        porta1.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-        porta1.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-        porta1.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1320.00 / 1920));
-        porta1.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
+        porta3.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
+        porta3.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
+        porta3.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1065.00 / 1920));
+        porta3.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
 
-        porta1.setOnMouseEntered(e -> {
-            porta1.setCursor(Cursor.HAND);
-            porta1.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        porta3.setOnMouseEntered(e -> {
+            porta3.setCursor(Cursor.HAND);
+            porta3.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
         });
-        porta1.setOnMouseExited(e -> {
-            porta1.setCursor(Cursor.DEFAULT);
-            porta1.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        porta3.setOnMouseExited(e -> {
+            porta3.setCursor(Cursor.DEFAULT);
+            porta3.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
+        Button porta4 = new Button();
+        porta4.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(porta4);
+
+        porta4.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
+        porta4.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
+        porta4.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1320.00 / 1920));
+        porta4.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080));
+
+        porta4.setOnMouseEntered(e -> {
+            porta4.setCursor(Cursor.HAND);
+            porta4.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        porta4.setOnMouseExited(e -> {
+            porta4.setCursor(Cursor.DEFAULT);
+            porta4.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
 
 
