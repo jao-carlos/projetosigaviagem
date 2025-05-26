@@ -54,6 +54,28 @@ public class TelaPainelExterno {
 
             fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
             fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
+
+            Button botaoIsolarPorta = new Button();
+            botaoIsolarPorta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+            camadaInterativa.getChildren().add(botaoIsolarPorta);
+
+            botaoIsolarPorta.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(620.00 / 1920));
+            botaoIsolarPorta.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(450.00 / 1080));
+            botaoIsolarPorta.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(665.00 / 1920));
+            botaoIsolarPorta.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(530.00 / 1080));
+
+            botaoIsolarPorta.setOnMouseEntered(e -> {
+                botaoIsolarPorta.setCursor(Cursor.HAND);
+                botaoIsolarPorta.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+            });
+            botaoIsolarPorta.setOnMouseExited(e -> {
+                botaoIsolarPorta.setCursor(Cursor.DEFAULT);
+                botaoIsolarPorta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+            });
+            botaoIsolarPorta.setOnAction(e -> {
+                App.root.getChildren().clear();
+                TelaIsolarPorta.exibir(estados);
+            });
             
         }
         Button voltar = Seta.buttonSeta("Voltar",
