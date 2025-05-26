@@ -153,7 +153,9 @@ public class TelaPainelComando {
             botaofinalizar.setCursor(Cursor.DEFAULT);
             botaofinalizar.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
-
+        botaofinalizar.setOnAction(e -> {
+            App.primaryStage.close();
+        });
         Button voltar = Seta.buttonSeta("Esquerda",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
