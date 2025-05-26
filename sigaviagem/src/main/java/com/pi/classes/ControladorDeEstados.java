@@ -22,6 +22,25 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
         this.painelExternoAberto = painelExternoAberto;
     }
     
+    private boolean adesivoRemovido = false;
+    private boolean cinturaoRemovido = false;
+
+    public boolean isAdesivoRemovido() {
+        return adesivoRemovido;
+    }
+
+    public void setAdesivoRemovido(boolean removido) {
+        this.adesivoRemovido = removido;
+    }
+
+    public boolean isCinturaoRemovido() {
+        return cinturaoRemovido;
+    }
+
+    public void setCinturaoRemovido(boolean removido) {
+        this.cinturaoRemovido = removido;
+    }
+
   
 
 }
