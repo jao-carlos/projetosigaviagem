@@ -45,6 +45,30 @@ public class TelaPainelComando {
             TelaADU.exibir(estados); 
         });
 
+        Button botaoModuloComunicacao = new Button();
+        botaoModuloComunicacao.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        camadaInterativa.getChildren().add(botaoModuloComunicacao);
+        botaoModuloComunicacao.setRotate(-9);
+
+        botaoModuloComunicacao.setOnMouseEntered(e -> {
+            botaoModuloComunicacao.setCursor(Cursor.HAND);
+            botaoModuloComunicacao.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
+        });
+        botaoModuloComunicacao.setOnMouseExited(e -> {
+            botaoModuloComunicacao.setCursor(Cursor.DEFAULT);
+            botaoModuloComunicacao.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        });
+
+        botaoModuloComunicacao.setOnAction(e -> {
+            App.root.getChildren().clear();
+            TelaModuloComunicacao.exibir(estados); 
+        });
+
+        botaoModuloComunicacao.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(190.00 / 1920));
+        botaoModuloComunicacao.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00/ 1080));
+        botaoModuloComunicacao.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(460.00 / 1920));
+        botaoModuloComunicacao.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(365.00 / 1080));
+
         Button botaoCvreversora = new Button();
         botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         camadaInterativa.getChildren().add(botaoCvreversora);
