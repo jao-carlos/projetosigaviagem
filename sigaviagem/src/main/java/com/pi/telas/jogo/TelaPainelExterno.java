@@ -73,8 +73,7 @@ public class TelaPainelExterno {
                 botaoIsolarPorta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
             });
             botaoIsolarPorta.setOnAction(e -> {
-                App.root.getChildren().clear();
-                TelaIsolarPorta.exibir(estados);
+                
             });
             
         }

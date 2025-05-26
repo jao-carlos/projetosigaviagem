@@ -45,22 +45,20 @@ public class TelaMesa {
         highlight.setSpread(0.5);
 
         if (!estados.isAdesivoRemovido()) {
+
             Image adesivoImg = new Image(App.class.getResource("/imagens/Adesivo.png").toExternalForm());
             Button adesivo = new Button();
             ImageView adesivoView = new ImageView(adesivoImg);
             adesivoView.setPreserveRatio(true);
 
-            // Aumentando o tamanho
-            adesivoView.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-            adesivoView.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
+            adesivoView.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(900.0 / 1920));
+            adesivoView.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(800.0 / 1080));
             adesivo.setGraphic(adesivoView);
             adesivo.setStyle("-fx-background-color: transparent;");
             adesivo.setCursor(Cursor.HAND);
 
-            adesivo.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-            adesivo.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-            adesivo.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.45));  // 45% largura da tela
-            adesivo.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(0.4));   // 40% altura da tela
+            adesivo.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.00 / 1920));
+            adesivo.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(300.00 / 1080));
 
             adesivo.setOnMouseEntered(e -> adesivo.setEffect(highlight));
             adesivo.setOnMouseExited(e -> adesivo.setEffect(null));
@@ -70,7 +68,7 @@ public class TelaMesa {
                 camadaInterativa.getChildren().remove(adesivo);
                 System.out.println("Adesivo clicado e removido");
             });
-
+            
             camadaInterativa.getChildren().add(adesivo);
         }
 
@@ -81,16 +79,14 @@ public class TelaMesa {
             ImageView cinturaoView = new ImageView(cinturaoImg);
             cinturaoView.setPreserveRatio(true);
 
-            cinturaoView.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-            cinturaoView.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
+            cinturaoView.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.0 / 1920));
+            cinturaoView.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(600.0 / 1080));
             cinturao.setGraphic(cinturaoView);
             cinturao.setStyle("-fx-background-color: transparent;");
             cinturao.setCursor(Cursor.HAND);
 
-            cinturao.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(150.0 / 1920));
-            cinturao.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.0 / 1080));
-            cinturao.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.55)); // 55% largura da tela
-            cinturao.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(0.4));  // 40% altura da tela
+            cinturao.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1000.00 / 1920));
+            cinturao.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.00 / 1080)); 
 
             cinturao.setOnMouseEntered(e -> cinturao.setEffect(highlight));
             cinturao.setOnMouseExited(e -> cinturao.setEffect(null));

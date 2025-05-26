@@ -1,6 +1,7 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.jogo.TelaMesa;
 import com.pi.telas.jogo.TelaPainelComando;
 
 import javafx.application.Application;
@@ -26,7 +27,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaPainelComando.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaMesa.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 
