@@ -1,5 +1,12 @@
 package com.pi.telas.login;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.pi.App;
+import com.pi.classes.ControladorDeEstados;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,14 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import com.pi.App;
-import com.pi.classes.ControladorDeEstados;
 
 public class TelaAutenticacao {
     public static void exibir(ControladorDeEstados estados) {
@@ -27,6 +26,12 @@ public class TelaAutenticacao {
 
         Button botaoOk = new Button("OK");
         botaoOk.setPrefWidth(100);
+
+        Button botaoAdmin = new Button("Admin");
+        botaoAdmin.setPrefWidth(100);
+        
+        Button botaoCadastro = new Button("Cadastrar");
+        botaoCadastro.setPrefWidth(100);
 
         botaoOk.setOnAction(e -> {
             String login = campoLogin.getText().trim();
@@ -44,10 +49,24 @@ public class TelaAutenticacao {
             }
         });
 
+        botaoAdmin.setOnAction(e -> {
+            TelaAdmin.exibir(estados);
+        });
+
+        botaoCadastro.setOnAction(e -> {
+            TelaCadastro.exibir(estados);
+        });
+
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(30));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(campoLogin, campoSenha, botaoOk);
+        layout.getChildren().addAll(
+            campoLogin, 
+            campoSenha, 
+            botaoOk, 
+            botaoAdmin, 
+            botaoCadastro
+        );
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
@@ -63,7 +82,7 @@ public class TelaAutenticacao {
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); // se encontrar o usuário, retorna true
+                return rs.next(); // Se encontrar o usuário, retorna true
             }
 
         } catch (Exception e) {
