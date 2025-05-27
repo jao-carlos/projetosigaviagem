@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.pi.App;
+import com.pi.classes.ControladorDeEstados;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,7 +20,7 @@ import javafx.stage.Stage;
 
 public class TelaAdmin {
 
-    public static void exibir(Stage stage) {
+    public static void exibir(ControladorDeEstados estados) {
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
 
@@ -40,13 +43,13 @@ public class TelaAdmin {
             }
 
             if (validarAdmin(login, senha)) {
-                TelaInicial.exibir(stage);
+                TelaInicial.exibir(estados);
             } else {
                 mostrarAlerta("Acesso Negado", "Login ou senha de administrador incorretos.");
             }
         });
 
-        botaoVoltar.setOnAction(e -> TelaCadastro.exibir(stage));
+        botaoVoltar.setOnAction(e -> TelaCadastro.exibir(estados));
 
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(30));
@@ -54,9 +57,7 @@ public class TelaAdmin {
         layout.getChildren().addAll(campoLogin, campoSenha, botaoLogin, botaoVoltar);
 
         Scene cena = new Scene(layout, 600, 400);
-        stage.setScene(cena);
-        stage.setTitle("Login Administrador - Siga Viagem");
-        stage.show();
+        App.root.getChildren().setAll(layout);
     }
 
     private static boolean validarAdmin(String login, String senha) {

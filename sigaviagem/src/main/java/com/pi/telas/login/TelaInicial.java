@@ -1,5 +1,6 @@
 package com.pi.telas.login;
 
+import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.telas.jogo.TelaPainelComando;
 
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 public class TelaInicial {
 
-    public static void exibir(Stage stage) {
+    public static void exibir(ControladorDeEstados estados) {
         Button botaoIniciarJogo = new Button("Iniciar Jogo");
         Button botaoEstatisticas = new Button("Estatísticas");
 
@@ -21,7 +22,6 @@ public class TelaInicial {
         botaoEstatisticas.setPrefWidth(200);
 
         botaoIniciarJogo.setOnAction(e -> {
-            ControladorDeEstados estados = new ControladorDeEstados();
             TelaPainelComando.exibir(estados);
         });
 
@@ -36,9 +36,7 @@ public class TelaInicial {
         layout.getChildren().addAll(botaoIniciarJogo, botaoEstatisticas);
 
         Scene cena = new Scene(layout, 600, 400);
-        stage.setScene(cena);
-        stage.setTitle("Menu Principal - Siga Viagem");
-        stage.show();
+        App.root.getChildren().setAll(layout);
     }
 
     private static void mostrarInfo(String mensagem) {

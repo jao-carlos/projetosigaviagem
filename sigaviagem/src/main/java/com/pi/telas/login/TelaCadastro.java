@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.pi.App;
+import com.pi.classes.ControladorDeEstados;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,7 +20,7 @@ import javafx.stage.Stage;
 
 public class TelaCadastro {
 
-    public static void exibir(Stage stage) {
+    public static void exibir(ControladorDeEstados estados) {
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
 
@@ -28,7 +31,7 @@ public class TelaCadastro {
         botaoCadastrar.setPrefWidth(100);
 
         Hyperlink linkAdmin = new Hyperlink("Entrar como administrador");
-        linkAdmin.setOnAction(e -> TelaAdmin.exibir(stage));
+        linkAdmin.setOnAction(e -> TelaAdmin.exibir(estados));
 
         botaoCadastrar.setOnAction(e -> {
             String login = campoLogin.getText().trim();
@@ -41,7 +44,7 @@ public class TelaCadastro {
 
             if (cadastrarUsuario(login, senha)) {
                 mostrarInfo("Cadastro realizado com sucesso!");
-                TelaAutenticacao.exibir(stage);
+                TelaAutenticacao.exibir(estados);
             }
         });
 
@@ -51,9 +54,7 @@ public class TelaCadastro {
         layout.getChildren().addAll(campoLogin, campoSenha, botaoCadastrar, linkAdmin);
 
         Scene cena = new Scene(layout, 600, 400);
-        stage.setScene(cena);
-        stage.setTitle("Cadastro - Siga Viagem");
-        stage.show();
+        App.root.getChildren().setAll(layout);
     }
 
     private static boolean cadastrarUsuario(String login, String senha) {

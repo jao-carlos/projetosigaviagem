@@ -14,8 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.pi.App;
+import com.pi.classes.ControladorDeEstados;
+
 public class TelaAutenticacao {
-    public static void exibir(Stage stage) {
+    public static void exibir(ControladorDeEstados estados) {
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
 
@@ -35,7 +38,7 @@ public class TelaAutenticacao {
             }
 
             if (autenticarUsuario(login, senha)) {
-                TelaInicial.exibir(stage);
+                TelaInicial.exibir(estados);
             } else {
                 mostrarAlerta("Erro de Login", "Credenciais inválidas");
             }
@@ -47,9 +50,7 @@ public class TelaAutenticacao {
         layout.getChildren().addAll(campoLogin, campoSenha, botaoOk);
 
         Scene cena = new Scene(layout, 600, 400);
-        stage.setScene(cena);
-        stage.setTitle("Siga Viagem");
-        stage.show();
+        App.root.getChildren().setAll(layout);
     }
 
     private static boolean autenticarUsuario(String login, String senha) {
