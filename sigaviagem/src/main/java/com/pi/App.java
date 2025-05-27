@@ -30,7 +30,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaInicial.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaAutenticacao.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 
