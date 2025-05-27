@@ -22,6 +22,7 @@ public class TelaInicial {
         botaoEstatisticas.setPrefWidth(200);
 
         botaoIniciarJogo.setOnAction(e -> {
+            estados.marcarInicio();
             TelaPainelComando.exibir(estados);
         });
 

@@ -41,6 +41,14 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
         this.cinturaoRemovido = removido;
     }
 
-  
+    private long tempoInicio;
+
+    public void marcarInicio() {
+        tempoInicio = System.currentTimeMillis();
+    }
+
+    public long tempoDecorridoEmSegundos() {
+        return (System.currentTimeMillis() - tempoInicio) / 1000;
+    }
 
 }

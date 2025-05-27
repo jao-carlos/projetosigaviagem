@@ -5,6 +5,7 @@ import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
 
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -81,6 +82,12 @@ public class TelaPainelComando {
             botaoCvreversora.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
         });
         botaoCvreversora.setOnAction(e -> {
+            long tempo = estados.tempoDecorridoEmSegundos();
+            // Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            // alerta.setTitle("Tempo");
+            // alerta.setHeaderText("Tempo decorrido: " + tempo + " segundos.");
+            // alerta.showAndWait();
+            System.out.println("Tempo decorrido: " + tempo + " segundos.");
             App.root.getChildren().clear();
             TelaChaveReversora.exibir(estados);
         });
