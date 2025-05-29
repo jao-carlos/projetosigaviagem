@@ -7,17 +7,20 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexaoBD {
 
-    // Dados do banco Cloud SQL
-    private static final String DB_IP = "34.75.213.100";
-    private static final String DB_PORT = "5433";
-    private static final String DB_NAME = "sigaviagem";
-    private static final String USUARIO = "postgres";
-    private static final String SENHA = "123";
+    private static final Logger LOGGER = Logger.getLogger(ConexaoBD.class.getName());
 
-    // Caminho do certificado dentro dos recursos do projeto (resources)
+    // Variáveis de ambiente que você deve setar no seu sistema
+    private static final String DB_IP = System.getenv("DB_IP");
+    private static final String DB_PORT = System.getenv("DB_PORT");
+    private static final String DB_NAME = System.getenv("DB_NAME");
+    private static final String USUARIO = System.getenv("DB_USER");
+    private static final String SENHA = System.getenv("DB_PASS");
+
     private static final String CERT_PATH = "server-ca.pem";
 
     /**
@@ -31,17 +34,17 @@ public class ConexaoBD {
         File certFile = extrairCertificadoTemporario();
 
         String url = String.format(
-                "jdbc:postgresql://%s:%s/%s?sslmode=verify-ca&sslrootcert=%s",
-                DB_IP, DB_PORT, DB_NAME, certFile.getAbsolutePath()
+            "jdbc:postgresql://%s:%s/%s?sslmode=verify-ca&sslrootcert=%s",
+            DB_IP, DB_PORT, DB_NAME, certFile.getAbsolutePath()
         );
 
-        System.out.println("Tentando conectar ao banco de dados...");
+        LOGGER.info("Tentando conectar ao banco de dados...");
         try {
             Connection conn = DriverManager.getConnection(url, USUARIO, SENHA);
-            System.out.println("✅ Conexão realizada com sucesso!");
+            LOGGER.info("✅ Conexão realizada com sucesso!");
             return conn;
         } catch (SQLException e) {
-            System.err.println("❌ Erro na conexão: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "❌ Erro na conexão: " + e.getMessage(), e);
             throw new SQLException("Falha ao conectar ao banco: ", e);
         }
     }
@@ -56,7 +59,9 @@ public class ConexaoBD {
         try (InputStream is = ConexaoBD.class.getClassLoader().getResourceAsStream(CERT_PATH)) {
 
             if (is == null) {
-                throw new IOException("❌ Certificado não encontrado no caminho: " + CERT_PATH);
+                String msg = "❌ Certificado não encontrado no caminho: " + CERT_PATH;
+                LOGGER.severe(msg);
+                throw new IOException(msg);
             }
 
             File tempFile = File.createTempFile("server-ca", ".pem");
@@ -70,7 +75,7 @@ public class ConexaoBD {
                 }
             }
 
-            System.out.println("✅ Certificado extraído para: " + tempFile.getAbsolutePath());
+            LOGGER.info("✅ Certificado extraído para: " + tempFile.getAbsolutePath());
             return tempFile;
         }
     }
