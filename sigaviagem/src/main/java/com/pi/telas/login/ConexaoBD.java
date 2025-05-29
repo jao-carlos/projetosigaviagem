@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConexaoBD {
 
@@ -15,30 +16,36 @@ public class ConexaoBD {
     private static final String USUARIO = "postgres";
     private static final String SENHA = "admin";
 
-    // Caminho do certificado dentro do projeto (resources)
-    private static final String CERT_PATH = "/sigaviagem/com/pi/server-ca.pem";
+    // Caminho do certificado no resources (sem /src ou /java)
+    private static final String CERT_PATH = "sigaviagem\\src\\main\\java\\server-ca.pem";
 
     /**
      * Método para conectar no banco Cloud SQL com SSL
      */
     public static Connection conectar() throws Exception {
-        // Extrai o certificado para um arquivo temporário
         File certFile = extrairCertificadoTemporario();
 
-        // Monta a URL JDBC com SSL habilitado
         String url = String.format(
                 "jdbc:postgresql://%s:%s/%s?sslmode=verify-ca&sslrootcert=%s",
                 DB_IP, DB_PORT, DB_NAME, certFile.getAbsolutePath()
         );
 
-        return DriverManager.getConnection(url, USUARIO, SENHA);
+        try {
+            System.out.println("Tentando conectar ao banco de dados...");
+            Connection conn = DriverManager.getConnection(url, USUARIO, SENHA);
+            System.out.println("Conexão realizada com sucesso!");
+            return conn;
+        } catch (SQLException e) {
+            System.err.println("Erro na conexão: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
-     * Extrai o certificado do resources para arquivo temporário no sistema
+     * Extrai o certificado do resources para um arquivo temporário
      */
     private static File extrairCertificadoTemporario() throws Exception {
-        InputStream is = ConexaoBD.class.getResourceAsStream(CERT_PATH);
+        InputStream is = ConexaoBD.class.getClassLoader().getResourceAsStream(CERT_PATH);
         if (is == null) {
             throw new RuntimeException("Certificado não encontrado no caminho: " + CERT_PATH);
         }
@@ -52,8 +59,11 @@ public class ConexaoBD {
             while ((bytesLidos = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, bytesLidos);
             }
+        } finally {
+            is.close();
         }
 
+        System.out.println("Certificado extraído para: " + tempFile.getAbsolutePath());
         return tempFile;
     }
 }
