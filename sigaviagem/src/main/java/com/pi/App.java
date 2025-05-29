@@ -1,7 +1,7 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
-import com.pi.telas.login.TelaInicial;
+import com.pi.telas.login.TelaAutenticacao;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,7 +26,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaInicial.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaAutenticacao.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 

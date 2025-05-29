@@ -16,7 +16,7 @@ public class ConexaoBD {
     private static final String SENHA = "admin";
 
     // Caminho do certificado dentro do projeto (resources)
-    private static final String CERT_PATH = "/certs/server-ca.pem";
+    private static final String CERT_PATH = "/sigaviagem/server-ca.pem";
 
     /**
      * Método para conectar no banco Cloud SQL com SSL
