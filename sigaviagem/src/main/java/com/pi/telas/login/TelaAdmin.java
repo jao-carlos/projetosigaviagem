@@ -36,7 +36,7 @@ public class TelaAdmin {
             String senha = campoSenha.getText().trim();
 
             if (login.isEmpty() || senha.isEmpty()) {
-                mostrarAlerta("Erro", "Todos os campos devem ser preenchidos.");
+                mostrarAlerta(Alert.AlertType.WARNING, "Erro", "Todos os campos devem ser preenchidos.");
                 return;
             }
 
@@ -44,11 +44,11 @@ public class TelaAdmin {
                 if (validarAdmin(login, senha)) {
                     TelaInicial.exibir(estados);
                 } else {
-                    mostrarAlerta("Acesso Negado", "Login ou senha de administrador incorretos.");
+                    mostrarAlerta(Alert.AlertType.INFORMATION, "Acesso Negado", "Login ou senha incorretos.");
                 }
             } catch (Exception ex) {
-                ex.printStackTrace(); // ideal: usar logger
-                mostrarAlerta("Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
+                ex.printStackTrace(); // Quando possível, troque por logger
+                mostrarAlerta(Alert.AlertType.ERROR, "Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
             }
         });
 
@@ -63,7 +63,7 @@ public class TelaAdmin {
     }
 
     private static boolean validarAdmin(String login, String senha) throws Exception {
-        String sql = "SELECT * FROM administrador WHERE login = ? AND senha = ?";
+        String sql = "SELECT * FROM administrador WHERE login = ? AND password = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -72,7 +72,7 @@ public class TelaAdmin {
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
+                return rs.next(); // Se existir pelo menos um registro, login ok
             }
 
         } catch (SQLException e) {
@@ -80,8 +80,8 @@ public class TelaAdmin {
         }
     }
 
-    private static void mostrarAlerta(String titulo, String mensagem) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
+    private static void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
+        Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
