@@ -10,13 +10,11 @@ import com.pi.classes.ControladorDeEstados;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class TelaAdmin {
 
@@ -42,10 +40,15 @@ public class TelaAdmin {
                 return;
             }
 
-            if (validarAdmin(login, senha)) {
-                TelaInicial.exibir(estados);
-            } else {
-                mostrarAlerta("Acesso Negado", "Login ou senha de administrador incorretos.");
+            try {
+                if (validarAdmin(login, senha)) {
+                    TelaInicial.exibir(estados);
+                } else {
+                    mostrarAlerta("Acesso Negado", "Login ou senha de administrador incorretos.");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace(); // ideal: usar logger
+                mostrarAlerta("Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
             }
         });
 
@@ -56,11 +59,10 @@ public class TelaAdmin {
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(campoLogin, campoSenha, botaoLogin, botaoVoltar);
 
-        Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
     }
 
-    private static boolean validarAdmin(String login, String senha) {
+    private static boolean validarAdmin(String login, String senha) throws Exception {
         String sql = "SELECT * FROM administrador WHERE login = ? AND senha = ?";
 
         try (Connection conn = ConexaoBD.conectar();
@@ -70,20 +72,19 @@ public class TelaAdmin {
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); 
+                return rs.next();
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            mostrarAlerta("Erro", "Erro ao conectar ao banco de dados.");
-            return false;
+            throw new Exception("Erro ao validar administrador.", e);
         }
     }
 
     private static void mostrarAlerta(String titulo, String mensagem) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle(titulo);
-        alerta.setHeaderText(mensagem);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensagem);
         alerta.showAndWait();
     }
 }
