@@ -1,6 +1,7 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.jogo.TelaPainelExterno;
 import com.pi.telas.login.TelaCadastro;
 import com.pi.telas.login.TelaInicial;
 
@@ -27,7 +28,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaInicial.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaPainelExterno.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 
