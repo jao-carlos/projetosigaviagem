@@ -80,7 +80,7 @@ public class TelaAdmin {
     }
 
     private static boolean validarAdmin(String login, String senha) throws Exception {
-        String sql = "SELECT * FROM administrador WHERE login = ? AND password = ?";
+        String sql = "SELECT * FROM administrador WHERE login = ? AND passcode = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
