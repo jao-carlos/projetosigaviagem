@@ -12,26 +12,36 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class TelaAutenticacao {
+
     public static void exibir(ControladorDeEstados estados) {
+        // Título
+        Label titulo = new Label("SIGA VIAGEM");
+        titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
+        titulo.setTextFill(Color.WHITE);
+        titulo.setEffect(new DropShadow(2, Color.BLACK));
+
+        // Campo Login
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
+        estilizarCampo(campoLogin);
 
+        // Campo Senha
         PasswordField campoSenha = new PasswordField();
         campoSenha.setPromptText("Senha");
+        estilizarCampo(campoSenha);
 
-        Button botaoOk = new Button("OK");
-        botaoOk.setPrefWidth(100);
-
-        Button botaoAdmin = new Button("Admin");
-        botaoAdmin.setPrefWidth(100);
-        
-        Button botaoCadastro = new Button("Cadastrar");
-        botaoCadastro.setPrefWidth(100);
+        // Botão OK
+        Button botaoOk = criarBotao("OK", "#ffffff", "#0066cc");
 
         botaoOk.setOnAction(e -> {
             String login = campoLogin.getText().trim();
@@ -49,24 +59,21 @@ public class TelaAutenticacao {
             }
         });
 
-        botaoAdmin.setOnAction(e -> {
-            TelaAdmin.exibir(estados);
-        });
+        // Botão Admin
+        Button botaoAdmin = criarBotao("Admin", "#ffffff", "#444444");
+        botaoAdmin.setOnAction(e -> TelaAdmin.exibir(estados));
 
-        botaoCadastro.setOnAction(e -> {
-            TelaCadastro.exibir(estados);
-        });
+        // Botão Cadastro
+        Button botaoCadastro = criarBotao("Cadastrar", "#ffffff", "#444444");
+        botaoCadastro.setOnAction(e -> TelaCadastro.exibir(estados));
 
+        // Layout
         VBox layout = new VBox(15);
-        layout.setPadding(new Insets(30));
+        layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(
-            campoLogin, 
-            campoSenha, 
-            botaoOk, 
-            botaoAdmin, 
-            botaoCadastro
-        );
+        layout.setStyle("-fx-background-color: #0066cc;"); // Azul forte
+
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, botaoAdmin, botaoCadastro);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
@@ -82,7 +89,7 @@ public class TelaAutenticacao {
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next(); // Se encontrar o usuário, retorna true
+                return rs.next();
             }
 
         } catch (Exception e) {
@@ -96,5 +103,23 @@ public class TelaAutenticacao {
         alerta.setTitle(titulo);
         alerta.setHeaderText(mensagem);
         alerta.showAndWait();
+    }
+
+    // Estiliza campos de texto com padding e borda arredondada
+    private static void estilizarCampo(TextField campo) {
+        campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
+    }
+
+    // Cria botão estilizado
+    private static Button criarBotao(String texto, String corTexto, String corFundo) {
+        Button botao = new Button(texto);
+        botao.setPrefWidth(150);
+        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+        botao.setStyle(
+            "-fx-background-color: " + corFundo + ";" +
+            "-fx-text-fill: " + corTexto + ";" +
+            "-fx-background-radius: 10;"
+        );
+        return botao;
     }
 }

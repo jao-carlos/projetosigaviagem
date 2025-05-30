@@ -13,25 +13,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class TelaCadastro {
 
     public static void exibir(ControladorDeEstados estados) {
+        // Título
+        Label titulo = new Label("CADASTRE-SE");
+        titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
+        titulo.setTextFill(Color.WHITE);
+        titulo.setEffect(new DropShadow(2, Color.BLACK));
+
+        // Campos
         TextField campoLogin = new TextField();
         campoLogin.setPromptText("Login");
+        estilizarCampo(campoLogin);
 
         PasswordField campoSenha = new PasswordField();
         campoSenha.setPromptText("Senha");
+        estilizarCampo(campoSenha);
 
-        Button botaoCadastrar = new Button("Cadastrar");
-        botaoCadastrar.setPrefWidth(100);
-
-        Hyperlink linkAdmin = new Hyperlink("Entrar como administrador");
-        linkAdmin.setOnAction(e -> TelaAdmin.exibir(estados));
+        // Botão Cadastrar
+        Button botaoCadastrar = criarBotao("Cadastrar", "#ffffff", "#0066cc");
 
         botaoCadastrar.setOnAction(e -> {
             String login = campoLogin.getText().trim();
@@ -48,10 +58,18 @@ public class TelaCadastro {
             }
         });
 
+        // Link Admin
+        Hyperlink linkAdmin = new Hyperlink("Entrar como administrador");
+        linkAdmin.setTextFill(Color.WHITE);
+        linkAdmin.setOnAction(e -> TelaAdmin.exibir(estados));
+
+        // Layout
         VBox layout = new VBox(15);
-        layout.setPadding(new Insets(30));
+        layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(campoLogin, campoSenha, botaoCadastrar, linkAdmin);
+        layout.setStyle("-fx-background-color: #0066cc;");
+
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoCadastrar, linkAdmin);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
@@ -100,5 +118,23 @@ public class TelaCadastro {
         alerta.setTitle("Sucesso");
         alerta.setHeaderText(mensagem);
         alerta.showAndWait();
+    }
+
+    // Estiliza campos
+    private static void estilizarCampo(TextField campo) {
+        campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
+    }
+
+    // Cria botão com estilo
+    private static Button criarBotao(String texto, String corTexto, String corFundo) {
+        Button botao = new Button(texto);
+        botao.setPrefWidth(150);
+        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+        botao.setStyle(
+            "-fx-background-color: " + corFundo + ";" +
+            "-fx-text-fill: " + corTexto + ";" +
+            "-fx-background-radius: 10;"
+        );
+        return botao;
     }
 }
