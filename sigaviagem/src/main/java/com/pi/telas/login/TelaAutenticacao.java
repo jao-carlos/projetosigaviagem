@@ -59,21 +59,13 @@ public class TelaAutenticacao {
             }
         });
 
-        // Botão Admin
-        Button botaoAdmin = criarBotao("Admin", "#ffffff", "#444444");
-        botaoAdmin.setOnAction(e -> TelaAdmin.exibir(estados));
-
-        // Botão Cadastro
-        Button botaoCadastro = criarBotao("Cadastrar", "#ffffff", "#444444");
-        botaoCadastro.setOnAction(e -> TelaCadastro.exibir(estados));
-
         // Layout
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: #0066cc;"); // Azul forte
 
-        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, botaoAdmin, botaoCadastro);
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
