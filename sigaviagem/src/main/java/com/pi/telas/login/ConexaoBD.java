@@ -15,14 +15,16 @@ public class ConexaoBD {
     private static final String CLOUD_SQL_CONNECTION_NAME = System.getenv("CLOUD_SQL_CONNECTION_NAME");  // Ex: projeto:regiao:instancia
     private static final String USUARIO = System.getenv("DB_USER");
     private static final String SENHA = System.getenv("DB_PASS");
+    private static final String DB_PORT = "5433";
 
     public static Connection conectar() throws SQLException {
         validarVariaveisAmbiente();
 
-        // Monta a URL para conexão via Cloud SQL Proxy do Google
-        String url = String.format(
-            "jdbc:postgresql://google/%s?cloudSqlInstance=%s&socketFactory=com.google.cloud.sql.postgres.SocketFactory&useSSL=false",
-            DB_NAME, CLOUD_SQL_CONNECTION_NAME);
+     
+String url = String.format(
+    "jdbc:postgresql://google/%s?cloudSqlInstance=%s&socketFactory=com.google.cloud.sql.postgres.SocketFactory&useSSL=false",
+    DB_NAME, CLOUD_SQL_CONNECTION_NAME);
+
 
         LOGGER.info("Tentando conectar ao banco via Cloud SQL Proxy...");
         LOGGER.info("URL de conexão (sem senha): " + url);
