@@ -29,8 +29,19 @@ public class TelaInicial {
         Button botaoIniciarJogo = new Button("Iniciar Jogo");
         Button botaoEstatisticas = new Button("Estatísticas");
 
-        String estiloBotao = "-fx-background-color: white; -fx-text-fill: blue; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px;";
-        String estiloHover = "-fx-background-color: #e0e0ff; -fx-text-fill: blue; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px;";
+        String estiloBotao = "-fx-background-color: white; "
+                           + "-fx-text-fill: blue; "
+                           + "-fx-font-size: 16px; "
+                           + "-fx-font-family: 'Helvetica'; "
+                           + "-fx-font-weight: bold; "
+                           + "-fx-background-radius: 8px;";
+                           
+        String estiloHover = "-fx-background-color: #e0e0ff; "
+                           + "-fx-text-fill: blue; "
+                           + "-fx-font-size: 16px; "
+                           + "-fx-font-family: 'Helvetica'; "
+                           + "-fx-font-weight: bold; "
+                           + "-fx-background-radius: 8px;";
 
         botaoIniciarJogo.setStyle(estiloBotao);
         botaoEstatisticas.setStyle(estiloBotao);
@@ -64,7 +75,7 @@ public class TelaInicial {
         camadaInterativa.getChildren().add(botoes);
 
         StackPane conteudo = new StackPane(fundo, camadaInterativa);
-        App.root.getChildren().addAll(conteudo);
+        App.root.getChildren().setAll(conteudo);
     }
 
     private static void mostrarInfo(String mensagem) {

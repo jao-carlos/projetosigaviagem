@@ -1,8 +1,6 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
-import com.pi.telas.jogo.TelaPainelExterno;
-import com.pi.telas.login.TelaCadastro;
 import com.pi.telas.login.TelaInicial;
 
 import javafx.application.Application;
