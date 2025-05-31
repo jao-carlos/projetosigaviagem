@@ -72,7 +72,7 @@ public class TelaAutenticacao {
     }
 
     private static boolean autenticarUsuario(String login, String senha) {
-        String sql = "SELECT * FROM usuarios WHERE login = ? AND senha = ?";
+        String sql = "SELECT * FROM usuario WHERE login = ? AND password = ?";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

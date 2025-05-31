@@ -76,7 +76,7 @@ public class TelaCadastro {
     }
 
     private static boolean cadastrarUsuario(String login, String senha) {
-        String sql = "INSERT INTO usuarios (login, senha) VALUES (?, ?)";
+        String sql = "INSERT INTO usuario (login, password) VALUES (?, ?)";
 
         try (Connection conn = ConexaoBD.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
