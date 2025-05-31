@@ -10,22 +10,22 @@ public class ConexaoBD {
 
     private static final Logger LOGGER = Logger.getLogger(ConexaoBD.class.getName());
 
-    // Variáveis de ambiente (espera que estejam setadas)
-    private static final String DB_HOST = "localhost";  // Ex: localhost
-    private static final String DB_PORT = "5432";  // Ex: 5433
-    private static final String DB_NAME = "projetosigaviagem";
-    private static final String USUARIO = "postgres";
-    private static final String SENHA = "admin";
+    // Troca essas variáveis pelos seus dados do Supabase
+    private static final String DB_HOST = "aws-0-us-east-2.pooler.supabase.com";
+    private static final String DB_PORT = "6543";
+    private static final String DB_NAME = "postgres";  // padrão Supabase
+    private static final String USUARIO = "postgres.dqzsugrhokpychwsaxon";  // <--- seu usuário do Supabase
+    private static final String SENHA = "Mauaehlegal123";  // <--- sua senha do Supabase
 
     public static Connection conectar() throws SQLException {
         validarVariaveisAmbiente();
 
         String url = String.format(
-            "jdbc:postgresql://%s:%s/%s",
+            "jdbc:postgresql://%s:%s/%s?sslmode=require",
             DB_HOST, DB_PORT, DB_NAME
         );
 
-        LOGGER.info("Tentando conectar ao banco local PostgreSQL...");
+        LOGGER.info("Tentando conectar ao banco Supabase PostgreSQL...");
         LOGGER.info("URL de conexão (sem senha): " + url);
         LOGGER.info("Usuário: " + USUARIO);
 
@@ -42,8 +42,8 @@ public class ConexaoBD {
     private static void validarVariaveisAmbiente() {
         if (isNullOrEmpty(DB_HOST) || isNullOrEmpty(DB_PORT) ||
             isNullOrEmpty(DB_NAME) || isNullOrEmpty(USUARIO) || isNullOrEmpty(SENHA)) {
-            String msg = "❌ Variáveis de ambiente para conexão local estão incompletas ou não definidas. " +
-                    "Verifique DB_HOST, DB_PORT, DB_NAME, DB_USER e DB_PASS.";
+            String msg = "❌ Variáveis para conexão Supabase estão incompletas. " +
+                    "Verifique DB_HOST, DB_PORT, DB_NAME, USUARIO e SENHA.";
             LOGGER.severe(msg);
             throw new IllegalStateException(msg);
         }
