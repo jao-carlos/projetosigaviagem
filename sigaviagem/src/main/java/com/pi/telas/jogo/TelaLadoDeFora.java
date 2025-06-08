@@ -1,6 +1,7 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
+import com.pi.classes.BotaoPersonalizado;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
 
@@ -38,28 +39,18 @@ public class TelaLadoDeFora {
             TelaPortaLateralDireita.exibir(estados); 
         });
 
-        Button porta = new Button();
-        porta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+        BotaoPersonalizado porta = new BotaoPersonalizado(
+            App.primaryStage.getScene().widthProperty().multiply(323.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(400.0 / 1080),
+            App.primaryStage.getScene().widthProperty().multiply(1500.7 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(250.31 / 1080),
+            () -> {
+                App.root.getChildren().clear();
+                TelaPorta.exibir(estados);
+            }
+        );
         camadaInterativa.getChildren().add(porta);
 
-        porta.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(323.07 / 1920));
-        porta.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(400.0 / 1080));
-        porta.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1500.7 / 1920));
-        porta.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(250.31 / 1080));
-
-        porta.setOnMouseEntered(e -> {
-            porta.setCursor(Cursor.HAND);
-            porta.setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px;");
-        });
-        porta.setOnMouseExited(e -> {
-            porta.setCursor(Cursor.DEFAULT);
-            porta.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
-        });
-
-        porta.setOnAction(e -> {
-            App.root.getChildren().clear();
-            TelaPorta.exibir(estados); 
-        });
 
 
         StackPane conteudo = new StackPane(fundo, camadaInterativa);
