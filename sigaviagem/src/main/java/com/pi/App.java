@@ -2,7 +2,6 @@ package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
 import com.pi.telas.jogo.TelaPainelComando;
-import com.pi.telas.login.TelaAdmin;
 import com.pi.telas.login.TelaCadastro;
 
 import javafx.application.Application;
@@ -28,7 +27,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaCadastro.exibir(estados); //<----- NÃO PASSA MAIS STAGE
+        TelaPainelComando.exibir(estados); //<----- NÃO PASSA MAIS STAGE
     }
     
 
