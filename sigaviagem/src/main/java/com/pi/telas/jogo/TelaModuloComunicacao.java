@@ -1,12 +1,14 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
+import com.pi.classes.BotaoPersonalizado;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class TelaModuloComunicacao {
@@ -17,6 +19,20 @@ public class TelaModuloComunicacao {
 
         fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
         fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
+
+        Pane camadaInterativa = new Pane();
+
+        BotaoPersonalizado botaoPA = new BotaoPersonalizado(
+            App.primaryStage.getScene().widthProperty().multiply(80.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(80.0 / 1080),
+            App.primaryStage.getScene().widthProperty().multiply(300.0 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(150.31 / 1080),
+            () -> {
+                App.root.getChildren().clear();
+                TelaADU.exibir(estados);
+            }
+        );
+        camadaInterativa.getChildren().add(botaoPA);
 
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
@@ -30,8 +46,8 @@ public class TelaModuloComunicacao {
             App.root.getChildren().clear();
             TelaPainelComando.exibir(estados); 
         });
-
-        StackPane conteudo = new StackPane(fundo,voltar);
+        camadaInterativa.getChildren().add(voltar);
+        StackPane conteudo = new StackPane(fundo,camadaInterativa);
         App.root.getChildren().setAll(conteudo);
     }
 }
