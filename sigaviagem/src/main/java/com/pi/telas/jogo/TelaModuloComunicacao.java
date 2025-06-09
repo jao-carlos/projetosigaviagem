@@ -33,7 +33,7 @@ public class TelaModuloComunicacao {
             }
         );
         camadaInterativa.getChildren().add(botaoPA);
-
+        
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),

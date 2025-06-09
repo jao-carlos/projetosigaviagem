@@ -22,13 +22,22 @@ public class TelaPortaLateralDireita {
 
         Pane camadaInterativa = new Pane();
     
-        // BotaoPersonalizado painelLatera = new BotaoPersonalizado(    //Acredito que isso é só um aviso não uma tela
-        //     App.primaryStage.getScene().widthProperty().multiply(160.07 / 1920),
-        //     App.primaryStage.getScene().heightProperty().multiply(600.0 / 1080),
-        //     App.primaryStage.getScene().widthProperty().multiply(300.7 / 1920),
-        //     App.primaryStage.getScene().heightProperty().multiply(360.00 / 1080)
-        // );
-        // camadaInterativa.getChildren().add(painelLatera);
+        BotaoPersonalizado botaoAbrir = new BotaoPersonalizado(    //Acredito que isso é só um aviso não uma tela
+            App.primaryStage.getScene().widthProperty().multiply(70.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(60.0 / 1080),
+            App.primaryStage.getScene().widthProperty().multiply(345.7 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080)
+
+        );
+        camadaInterativa.getChildren().add(botaoAbrir);
+        BotaoPersonalizado botaoFechar = new BotaoPersonalizado(    //Acredito que isso é só um aviso não uma tela
+            App.primaryStage.getScene().widthProperty().multiply(70.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(70.0 / 1080),
+            App.primaryStage.getScene().widthProperty().multiply(350.7 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(780.00 / 1080)
+
+        );
+        camadaInterativa.getChildren().add(botaoFechar);
 
         BotaoPersonalizado porta = new BotaoPersonalizado(
             App.primaryStage.getScene().widthProperty().multiply(1100.07 / 1920),
