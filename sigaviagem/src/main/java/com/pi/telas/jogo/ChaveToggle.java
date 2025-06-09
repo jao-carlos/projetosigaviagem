@@ -45,5 +45,7 @@ public class ChaveToggle extends Button {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+        imagemView.setRotate(ativo ? 90 : 0);
     }
+
 }

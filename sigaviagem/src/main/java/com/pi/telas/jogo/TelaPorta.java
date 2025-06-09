@@ -11,12 +11,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class TelaPorta {
-    public static void exibir(ControladorDeEstados estados){
+    public static void exibir(ControladorDeEstados estados) {
         Image imagemFundo;
 
-        // Define qual imagem mostrar com base no estado da porta
         if (estados.isPortaComFita()) {
-            imagemFundo = new Image(App.class.getResource("/imagens/portaComFaixa.jpg").toExternalForm());
+            imagemFundo = new Image(App.class.getResource("/imagens/portaComFita.jpg").toExternalForm());
         } else if (estados.isPortaFechada()) {
             imagemFundo = new Image(App.class.getResource("/imagens/portaFechada.jpg").toExternalForm());
         } else {
@@ -30,7 +29,6 @@ public class TelaPorta {
 
         Pane camadaInterativa = new Pane();
 
-        // Botão Voltar
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
@@ -43,7 +41,6 @@ public class TelaPorta {
         });
         camadaInterativa.getChildren().add(voltar);
 
-        // Botão para verificar obstrução
         if (!estados.isVerificouAlgoNaPorta()) {
             Button verificar = new Button("Verificar obstrução na porta");
             verificar.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px;");
@@ -70,8 +67,7 @@ public class TelaPorta {
             camadaInterativa.getChildren().add(verificar);
         }
 
-        // Botão para fechar a porta (só aparece se a chave 3 foi ativada)
-        if (!estados.isPortaFechada() && estados.isCinturaoRemovido()) {
+        if (!estados.isPortaFechada() && estados.isChave3Ativa()) {
             Button fechar = new Button("Fechar Porta");
             fechar.setStyle("-fx-background-color: lightgreen; -fx-border-color: darkgreen; -fx-font-size: 15px;");
             fechar.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(300.0 / 1920));
@@ -82,13 +78,12 @@ public class TelaPorta {
             fechar.setOnAction(e -> {
                 estados.setPortaFechada(true);
                 App.root.getChildren().clear();
-                TelaPorta.exibir(estados); // Recarrega a tela com a nova imagem
+                TelaPorta.exibir(estados);
             });
 
             camadaInterativa.getChildren().add(fechar);
         }
 
-        // Botão para colocar a faixa (só aparece se a porta já estiver fechada e a faixa foi coletada)
         if (estados.isPortaFechada() && !estados.isPortaComFita() && estados.isAdesivoRemovido()) {
             Button faixa = new Button("Colocar Faixa");
             faixa.setStyle("-fx-background-color: orange; -fx-border-color: darkred; -fx-font-size: 15px;");
@@ -100,13 +95,12 @@ public class TelaPorta {
             faixa.setOnAction(e -> {
                 estados.setPortaComFita(true);
                 App.root.getChildren().clear();
-                TelaPorta.exibir(estados); // Recarrega a tela com a nova imagem
+                TelaPorta.exibir(estados);
             });
 
             camadaInterativa.getChildren().add(faixa);
         }
 
-        // Botão Direita
         Button direita = Seta.buttonSeta("direita",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
