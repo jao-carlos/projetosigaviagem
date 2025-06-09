@@ -10,13 +10,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 public class TelaChaveReversora {
     public static void exibir(ControladorDeEstados estados){
-        Image imagem = new Image(App.class.getResource("/imagens/chaveReversoraneutro.png").toExternalForm());
+        Image imagem = new Image(App.class.getResource("/imagens/BaseReversora.jpg").toExternalForm());
         ImageView fundo = new ImageView(imagem);
         fundo.setPreserveRatio(false);
+        Pane camadaInterativa = new Pane();
 
         fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
         fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
-         Pane camadaInterativa = new Pane();
+        
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
@@ -28,6 +29,16 @@ public class TelaChaveReversora {
         voltar.setOnAction(e -> {
             App.root.getChildren().clear();
             TelaPainelComando.exibir(estados); 
+        });
+
+        ReversoraToggle chaveRev = new ReversoraToggle(1000,1000);
+        chaveRev.posicionar(450, 38);
+        camadaInterativa.getChildren().add(chaveRev);
+
+        chaveRev.setNFR(estados.estadoChaveReversora());
+        chaveRev.setOnAction(e -> {
+            chaveRev.alternarSelecao();
+            estados.setChaveReversora(chaveRev.neutroFrenteRe());
         });
 
 

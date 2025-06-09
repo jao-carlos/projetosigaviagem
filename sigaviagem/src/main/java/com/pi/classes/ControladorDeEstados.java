@@ -8,6 +8,7 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     private boolean chave2Ativa = false;
     private boolean chave3Ativa = false;
     private boolean chave4Ativa = false;
+    private int posChaveReversora = 0;
 
     
     //Porta do carro
@@ -88,5 +89,6 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public boolean isChave4Ativa() { return chave4Ativa; }
     public void setChave4Ativa(boolean chave4Ativa) { this.chave4Ativa = chave4Ativa; }
 
-
+    public int estadoChaveReversora() {return posChaveReversora;}
+    public void setChaveReversora(int posChaveReversora) {this.posChaveReversora = posChaveReversora;}
 }
