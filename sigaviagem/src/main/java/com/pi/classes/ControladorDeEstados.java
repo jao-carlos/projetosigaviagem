@@ -2,6 +2,26 @@ package com.pi.classes;
 
 public class ControladorDeEstados {    // Verifica se o usuario verificou se algo esta impedindo da porta fechar
     private boolean verificouAlgoNaPorta = false;
+    private boolean portaFechada=false;
+    private boolean portaComFita=false;
+
+    
+    //Porta do carro
+    public boolean isPortaFechada() {
+        return portaFechada;
+    }
+
+    public void setPortaFechada(boolean portaFechada) {
+        this.portaFechada = portaFechada;
+    }
+
+    public boolean isPortaComFita() {
+        return portaComFita;
+    }
+
+    public void setPortaComFita(boolean portaComFita) {
+        this.portaComFita = portaComFita;
+    }
 
     public boolean isVerificouAlgoNaPorta() {
         return verificouAlgoNaPorta;
