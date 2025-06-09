@@ -20,7 +20,23 @@ public class TelaDDU {
         fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
         
         Pane camadaInterativa = new Pane();
+        String estadoPorta;
+        if(estados.isPortaFechada()){
+            estadoPorta = "dduPortaSelada";
+        }
+        else{
+            estadoPorta = "dduPortaAberta";
+        }
+        Image imagemPorta = new Image(App.class.getResource("/imagens/" + estadoPorta + ".png").toExternalForm());
+        ImageView portas = new ImageView(imagemPorta);
+        portas.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(883.0 / 1920));
+        portas.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(80.0 / 1080));
+        portas.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(527.00/1920));
+        portas.layoutYProperty().bind(App.primaryStage.getScene().widthProperty().multiply(312.00/1920));
+        portas.setRotate(0.3);
 
+       
+        camadaInterativa.getChildren().add(portas);
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
