@@ -53,21 +53,32 @@ public class TelaPainelExterno {
             chave3.posicionar(1000, 787);
             chave4.posicionar(1130, 787);
 
+            // Chave 1
+            chave1.setAtivo(estados.isChave1Ativa());
             chave1.setOnAction(e -> {
                 chave1.alternar();
-                estados.setAdesivoRemovido(chave1.isAtivo());
+                estados.setChave1Ativa(chave1.isAtivo());
             });
+
+            // Chave 2
+            chave2.setAtivo(estados.isChave2Ativa());
             chave2.setOnAction(e -> {
                 chave2.alternar();
-                estados.setAdesivoRemovido(chave2.isAtivo());
+                estados.setChave2Ativa(chave2.isAtivo());
             });
+
+            // Chave 3
+            chave3.setAtivo(estados.isChave3Ativa());
             chave3.setOnAction(e -> {
                 chave3.alternar();
-                estados.setCinturaoRemovido(chave3.isAtivo());
+                estados.setChave3Ativa(chave3.isAtivo());
             });
+
+            // Chave 4
+            chave4.setAtivo(estados.isChave4Ativa());
             chave4.setOnAction(e -> {
                 chave4.alternar();
-                estados.setCinturaoRemovido(chave4.isAtivo());
+                estados.setChave4Ativa(chave4.isAtivo());
             });
 
             camadaInterativa.getChildren().addAll(chave1, chave2, chave3, chave4);

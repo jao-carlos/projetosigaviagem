@@ -4,6 +4,10 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     private boolean verificouAlgoNaPorta = false;
     private boolean portaFechada=false;
     private boolean portaComFita=false;
+    private boolean chave1Ativa = false;
+    private boolean chave2Ativa = false;
+    private boolean chave3Ativa = false;
+    private boolean chave4Ativa = false;
 
     
     //Porta do carro
@@ -70,5 +74,19 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public long tempoDecorridoEmSegundos() {
         return (System.currentTimeMillis() - tempoInicio) / 1000;
     }
+    // Estados individuais das chaves
+
+    public boolean isChave1Ativa() { return chave1Ativa; }
+    public void setChave1Ativa(boolean chave1Ativa) { this.chave1Ativa = chave1Ativa; }
+
+    public boolean isChave2Ativa() { return chave2Ativa; }
+    public void setChave2Ativa(boolean chave2Ativa) { this.chave2Ativa = chave2Ativa; }
+
+    public boolean isChave3Ativa() { return chave3Ativa; }
+    public void setChave3Ativa(boolean chave3Ativa) { this.chave3Ativa = chave3Ativa; }
+
+    public boolean isChave4Ativa() { return chave4Ativa; }
+    public void setChave4Ativa(boolean chave4Ativa) { this.chave4Ativa = chave4Ativa; }
+
 
 }
