@@ -36,7 +36,7 @@ public class TelaPorta {
         });
 
         if(!estados.isVerificouAlgoNaPorta()){
-            Button verificar = new Button("Verificar se tem algo impedindo o fechamento da porta");
+            Button verificar = new Button("Verificar obstrução na porta");
             verificar.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px;");
             camadaInterativa.getChildren().add(verificar);
 
