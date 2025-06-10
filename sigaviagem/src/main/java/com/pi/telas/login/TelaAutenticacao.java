@@ -1,5 +1,4 @@
 package com.pi.telas.login;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,20 +58,20 @@ public class TelaAutenticacao {
             }
         });
 
-        // Texto de cadastro
+        // Link para cadastro
         Label textoCadastro = new Label("Não tem uma conta? Cadastre-se");
         textoCadastro.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
         textoCadastro.setTextFill(Color.WHITE);
         textoCadastro.setUnderline(true);
         textoCadastro.setOnMouseClicked(e -> {
-            TelaCadastro.exibir(estados);
+            TelaCadastrar.exibir(estados);
         });
 
         // Layout
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #0066cc;"); // Azul forte
+        layout.setStyle("-fx-background-color: #0066cc;");
 
         layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, textoCadastro);
 
@@ -106,12 +105,10 @@ public class TelaAutenticacao {
         alerta.showAndWait();
     }
 
-    // Estiliza campos de texto com padding e borda arredondada
     private static void estilizarCampo(TextField campo) {
         campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
     }
 
-    // Cria botão estilizado
     private static Button criarBotao(String texto, String corTexto, String corFundo) {
         Button botao = new Button(texto);
         botao.setPrefWidth(150);

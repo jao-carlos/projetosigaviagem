@@ -65,7 +65,7 @@ public class TelaAdmin {
 
         // Botão Voltar
         Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000");
-        botaoVoltar.setOnAction(e -> TelaCadastro.exibir(estados));
+        botaoVoltar.setOnAction(e -> TelaCadastrar.exibir(estados));
 
         // Layout
         VBox layout = new VBox(15);

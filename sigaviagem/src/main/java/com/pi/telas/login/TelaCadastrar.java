@@ -54,7 +54,6 @@ public class TelaCadastrar {
 
             if (cadastrarUsuario(login, senha)) {
                 mostrarInfo("Cadastro realizado com sucesso!");
-                TelaAutenticacao.exibir(estados);
             }
         });
 
