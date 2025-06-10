@@ -28,7 +28,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaPainelDIC.exibir(estados); 
+        TelaAutenticacao.exibir(estados); 
     }
     
 
