@@ -27,7 +27,7 @@ public class Seta {
                 updatePolygonEsq(flecha, largura.getValue().doubleValue(), newVal.doubleValue())
             );
         }
-        if (direcao.equalsIgnoreCase("baixo")) {
+        else if (direcao.equalsIgnoreCase("baixo")) {
             updatePolygonBaixo(flecha, largura.getValue().doubleValue(), altura.getValue().doubleValue());
 
             largura.addListener((obs, oldVal, newVal) ->
