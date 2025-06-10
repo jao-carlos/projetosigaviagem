@@ -2,6 +2,7 @@ package com.pi.telas.estatisticas;
 
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.login.TelaInicial;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,6 +39,10 @@ public class TelaEstatisticas {
             "-fx-background-radius: 10;"
         );
 
+        botaoVoltar.setOnAction(e -> {
+            App.root.getChildren().clear();
+            TelaInicial.exibir(estados);
+        });
       
         // Layout
         VBox layout = new VBox(20);

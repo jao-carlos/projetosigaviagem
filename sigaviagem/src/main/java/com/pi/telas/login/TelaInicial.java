@@ -2,6 +2,7 @@ package com.pi.telas.login;
 
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.estatisticas.TelaEstatisticas;
 import com.pi.telas.jogo.TelaPainelComando;
 
 import javafx.geometry.Pos;
@@ -62,7 +63,8 @@ public class TelaInicial {
         });
 
         botaoEstatisticas.setOnAction(e -> {
-            mostrarInfo("Estatísticas ainda não implementadas.");
+            App.root.getChildren().clear();
+            TelaEstatisticas.exibir(estados);
         });
 
         HBox botoes = new HBox(30);
