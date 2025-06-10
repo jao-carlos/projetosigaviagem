@@ -7,20 +7,24 @@ import java.sql.ResultSet;
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
 
+import javafx.animation.PauseTransition;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 public class TelaAutenticacao {
 
@@ -44,7 +48,32 @@ public class TelaAutenticacao {
         // Botão OK
         Button botaoOk = criarBotao("OK", "#ffffff", "#0066cc");
 
-        // Efeito de hover no botão OK
+        // Spinner de carregamento
+        ProgressIndicator spinner = new ProgressIndicator();
+        spinner.setVisible(false);
+        spinner.setPrefSize(50, 50);
+
+        // Ícone de erro (X estilizado)
+        Label erroIcone = new Label("\u2716"); // Unicode para ✖
+        erroIcone.setTextFill(Color.web("#FF4C4C")); // vermelho vibrante
+        erroIcone.setFont(Font.font("Arial Black", FontWeight.BOLD, 40));
+        erroIcone.setEffect(new DropShadow(5, Color.rgb(255, 0, 0, 0.7)));
+        erroIcone.setVisible(false);
+        erroIcone.setPrefSize(50, 50);
+        erroIcone.setAlignment(Pos.CENTER);
+
+        // StackPane para sobreposição dinâmica
+        StackPane stackCarregamento = new StackPane(botaoOk, spinner, erroIcone);
+        stackCarregamento.setMaxSize(150, 60);
+        StackPane.setAlignment(botaoOk, Pos.CENTER);
+        StackPane.setAlignment(spinner, Pos.CENTER);
+        StackPane.setAlignment(erroIcone, Pos.CENTER);
+
+        // Container geral para botão
+        VBox containerBotao = new VBox(10, stackCarregamento);
+        containerBotao.setAlignment(Pos.CENTER);
+
+        // Hover do botão OK
         botaoOk.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             botaoOk.setStyle("-fx-background-color: #005bb5; -fx-text-fill: white; -fx-background-radius: 10;");
         });
@@ -52,29 +81,80 @@ public class TelaAutenticacao {
             botaoOk.setStyle("-fx-background-color: #0066cc; -fx-text-fill: white; -fx-background-radius: 10;");
         });
 
+        // Ação de clique do botão
         botaoOk.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
 
+            // Reset visuais
+            erroIcone.setVisible(false);
+            botaoOk.setVisible(false);
+            spinner.setVisible(true);
+
             if (login.isEmpty() || senha.isEmpty()) {
-                mostrarAlerta("Erro de Login", "Por favor, preencha todos os campos.");
+                spinner.setVisible(false);
+                erroIcone.setVisible(true);
+
+                // Volta o botão OK após 0,5s
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                pause.setOnFinished(ev -> {
+                    erroIcone.setVisible(false);
+                    botaoOk.setVisible(true);
+                });
+                pause.play();
+
                 return;
             }
 
-            if (autenticarUsuario(login, senha)) {
-                TelaInicial.exibir(estados);
-            } else {
-                mostrarAlerta("Erro de Login", "Credenciais inválidas");
-            }
+            Task<Boolean> tarefaAutenticacao = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    return autenticarUsuario(login, senha);
+                }
+            };
+
+            tarefaAutenticacao.setOnSucceeded(ev -> {
+                boolean sucesso = tarefaAutenticacao.getValue();
+
+                if (sucesso) {
+                    erroIcone.setVisible(false);
+                    spinner.setVisible(false);
+                    botaoOk.setVisible(false);
+                    TelaInicial.exibir(estados);
+                } else {
+                    spinner.setVisible(false);
+                    erroIcone.setVisible(true);
+
+                    PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                    pause.setOnFinished(ev2 -> {
+                        erroIcone.setVisible(false);
+                        botaoOk.setVisible(true);
+                    });
+                    pause.play();
+                }
+            });
+
+            tarefaAutenticacao.setOnFailed(ev -> {
+                spinner.setVisible(false);
+                erroIcone.setVisible(true);
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                pause.setOnFinished(ev2 -> {
+                    erroIcone.setVisible(false);
+                    botaoOk.setVisible(true);
+                });
+                pause.play();
+            });
+
+            new Thread(tarefaAutenticacao).start();
         });
 
-        // Texto interativo para admin
+        // Texto do link para admin
         Label textoAdmin = new Label("É administrador? Faça login aqui");
         textoAdmin.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
         textoAdmin.setTextFill(Color.WHITE);
         textoAdmin.setUnderline(true);
-        
-        // Hover sutil
+
         textoAdmin.setOnMouseEntered(e -> {
             textoAdmin.setTextFill(Color.LIGHTGRAY);
             textoAdmin.setScaleX(1.03);
@@ -90,13 +170,12 @@ public class TelaAutenticacao {
             TelaAdmin.exibir(estados);
         });
 
-        // Layout
+        // Layout principal
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: #0066cc;");
-
-        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, textoAdmin);
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, containerBotao, textoAdmin);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
@@ -116,16 +195,9 @@ public class TelaAutenticacao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log para dev
             return false;
         }
-    }
-
-    private static void mostrarAlerta(String titulo, String mensagem) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(mensagem);
-        alerta.showAndWait();
     }
 
     private static void estilizarCampo(TextField campo) {

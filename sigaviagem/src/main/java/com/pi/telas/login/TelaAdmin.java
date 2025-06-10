@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
 
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,9 +16,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -30,19 +34,32 @@ public class TelaAdmin {
         Label titulo = new Label("ADMINISTRADOR");
         titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
         titulo.setTextFill(Color.WHITE);
-        titulo.setEffect(new DropShadow(2, Color.BLACK));
+        titulo.setEffect(new DropShadow(3, Color.BLACK));
 
-        // Campos
-        TextField campoLogin = new TextField();
-        campoLogin.setPromptText("Login");
-        estilizarCampo(campoLogin);
+        // Inputs personalizados
+        TextField campoLogin = criarCampoPersonalizado("Login");
+        PasswordField campoSenha = criarSenhaPersonalizada("Senha");
 
-        PasswordField campoSenha = new PasswordField();
-        campoSenha.setPromptText("Senha");
-        estilizarCampo(campoSenha);
-
-        // Botão Login
+        // Botões
         Button botaoLogin = criarBotao("Entrar", "#ffffff", "#0066cc", "#0052a3");
+        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000", "#a30000");
+
+        // Indicador de progresso circular com fundo escurecido
+        StackPane overlayLoading = criarOverlayLoading();
+
+        // Container principal do formulário
+        VBox formLayout = new VBox(15, titulo, campoLogin, campoSenha, botaoLogin, botaoVoltar);
+        formLayout.setAlignment(Pos.CENTER);
+        formLayout.setPadding(new Insets(40));
+        formLayout.setMaxWidth(320);
+        formLayout.setStyle("-fx-background-color: #0066cc; -fx-background-radius: 16;");
+
+        // Root com overlay do loading
+        StackPane raiz = new StackPane(formLayout, overlayLoading);
+        raiz.setStyle("-fx-background-color: linear-gradient(to bottom right, #004080, #003366);");
+        StackPane.setAlignment(overlayLoading, Pos.CENTER);
+
+        // Evento login
         botaoLogin.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
@@ -52,32 +69,166 @@ public class TelaAdmin {
                 return;
             }
 
-            try {
-                if (validarAdmin(login, senha)) {
+            // Desativa UI, mostra loading
+            setUIEnabled(formLayout, false);
+            overlayLoading.setVisible(true);
+
+            Task<Boolean> taskLogin = new Task<>() {
+                @Override
+                protected Boolean call() throws Exception {
+                    return validarAdmin(login, senha);
+                }
+            };
+
+            taskLogin.setOnSucceeded(ev -> {
+                boolean valido = taskLogin.getValue();
+                overlayLoading.setVisible(false);
+                setUIEnabled(formLayout, true);
+
+                if (valido) {
                     TelaInicial.exibir(estados);
                 } else {
-                    mostrarAlerta(Alert.AlertType.INFORMATION, "Acesso Negado", "Login ou senha incorretos.");
+                    mostrarAlerta(Alert.AlertType.ERROR, "Acesso Negado", "Login ou senha incorretos.");
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace(); // Substituir por logger futuramente
+            });
+
+            taskLogin.setOnFailed(ev -> {
+                overlayLoading.setVisible(false);
+                setUIEnabled(formLayout, true);
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
-            }
+            });
+
+            new Thread(taskLogin).start();
         });
 
-        // Botão Voltar (retorna à tela de login normal)
-        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000", "#a30000");
+        // Evento voltar
         botaoVoltar.setOnAction(e -> TelaAutenticacao.exibir(estados));
 
-        // Layout
-        VBox layout = new VBox(15);
-        layout.setPadding(new Insets(40));
-        layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #0066cc;");
+        // Cena
+        Scene cena = new Scene(raiz, 600, 400);
+        App.root.getChildren().setAll(raiz);
+    }
 
-        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoLogin, botaoVoltar);
+    private static void setUIEnabled(Pane container, boolean habilitar) {
+        container.setDisable(!habilitar);
+        container.setOpacity(habilitar ? 1.0 : 0.6);
+    }
 
-        Scene cena = new Scene(layout, 600, 400);
-        App.root.getChildren().setAll(layout);
+    private static StackPane criarOverlayLoading() {
+        ProgressIndicator loading = new ProgressIndicator();
+        loading.setPrefSize(100, 100);
+
+        StackPane overlay = new StackPane();
+        overlay.setStyle("-fx-background-color: rgba(0,0,0,0.5);");
+        overlay.getChildren().add(loading);
+        overlay.setVisible(false);
+        return overlay;
+    }
+
+    private static TextField criarCampoPersonalizado(String placeholder) {
+        TextField campo = new TextField();
+        campo.setPromptText(placeholder);
+        campo.setFont(Font.font("Helvetica", 14));
+        campo.setStyle(
+            "-fx-background-radius: 12;" +
+            "-fx-background-color: white;" +
+            "-fx-padding: 10 14;" +
+            "-fx-border-radius: 12;" +
+            "-fx-border-color: transparent;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
+        );
+        campo.focusedProperty().addListener((obs, oldV, newV) -> {
+            if (newV) {
+                campo.setStyle(
+                    "-fx-background-radius: 12;" +
+                    "-fx-background-color: white;" +
+                    "-fx-padding: 10 14;" +
+                    "-fx-border-radius: 12;" +
+                    "-fx-border-color: #3399ff;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,153,255,0.5), 8, 0.7, 0, 2);"
+                );
+            } else {
+                campo.setStyle(
+                    "-fx-background-radius: 12;" +
+                    "-fx-background-color: white;" +
+                    "-fx-padding: 10 14;" +
+                    "-fx-border-radius: 12;" +
+                    "-fx-border-color: transparent;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
+                );
+            }
+        });
+        return campo;
+    }
+
+    private static PasswordField criarSenhaPersonalizada(String placeholder) {
+        PasswordField campo = new PasswordField();
+        campo.setPromptText(placeholder);
+        campo.setFont(Font.font("Helvetica", 14));
+        campo.setStyle(
+            "-fx-background-radius: 12;" +
+            "-fx-background-color: white;" +
+            "-fx-padding: 10 14;" +
+            "-fx-border-radius: 12;" +
+            "-fx-border-color: transparent;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
+        );
+        campo.focusedProperty().addListener((obs, oldV, newV) -> {
+            if (newV) {
+                campo.setStyle(
+                    "-fx-background-radius: 12;" +
+                    "-fx-background-color: white;" +
+                    "-fx-padding: 10 14;" +
+                    "-fx-border-radius: 12;" +
+                    "-fx-border-color: #3399ff;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,153,255,0.5), 8, 0.7, 0, 2);"
+                );
+            } else {
+                campo.setStyle(
+                    "-fx-background-radius: 12;" +
+                    "-fx-background-color: white;" +
+                    "-fx-padding: 10 14;" +
+                    "-fx-border-radius: 12;" +
+                    "-fx-border-color: transparent;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
+                );
+            }
+        });
+        return campo;
+    }
+
+    private static Button criarBotao(String texto, String corTexto, String corFundo, String corHover) {
+        Button botao = new Button(texto);
+        botao.setPrefWidth(180);
+        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+        botao.setStyle(
+            "-fx-background-color: " + corFundo + ";" +
+            "-fx-text-fill: " + corTexto + ";" +
+            "-fx-background-radius: 12;" +
+            "-fx-cursor: hand;"
+        );
+
+        botao.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->
+            botao.setStyle(
+                "-fx-background-color: " + corHover + ";" +
+                "-fx-text-fill: " + corTexto + ";" +
+                "-fx-background-radius: 12;" +
+                "-fx-cursor: hand;"
+            )
+        );
+
+        botao.addEventHandler(MouseEvent.MOUSE_EXITED, e ->
+            botao.setStyle(
+                "-fx-background-color: " + corFundo + ";" +
+                "-fx-text-fill: " + corTexto + ";" +
+                "-fx-background-radius: 12;" +
+                "-fx-cursor: hand;"
+            )
+        );
+
+        return botao;
     }
 
     private static boolean validarAdmin(String login, String senha) throws Exception {
@@ -104,30 +255,5 @@ public class TelaAdmin {
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
         alerta.showAndWait();
-    }
-
-    private static void estilizarCampo(TextField campo) {
-        campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
-    }
-
-    private static Button criarBotao(String texto, String corTexto, String corFundo, String corHover) {
-        Button botao = new Button(texto);
-        botao.setPrefWidth(150);
-        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        botao.setStyle(
-            "-fx-background-color: " + corFundo + ";" +
-            "-fx-text-fill: " + corTexto + ";" +
-            "-fx-background-radius: 10;"
-        );
-
-        // Efeito hover
-        botao.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> 
-            botao.setStyle("-fx-background-color: " + corHover + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 10;")
-        );
-        botao.addEventHandler(MouseEvent.MOUSE_EXITED, e -> 
-            botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 10;")
-        );
-
-        return botao;
     }
 }

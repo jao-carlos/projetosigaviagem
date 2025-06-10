@@ -21,11 +21,10 @@ public class TelaInicial {
 
     public static void exibir(ControladorDeEstados estados) {
 
-        // Logo (imagem do símbolo do metrô)
-        Image imagemLogo = new Image(App.class.getResource("/imagens/simboloMetro.png").toExternalForm());
-        ImageView logo = new ImageView(imagemLogo);
-        logo.setPreserveRatio(true);
-        logo.setFitHeight(200); // Ajuste conforme necessário
+        // Imagem do símbolo do metrô (substitua pelo caminho correto)
+        ImageView logoMetro = new ImageView(new Image(App.class.getResourceAsStream("/imagens/logometro.png")));
+        logoMetro.setFitHeight(120);
+        logoMetro.setPreserveRatio(true);
 
         // Título
         Label titulo = new Label("SIGA VIAGEM");
@@ -50,13 +49,13 @@ public class TelaInicial {
         });
 
         // Layout central
-        VBox layout = new VBox(25);
+        VBox layout = new VBox(30);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(logo, titulo, botaoIniciarJogo, botaoEstatisticas);
+        layout.getChildren().addAll(logoMetro, titulo, botaoIniciarJogo, botaoEstatisticas);
 
-        // Conteúdo principal com fundo sólido
+        // Fundo azul oficial do metrô de São Paulo
         StackPane conteudo = new StackPane();
-        conteudo.setStyle("-fx-background-color: black;");
+        conteudo.setStyle("-fx-background-color: #004d99;");
         conteudo.getChildren().add(layout);
 
         // Mostra na tela
