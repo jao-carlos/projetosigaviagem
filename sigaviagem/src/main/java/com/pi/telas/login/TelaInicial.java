@@ -2,59 +2,42 @@ package com.pi.telas.login;
 
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.estatisticas.TelaEstatisticas;
 import com.pi.telas.jogo.TelaPainelComando;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class TelaInicial {
 
     public static void exibir(ControladorDeEstados estados) {
 
-        Image imagemFundo = new Image(App.class.getResource("/imagens/fundoInicial.jpg").toExternalForm());
-        ImageView fundo = new ImageView(imagemFundo);
+        // Logo (imagem do símbolo do metrô)
+        Image imagemLogo = new Image(App.class.getResource("/imagens/simboloMetro.png").toExternalForm());
+        ImageView logo = new ImageView(imagemLogo);
+        logo.setPreserveRatio(true);
+        logo.setFitHeight(200); // Ajuste conforme necessário
 
-        fundo.setPreserveRatio(false);
-        fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
-        fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
+        // Título
+        Label titulo = new Label("SIGA VIAGEM");
+        titulo.setFont(Font.font("Helvetica", FontWeight.EXTRA_BOLD, 36));
+        titulo.setTextFill(Color.WHITE);
+        titulo.setEffect(new DropShadow(4, Color.BLACK));
 
-        Pane camadaInterativa = new Pane();
+        // Botões
+        Button botaoIniciarJogo = criarBotao("Iniciar Jogo");
+        Button botaoEstatisticas = criarBotao("Estatísticas");
 
-        Button botaoIniciarJogo = new Button("Iniciar Jogo");
-        Button botaoEstatisticas = new Button("Estatísticas");
-
-        String estiloBotao = "-fx-background-color: white; "
-                           + "-fx-text-fill: blue; "
-                           + "-fx-font-size: 16px; "
-                           + "-fx-font-family: 'Helvetica'; "
-                           + "-fx-font-weight: bold; "
-                           + "-fx-background-radius: 8px;";
-                           
-        String estiloHover = "-fx-background-color: #e0e0ff; "
-                           + "-fx-text-fill: blue; "
-                           + "-fx-font-size: 16px; "
-                           + "-fx-font-family: 'Helvetica'; "
-                           + "-fx-font-weight: bold; "
-                           + "-fx-background-radius: 8px;";
-
-        botaoIniciarJogo.setStyle(estiloBotao);
-        botaoEstatisticas.setStyle(estiloBotao);
-
-        botaoIniciarJogo.setPrefWidth(200);
-        botaoEstatisticas.setPrefWidth(200);
-
-        botaoIniciarJogo.setOnMouseEntered(e -> botaoIniciarJogo.setStyle(estiloHover));
-        botaoIniciarJogo.setOnMouseExited(e -> botaoIniciarJogo.setStyle(estiloBotao));
-
-        botaoEstatisticas.setOnMouseEntered(e -> botaoEstatisticas.setStyle(estiloHover));
-        botaoEstatisticas.setOnMouseExited(e -> botaoEstatisticas.setStyle(estiloBotao));
-
+        // Ações dos botões
         botaoIniciarJogo.setOnAction(e -> {
             estados.marcarInicio();
             App.root.getChildren().clear();
@@ -62,26 +45,45 @@ public class TelaInicial {
         });
 
         botaoEstatisticas.setOnAction(e -> {
-            mostrarInfo("Estatísticas ainda não implementadas.");
+            App.root.getChildren().clear();
+            TelaEstatisticas.exibir(estados);
         });
 
-        HBox botoes = new HBox(30);
-        botoes.setAlignment(Pos.CENTER);
-        botoes.getChildren().addAll(botaoIniciarJogo, botaoEstatisticas);
+        // Layout central
+        VBox layout = new VBox(25);
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(logo, titulo, botaoIniciarJogo, botaoEstatisticas);
 
-        botoes.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().subtract(botoes.widthProperty()).divide(2));
-        botoes.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(0.8)); // ~80% da altura
+        // Conteúdo principal com fundo sólido
+        StackPane conteudo = new StackPane();
+        conteudo.setStyle("-fx-background-color: black;");
+        conteudo.getChildren().add(layout);
 
-        camadaInterativa.getChildren().add(botoes);
-
-        StackPane conteudo = new StackPane(fundo, camadaInterativa);
+        // Mostra na tela
         App.root.getChildren().setAll(conteudo);
     }
 
-    private static void mostrarInfo(String mensagem) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Informação");
-        alerta.setHeaderText(mensagem);
-        alerta.showAndWait();
+    private static Button criarBotao(String texto) {
+        Button botao = new Button(texto);
+        botao.setPrefWidth(220);
+        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
+        botao.setStyle("-fx-background-color: white; " +
+                       "-fx-text-fill: #0066cc; " +
+                       "-fx-background-radius: 10px; " +
+                       "-fx-cursor: hand; " +
+                       "-fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.3), 4, 0.3, 0, 2);");
+
+        botao.setOnMouseEntered(e -> botao.setStyle("-fx-background-color: #e6f0ff; " +
+                                                    "-fx-text-fill: #003366; " +
+                                                    "-fx-background-radius: 10px; " +
+                                                    "-fx-cursor: hand; " +
+                                                    "-fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.4), 6, 0.4, 0, 2);"));
+
+        botao.setOnMouseExited(e -> botao.setStyle("-fx-background-color: white; " +
+                                                   "-fx-text-fill: #0066cc; " +
+                                                   "-fx-background-radius: 10px; " +
+                                                   "-fx-cursor: hand; " +
+                                                   "-fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.3), 4, 0.3, 0, 2);"));
+        return botao;
     }
 }

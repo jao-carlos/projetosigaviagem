@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -41,7 +42,7 @@ public class TelaAdmin {
         estilizarCampo(campoSenha);
 
         // Botão Login
-        Button botaoLogin = criarBotao("Entrar", "#ffffff", "#0066cc");
+        Button botaoLogin = criarBotao("Entrar", "#ffffff", "#0066cc", "#0052a3");
         botaoLogin.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
@@ -58,14 +59,14 @@ public class TelaAdmin {
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Acesso Negado", "Login ou senha incorretos.");
                 }
             } catch (Exception ex) {
-                ex.printStackTrace(); // Melhor trocar por logger futuramente
+                ex.printStackTrace(); // Substituir por logger futuramente
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
             }
         });
 
-        // Botão Voltar
-        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000");
-        botaoVoltar.setOnAction(e -> TelaCadastrar.exibir(estados));
+        // Botão Voltar (retorna à tela de login normal)
+        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000", "#a30000");
+        botaoVoltar.setOnAction(e -> TelaAutenticacao.exibir(estados));
 
         // Layout
         VBox layout = new VBox(15);
@@ -109,7 +110,7 @@ public class TelaAdmin {
         campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
     }
 
-    private static Button criarBotao(String texto, String corTexto, String corFundo) {
+    private static Button criarBotao(String texto, String corTexto, String corFundo, String corHover) {
         Button botao = new Button(texto);
         botao.setPrefWidth(150);
         botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
@@ -118,6 +119,15 @@ public class TelaAdmin {
             "-fx-text-fill: " + corTexto + ";" +
             "-fx-background-radius: 10;"
         );
+
+        // Efeito hover
+        botao.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> 
+            botao.setStyle("-fx-background-color: " + corHover + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 10;")
+        );
+        botao.addEventHandler(MouseEvent.MOUSE_EXITED, e -> 
+            botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 10;")
+        );
+
         return botao;
     }
 }

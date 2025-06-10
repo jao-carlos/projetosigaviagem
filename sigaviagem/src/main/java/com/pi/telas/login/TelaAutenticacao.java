@@ -1,4 +1,5 @@
 package com.pi.telas.login;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -42,6 +44,14 @@ public class TelaAutenticacao {
         // Botão OK
         Button botaoOk = criarBotao("OK", "#ffffff", "#0066cc");
 
+        // Efeito de hover no botão OK
+        botaoOk.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            botaoOk.setStyle("-fx-background-color: #005bb5; -fx-text-fill: white; -fx-background-radius: 10;");
+        });
+        botaoOk.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            botaoOk.setStyle("-fx-background-color: #0066cc; -fx-text-fill: white; -fx-background-radius: 10;");
+        });
+
         botaoOk.setOnAction(e -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
@@ -58,13 +68,26 @@ public class TelaAutenticacao {
             }
         });
 
-        // Link para cadastro
-        Label textoCadastro = new Label("Não tem uma conta? Cadastre-se");
-        textoCadastro.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
-        textoCadastro.setTextFill(Color.WHITE);
-        textoCadastro.setUnderline(true);
-        textoCadastro.setOnMouseClicked(e -> {
-            TelaCadastrar.exibir(estados);
+        // Texto interativo para admin
+        Label textoAdmin = new Label("É administrador? Faça login aqui");
+        textoAdmin.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
+        textoAdmin.setTextFill(Color.WHITE);
+        textoAdmin.setUnderline(true);
+        
+        // Hover sutil
+        textoAdmin.setOnMouseEntered(e -> {
+            textoAdmin.setTextFill(Color.LIGHTGRAY);
+            textoAdmin.setScaleX(1.03);
+            textoAdmin.setScaleY(1.03);
+        });
+        textoAdmin.setOnMouseExited(e -> {
+            textoAdmin.setTextFill(Color.WHITE);
+            textoAdmin.setScaleX(1.0);
+            textoAdmin.setScaleY(1.0);
+        });
+
+        textoAdmin.setOnMouseClicked(e -> {
+            TelaAdmin.exibir(estados);
         });
 
         // Layout
@@ -73,7 +96,7 @@ public class TelaAutenticacao {
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: #0066cc;");
 
-        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, textoCadastro);
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, textoAdmin);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
