@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class TelaCadastro {
+public class TelaCadastrar {
 
     public static void exibir(ControladorDeEstados estados) {
         // Título
