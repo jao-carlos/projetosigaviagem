@@ -2,6 +2,8 @@ package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
 import com.pi.telas.jogo.TelaModuloComunicacao;
+import com.pi.telas.jogo.TelaPainelExterno;
+import com.pi.telas.login.TelaAutenticacao;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,7 +28,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaModuloComunicacao.exibir(estados); 
+        TelaAutenticacao.exibir(estados); 
     }
     
 

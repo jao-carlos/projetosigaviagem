@@ -26,7 +26,18 @@ public class Seta {
             altura.addListener((obs, oldVal, newVal) -> 
                 updatePolygonEsq(flecha, largura.getValue().doubleValue(), newVal.doubleValue())
             );
-        } else {
+        }
+        if (direcao.equalsIgnoreCase("baixo")) {
+            updatePolygonBaixo(flecha, largura.getValue().doubleValue(), altura.getValue().doubleValue());
+
+            largura.addListener((obs, oldVal, newVal) ->
+                updatePolygonBaixo(flecha, newVal.doubleValue(), altura.getValue().doubleValue())
+            );
+            altura.addListener((obs, oldVal, newVal) ->
+                updatePolygonBaixo(flecha, largura.getValue().doubleValue(), newVal.doubleValue())
+            );
+        } 
+        else{
             updatePolygonDir(flecha, largura.getValue().doubleValue(), altura.getValue().doubleValue());
 
             largura.addListener((obs, oldVal, newVal) -> 
@@ -129,4 +140,17 @@ public class Seta {
             w, 0.75 * h
         );
     }
+
+    private static void updatePolygonBaixo(Polygon polygon, double w, double h) {
+        polygon.getPoints().setAll(
+            0.25 * w, 0.0,
+            0.25 * w, 0.714 * h,
+            0.0, 0.714 * h,
+            0.5 * w, h,
+            w, 0.714 * h,
+            0.75 * w, 0.714 * h,
+            0.75 * w, 0.0
+        );
+    }
+
 }
