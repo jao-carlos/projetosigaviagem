@@ -8,6 +8,10 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     private boolean chave2Ativa = false;
     private boolean chave3Ativa = false;
     private boolean chave4Ativa = false;
+    private boolean paSegurarPorta = false;
+    private boolean paProblema = false;
+    private boolean avisoCCO = false;
+    private boolean boleira = false;
     private int posChaveReversora = 0;
     private int posChaveCBTC = 0;
 
@@ -84,7 +88,40 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public long tempoDecorridoEmSegundos() {
         return (System.currentTimeMillis() - tempoInicio) / 1000;
     }
+    
     // Estados individuais das chaves
+
+    public boolean isPaSegurarPorta() {
+        return paSegurarPorta;
+    }
+
+    public void setPaSegurarPorta(boolean paSegurarPorta) {
+        this.paSegurarPorta = paSegurarPorta;
+    }
+
+    public boolean isPaProblema() {
+        return paProblema;
+    }
+
+    public void setPaProblema(boolean paProblema) {
+        this.paProblema = paProblema;
+    }
+
+    public boolean isAvisoCCO() {
+        return avisoCCO;
+    }
+
+    public void setAvisoCCO(boolean avisoCCO) {
+        this.avisoCCO = avisoCCO;
+    }
+
+    public boolean isBoleira() {
+        return boleira;
+    }
+
+    public void setBoleira(boolean boleira) {
+        this.boleira = boleira;
+    }
 
     public boolean isChave1Ativa() { return chave1Ativa; }
     public void setChave1Ativa(boolean chave1Ativa) { this.chave1Ativa = chave1Ativa; }

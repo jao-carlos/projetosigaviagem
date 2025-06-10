@@ -16,7 +16,7 @@ public class Seta {
 
     public static Button buttonSeta(String textoBotao, ObservableValue<Number> largura, ObservableValue<Number> altura, String direcao) {
         Polygon flecha = new Polygon();
-        // Inicializa a forma da seta baseada na direção
+        
         if (direcao.equalsIgnoreCase("esq")) {
             updatePolygonEsq(flecha, largura.getValue().doubleValue(), altura.getValue().doubleValue());
 
@@ -37,18 +37,18 @@ public class Seta {
             );
         }
 
-        // Estilo base
-        flecha.setFill(Color.web("#5A9BD5"));         // azul profissional
-        flecha.setStroke(Color.web("#2A5599"));       // contorno forte
+   
+        flecha.setFill(Color.web("#5A9BD5"));        
+        flecha.setStroke(Color.web("#2A5599"));       
         flecha.setStrokeWidth(2);
 
-        // Transição de cor para hover
+        
         FillTransition fillHover = new FillTransition(Duration.millis(250), flecha, 
             Color.web("#5A9BD5"), Color.web("#A9CFF0"));
         FillTransition fillExit = new FillTransition(Duration.millis(250), flecha, 
             Color.web("#A9CFF0"), Color.web("#5A9BD5"));
 
-        // Animação de scale (leve zoom)
+        
         ScaleTransition scaleHover = new ScaleTransition(Duration.millis(200), flecha);
         scaleHover.setToX(1.05);
         scaleHover.setToY(1.05);
@@ -57,7 +57,7 @@ public class Seta {
         scaleExit.setToX(1.0);
         scaleExit.setToY(1.0);
 
-        // Eventos de mouse para animações suaves e cursor
+      
         flecha.setOnMouseEntered(e -> {
             flecha.setCursor(Cursor.HAND);
             fillHover.playFromStart();
@@ -70,33 +70,33 @@ public class Seta {
             scaleExit.playFromStart();
         });
 
-        // Label do texto
+      
         Label texto = new Label(textoBotao);
         texto.setStyle("-fx-font-size: 16px; -fx-text-fill: #333; -fx-font-weight: bold;");
 
         StackPane conteudo = new StackPane(flecha, texto);
 
-        // Botão com estilo limpo e suporte a foco (acessibilidade)
+        
         Button botao = new Button();
         botao.setGraphic(conteudo);
         botao.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
         botao.prefWidthProperty().bind(largura);
         botao.prefHeightProperty().bind(altura);
 
-        // Feedback visual para foco via teclado
+       
         botao.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
-                // Quando focado, aumenta a sombra e brilho
+                
                 flecha.setEffect(new javafx.scene.effect.DropShadow(15, Color.web("#4178BE")));
             } else {
                 flecha.setEffect(null);
             }
         });
 
-        // Ação ao pressionar ENTER para acessibilidade
+        
         botao.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.SPACE) {
-                // Aqui você pode disparar evento ou animação de clique
+               
                 botao.fire();
             }
         });
@@ -104,7 +104,7 @@ public class Seta {
         return botao;
     }
 
-    // Polígono seta direita
+    
     private static void updatePolygonDir(Polygon polygon, double w, double h) {
         polygon.getPoints().setAll(
             0.0, 0.25 * h,
@@ -117,7 +117,7 @@ public class Seta {
         );
     }
 
-    // Polígono seta esquerda
+    
     private static void updatePolygonEsq(Polygon polygon, double w, double h) {
         polygon.getPoints().setAll(
             w, 0.25 * h,

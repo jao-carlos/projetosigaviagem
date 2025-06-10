@@ -26,7 +26,10 @@ public class TelaPortaLateralDireita {
             App.primaryStage.getScene().widthProperty().multiply(70.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(60.0 / 1080),
             App.primaryStage.getScene().widthProperty().multiply(345.7 / 1920),
-            App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080)
+            App.primaryStage.getScene().heightProperty().multiply(640.00 / 1080),
+            () -> {
+                estados.setBoleira(true);
+            }
 
         );
         camadaInterativa.getChildren().add(botaoAbrir);
