@@ -82,6 +82,20 @@ public class TelaPainelExterno {
             });
 
             camadaInterativa.getChildren().addAll(chave1, chave2, chave3, chave4);
+
+            Button fechar = Seta.buttonSeta("Fechar",
+
+            App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
+            App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
+            "baixo");
+            fechar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(900.0 / 1920));
+            fechar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(200.0 / 1080));
+            fechar.setOnAction(e -> {
+                estados.setPainelExternoAberto(false);
+                TelaPainelExterno.exibir(estados);
+            });
+            camadaInterativa.getChildren().add(fechar);
+
         }
 
         Button voltar = Seta.buttonSeta("Voltar",
