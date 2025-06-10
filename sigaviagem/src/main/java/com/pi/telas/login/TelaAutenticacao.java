@@ -59,13 +59,22 @@ public class TelaAutenticacao {
             }
         });
 
+        // Texto de cadastro
+        Label textoCadastro = new Label("Não tem uma conta? Cadastre-se");
+        textoCadastro.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
+        textoCadastro.setTextFill(Color.WHITE);
+        textoCadastro.setUnderline(true);
+        textoCadastro.setOnMouseClicked(e -> {
+            TelaCadastro.exibir(estados);
+        });
+
         // Layout
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: #0066cc;"); // Azul forte
 
-        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk);
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoOk, textoCadastro);
 
         Scene cena = new Scene(layout, 600, 400);
         App.root.getChildren().setAll(layout);
