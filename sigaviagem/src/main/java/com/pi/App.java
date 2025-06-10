@@ -1,6 +1,7 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.jogo.TelaPainelDIC;
 import com.pi.telas.login.TelaAutenticacao;
 import com.pi.telas.login.TelaInicial;
 
@@ -27,7 +28,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaInicial.exibir(estados); 
+        TelaPainelDIC.exibir(estados); 
     }
     
 

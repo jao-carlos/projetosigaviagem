@@ -9,6 +9,8 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     private boolean chave3Ativa = false;
     private boolean chave4Ativa = false;
     private int posChaveReversora = 0;
+    private int posChaveCBTC = 0;
+
 
     
     //Porta do carro
@@ -35,7 +37,14 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public void setVerificouAlgoNaPorta(boolean verificouAlgoNaPorta) {
         this.verificouAlgoNaPorta = verificouAlgoNaPorta;
     }
+    //Chave CBTC
+    public int getPosChaveCBTC() {
+        return posChaveCBTC;
+    }
 
+    public void setPosChaveCBTC(int pos) {
+        this.posChaveCBTC = pos;
+    }
     // Painel Externo
     private boolean painelExternoAberto = false;
 
@@ -91,4 +100,5 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
 
     public int estadoChaveReversora() {return posChaveReversora;}
     public void setChaveReversora(int posChaveReversora) {this.posChaveReversora = posChaveReversora;}
+
 }
