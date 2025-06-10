@@ -20,28 +20,40 @@ public class TelaPainelDIC {
         fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
         fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
 
-
         Pane camadaInterativa = new Pane();
 
-        BotaoPersonalizado chaveCBTC = new BotaoPersonalizado(
-            App.primaryStage.getScene().widthProperty().multiply(135.07 / 1920),
-            App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
-            App.primaryStage.getScene().widthProperty().multiply(825.7 / 1920),
-            App.primaryStage.getScene().heightProperty().multiply(880.00 / 1080),
-            () -> {
-                App.root.getChildren().clear();
-                TelaChaveCBTC.exibir(estados);
-            }
-        );
-        camadaInterativa.getChildren().add(chaveCBTC);
+        Image chaveImg = new Image(App.class.getResource("/imagens/ChaveAssetCBTC.png").toExternalForm());
+        ImageView chaveView = new ImageView(chaveImg);
 
+        chaveView.setFitWidth(App.primaryStage.getScene().getWidth() * (98.0 / 1920));
+        chaveView.setPreserveRatio(true);
 
+        chaveView.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(843.0 / 1920));
+        chaveView.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(890.0 / 1080));
+
+        double[] angulos = {-45, 0, 45};
+
+        chaveView.setRotate(angulos[estados.getPosChaveCBTC()]);
+
+        Button btnChave = new Button();
+        btnChave.setStyle("-fx-background-color: transparent;");
+        btnChave.setPrefSize(100, 100);
+        btnChave.layoutXProperty().bind(chaveView.layoutXProperty());
+        btnChave.layoutYProperty().bind(chaveView.layoutYProperty());
+
+        btnChave.setOnAction(e -> {
+            int novaPos = (estados.getPosChaveCBTC() + 1) % 3;
+            estados.setPosChaveCBTC(novaPos);
+            chaveView.setRotate(angulos[novaPos]);
+        });
+
+        camadaInterativa.getChildren().addAll(chaveView, btnChave);
+
+        // Botão de seta esquerda
         Button voltar = Seta.buttonSeta("Esquerda",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
             "esq");
-        camadaInterativa.getChildren().add(voltar);
-
         voltar.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(0.0 / 1920));
         voltar.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         voltar.setOnAction(e -> {
@@ -49,12 +61,13 @@ public class TelaPainelDIC {
             TelaPainelComando.exibir(estados); 
         });
 
+        camadaInterativa.getChildren().add(voltar);
+
+        // Botão de seta direita
         Button direita = Seta.buttonSeta("direita",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
             "dir");
-        camadaInterativa.getChildren().add(direita);
-
         direita.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(1720.00 / 1920));
         direita.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(900.00 / 1080));
         direita.setOnAction(e -> {
@@ -62,8 +75,9 @@ public class TelaPainelDIC {
             TelaPortaLateralDireita.exibir(estados); 
         });
 
+        camadaInterativa.getChildren().add(direita);
+
         StackPane conteudo = new StackPane(fundo, camadaInterativa);
-        
         App.root.getChildren().addAll(conteudo);
     }
 }
