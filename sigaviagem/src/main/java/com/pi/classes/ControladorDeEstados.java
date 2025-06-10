@@ -123,6 +123,17 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
         this.boleira = boleira;
     }
 
+    // public int getPosChaveCBTC() {
+    //     return posChaveCBTC;
+    // }
+
+    // public void setPosChaveCBTC(int pos) {
+    //     this.posChaveCBTC = pos;
+    // }
+
+    public int getPosChaveReversora() {return posChaveReversora;}
+    public void setPosChaveReversora(int pos) {this.posChaveReversora = pos;}
+
     public boolean isChave1Ativa() { return chave1Ativa; }
     public void setChave1Ativa(boolean chave1Ativa) { this.chave1Ativa = chave1Ativa; }
 
@@ -134,8 +145,4 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
 
     public boolean isChave4Ativa() { return chave4Ativa; }
     public void setChave4Ativa(boolean chave4Ativa) { this.chave4Ativa = chave4Ativa; }
-
-    public int estadoChaveReversora() {return posChaveReversora;}
-    public void setChaveReversora(int posChaveReversora) {this.posChaveReversora = posChaveReversora;}
-
 }

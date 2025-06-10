@@ -31,16 +31,32 @@ public class TelaChaveReversora {
             TelaPainelComando.exibir(estados); 
         });
 
-        ReversoraToggle chaveRev = new ReversoraToggle(1000,1000);
-        chaveRev.posicionar(450, 38);
-        camadaInterativa.getChildren().add(chaveRev);
+        Image chaveImg = new Image(App.class.getResource("/imagens/SoChaveReversora.png").toExternalForm());
+        ImageView chaveView = new ImageView(chaveImg);
 
-        chaveRev.setNFR(estados.estadoChaveReversora());
+        chaveView.setFitWidth(App.primaryStage.getScene().getWidth() * (1000.0 / 1920));
+        chaveView.setPreserveRatio(true);
+
+        chaveView.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.0 / 1920));
+        chaveView.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(200.0 / 1080));
+
+        double[] angulos = {0, -90, 90};
+
+        chaveView.setRotate(angulos[estados.getPosChaveReversora()]);
+
+        Button chaveRev = new Button();
+        chaveRev.setStyle("-fx-background-color: transparent;");
+        chaveRev.setPrefSize(1000, 1000);
+        chaveRev.layoutXProperty().bind(chaveView.layoutXProperty());
+        chaveRev.layoutYProperty().bind(chaveView.layoutYProperty());
+
         chaveRev.setOnAction(e -> {
-            chaveRev.alternarSelecao();
-            estados.setChaveReversora(chaveRev.neutroFrenteRe());
+            int novaPos = (estados.getPosChaveReversora() + 1) % 3;
+            estados.setPosChaveReversora(novaPos);
+            chaveView.setRotate(angulos[novaPos]);
         });
 
+        camadaInterativa.getChildren().addAll(chaveView, chaveRev);
 
         StackPane conteudo = new StackPane(fundo,camadaInterativa);
         App.root.getChildren().setAll(conteudo);
