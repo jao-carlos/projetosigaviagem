@@ -16,9 +16,19 @@ public class ControladorDeEstados {
     private boolean ccoResolvido = false;
     private int posChaveReversora = 0;
     private int posChaveCBTC = 0;
+    private int pontuacao = 0;
 
+    public void setPontuacao(int pontos) {
+        this.pontuacao = pontos;
+    }
 
-    
+    public void incrementarPontuacao(int pontos) {
+        this.pontuacao += pontos;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
 
     public boolean isPortaFechada() {
         return portaFechada;
@@ -157,4 +167,35 @@ public class ControladorDeEstados {
 
     public boolean isChave4Ativa() { return chave4Ativa; }
     public void setChave4Ativa(boolean chave4Ativa) { this.chave4Ativa = chave4Ativa; }
+
+    public int calcularPontuacaoFinal() {
+        int pontos = 0;    //GENTE SE ALGUEM LEMBRAR DE MAIS ALGO ADCIONA POR FAVOR E FALA COMIGO QUE EU AJUDO = Leo
+
+        // Ações positivas
+        if (paSegurarPorta || paProblema) pontos += 1; // Emitiu PA
+        if (avisoCCO) pontos += 1; // Comunicou o CCO
+        if (!painelExternoAberto) pontos += 1; // Fechou o painel externo
+        if (portaComFita) pontos += 3; // Usou fita na porta
+        if (portaFechada) pontos += 4; // Porta finalizada fechada
+        if (posChaveReversora == 0) pontos += 1; // Deixou em neutro
+        if (posChaveCBTC == 0) pontos += 1; // CBTC em AM no final
+        if (verificouAlgoNaPorta) pontos += 2; // Verificou a porta
+
+        // Penalizações
+        if (painelExternoAberto) pontos -= 2; // Deixou painel aberto
+        if (!portaFechada) pontos -= 4; // Porta ainda aberta
+        if (posChaveReversora == 2) pontos -= 3; // Chave em ré na partida
+        if (posChaveCBTC != 1) pontos -= 2; // CBTC fora de AM no final
+        if (!avisoCCO) pontos -= 1; // Não comunicou o CCO
+        if (!paSegurarPorta && !paProblema) pontos -= 1; // Não deu nenhum PA
+        if (!verificouAlgoNaPorta) pontos -= 2; // Não verificou a porta
+        if (chave1Ativa) pontos -= 3;
+        if (chave2Ativa) pontos -= 3;
+        if (chave4Ativa) pontos -= 3;
+
+        return pontos;
+    }
+
+
+
 }

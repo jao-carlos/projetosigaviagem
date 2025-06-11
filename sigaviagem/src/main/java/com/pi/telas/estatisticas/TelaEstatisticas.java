@@ -1,16 +1,9 @@
 package com.pi.telas.estatisticas;
-
 import com.pi.App;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.telas.login.TelaInicial;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -22,43 +15,32 @@ import javafx.scene.text.FontWeight;
 public class TelaEstatisticas {
 
     public static void exibir(ControladorDeEstados estados) {
-     
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setTickLabelFill(Color.WHITE);
-        xAxis.setOpacity(0);
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setTickLabelsVisible(false);
-        yAxis.setOpacity(0);
-
-       
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setLegendVisible(false);
-        barChart.setHorizontalGridLinesVisible(false);
-        barChart.setVerticalGridLinesVisible(false);
-        barChart.setAlternativeRowFillVisible(false);
-        barChart.setAlternativeColumnFillVisible(false);
-        barChart.setBarGap(15);
-        barChart.setCategoryGap(40);
-        barChart.setStyle("-fx-background-color: transparent;");
-
-        XYChart.Series<String, Number> data = new XYChart.Series<>();
-        data.getData().add(new XYChart.Data<>("Viagens", 124));
-        data.getData().add(new XYChart.Data<>("Distância (km)", 678));
-        data.getData().add(new XYChart.Data<>("Tempo médio (min)", 42));
-
-        barChart.getData().add(data);
-
-        for (XYChart.Data<String, Number> item : data.getData()) {
-            item.getNode().setStyle("-fx-bar-fill: white;");
-
-            item.getNode().setOnMouseEntered(e -> item.getNode().setStyle("-fx-bar-fill: #cce6ff;"));
-            item.getNode().setOnMouseExited(e -> item.getNode().setStyle("-fx-bar-fill: white;"));
-        }
-
-        Label titulo = new Label("ESTATÍSTICAS");
+        Label titulo = new Label("ESTATÍSTICAS FINAIS");
         titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
         titulo.setTextFill(Color.WHITE);
+
+        Label tempo = new Label("Tempo total: " + estados.tempoDecorridoEmSegundos() + " segundos");
+        Label cco = new Label("Aviso ao CCO: " + (estados.isAvisoCCO() ? "Enviado" : "Não enviado"));
+        Label pa = new Label("PA emitido: " + (estados.isPaSegurarPorta() || estados.isPaProblema() ? "Sim" : "Não"));
+        Label chaveReversora = new Label("Posição da Chave Reversora: " + estados.getPosChaveReversora());
+        Label chaveCBTC = new Label("Posição da Chave CBTC: " + estados.getPosChaveCBTC());
+        Label adesivo = new Label("Adesivo colocado: " + (estados.isAdesivoRemovido() ? "Sim" : "Não"));
+        Label cinturao = new Label("Cinturão retirado: " + (estados.isCinturaoRemovido() ? "Sim" : "Não"));
+        Label painel = new Label("Painel externo aberto: " + (estados.isPainelExternoAberto() ? "Sim" : "Não"));
+        Label verificacao = new Label("Porta verificada: " + (estados.isVerificouAlgoNaPorta() ? "Sim" : "Não"));
+
+        boolean chavesErradasAtivas = estados.isChave1Ativa() || estados.isChave2Ativa() || estados.isChave4Ativa();
+        Label chavesErradas = new Label("Portas isoladas incorretamente: " + (chavesErradasAtivas ? "Sim" : "Não"));
+
+        int pontos = estados.calcularPontuacaoFinal();
+        Label pontuacao = new Label("Pontuação estimada: " + pontos);
+        pontuacao.setTextFill(pontos >= 0 ? Color.LIGHTGREEN : Color.ORANGERED);
+        pontuacao.setFont(Font.font("Helvetica", FontWeight.BOLD, 18));
+
+        for (Label label : new Label[]{tempo, cco, pa, chaveReversora, chaveCBTC, adesivo, cinturao, painel, verificacao, chavesErradas}) {
+            label.setTextFill(Color.WHITE);
+            label.setFont(Font.font("Helvetica", 16));
+        }
 
         Button botaoVoltar = new Button("Voltar");
         botaoVoltar.setPrefWidth(150);
@@ -80,21 +62,14 @@ public class TelaEstatisticas {
         ));
         botaoVoltar.setOnAction(e -> TelaInicial.exibir(estados));
 
-        VBox topSection = new VBox(10, titulo);
-        topSection.setAlignment(Pos.CENTER);
-        topSection.setPadding(new Insets(20));
-
-        VBox bottomSection = new VBox(10, botaoVoltar);
-        bottomSection.setAlignment(Pos.CENTER);
-        bottomSection.setPadding(new Insets(20));
+        VBox conteudo = new VBox(10, titulo, tempo, cco, pa, chaveReversora, chaveCBTC, adesivo, cinturao, painel, verificacao, chavesErradas, pontuacao, botaoVoltar);
+        conteudo.setAlignment(Pos.CENTER);
+        conteudo.setPadding(new Insets(30));
 
         BorderPane layout = new BorderPane();
-        layout.setTop(topSection);
-        layout.setCenter(barChart);
-        layout.setBottom(bottomSection);
+        layout.setCenter(conteudo);
         layout.setStyle("-fx-background-color: #0066cc;");
 
-        Scene cena = new Scene(layout, 700, 500);
         App.root.getChildren().setAll(layout);
     }
 }
