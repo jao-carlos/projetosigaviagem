@@ -13,10 +13,18 @@ import javafx.scene.layout.StackPane;
 
 public class TelaLadoDeFora {
     public static void exibir(ControladorDeEstados estados){
-        Image imagemFundo = new Image(App.class.getResource("/imagens/ladoDeFora.jpg").toExternalForm());
+        Image imagemFundo;
+
+        if (estados.isPortaComFita()) {
+            imagemFundo = new Image(App.class.getResource("/imagens/ladoDeForaAdesivo.jpg").toExternalForm());
+        } else if (estados.isPortaFechada()) {
+            imagemFundo = new Image(App.class.getResource("/imagens/ladoDeForaFechada.jpg").toExternalForm());
+        } else {
+            imagemFundo = new Image(App.class.getResource("/imagens/ladoDeFora.jpg").toExternalForm());
+        }
+
         ImageView fundo = new ImageView(imagemFundo);
         fundo.setPreserveRatio(false);
-
         fundo.fitWidthProperty().bind(App.primaryStage.getScene().widthProperty());
         fundo.fitHeightProperty().bind(App.primaryStage.getScene().heightProperty());
 
