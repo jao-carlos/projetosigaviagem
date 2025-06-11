@@ -29,7 +29,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaChaveReversora.exibir(estados); 
+        TelaAutenticacao.exibir(estados); 
     }
     
 

@@ -38,10 +38,12 @@ public class TelaInicial {
 
         
         botaoIniciarJogo.setOnAction(e -> {
-            estados.marcarInicio();
+            ControladorDeEstados novoEstado = new ControladorDeEstados();
+            novoEstado.marcarInicio();
             App.root.getChildren().clear();
-            TelaPainelComando.exibir(estados);
+            TelaPainelComando.exibir(novoEstado);
         });
+
 
         botaoEstatisticas.setOnAction(e -> {
             App.root.getChildren().clear();

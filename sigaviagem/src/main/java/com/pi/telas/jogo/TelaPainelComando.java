@@ -4,6 +4,7 @@ import com.pi.App;
 import com.pi.classes.BotaoPersonalizado;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
+import com.pi.telas.login.TelaInicial;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -92,9 +93,14 @@ public class TelaPainelComando {
             App.primaryStage.getScene().heightProperty().multiply(230.00 / 1080),
             App.primaryStage.getScene().widthProperty().multiply(998.00 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(630.00 / 1080),
-            () -> App.primaryStage.close()
+            () -> {
+                App.root.getChildren().clear();
+                TelaInicial.exibir(estados);
+            }
         );
+
         camadaInterativa.getChildren().add(botaofinalizar);
+
 
         Button voltar = Seta.buttonSeta("Esquerda",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
