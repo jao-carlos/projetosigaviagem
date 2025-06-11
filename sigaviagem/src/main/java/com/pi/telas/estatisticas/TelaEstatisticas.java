@@ -26,7 +26,6 @@ public class TelaEstatisticas {
         Label chaveReversora = criarLabel("Posição da Chave Reversora: " + estados.getPosChaveReversora());
         Label chaveCBTC = criarLabel("Posição da Chave CBTC: " + estados.getPosChaveCBTC());
         Label adesivo = criarLabel("Adesivo colocado: " + (estados.isAdesivoRemovido() ? "Sim" : "Não"));
-        Label cinturao = criarLabel("Cinturão retirado: " + (estados.isCinturaoRemovido() ? "Sim" : "Não"));
         Label painel = criarLabel("Painel externo aberto: " + (estados.isPainelExternoAberto() ? "Sim" : "Não"));
         Label verificacao = criarLabel("Porta verificada: " + (estados.isVerificouAlgoNaPorta() ? "Sim" : "Não"));
 
@@ -66,8 +65,7 @@ public class TelaEstatisticas {
         botaoVoltar.setOnAction(e -> TelaInicial.exibir(estados));
 
         VBox estatisticasBox = new VBox(10,
-            tempo, cco, pa, chaveReversora, chaveCBTC, adesivo,
-            cinturao, painel, verificacao, chavesErradas, pontuacao
+            tempo, cco, pa, chaveReversora, chaveCBTC, adesivo, painel, verificacao, chavesErradas, pontuacao
         );
         estatisticasBox.setPadding(new Insets(20));
         estatisticasBox.setAlignment(Pos.CENTER_LEFT);
