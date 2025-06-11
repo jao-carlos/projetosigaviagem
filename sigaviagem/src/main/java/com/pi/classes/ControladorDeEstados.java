@@ -12,6 +12,8 @@ public class ControladorDeEstados {
     private boolean paProblema = false;
     private boolean avisoCCO = false;
     private boolean boleira = false;
+    private boolean paResolvido = false;
+    private boolean ccoResolvido = false;
     private int posChaveReversora = 0;
     private int posChaveCBTC = 0;
 
@@ -123,13 +125,23 @@ public class ControladorDeEstados {
         this.boleira = boleira;
     }
 
-    // public int getPosChaveCBTC() {
-    //     return posChaveCBTC;
-    // }
+    
+    
+    public boolean isPaResolvido() {
+        return paResolvido;
+    }
 
-    // public void setPosChaveCBTC(int pos) {
-    //     this.posChaveCBTC = pos;
-    // }
+    public void setPaResolvido(boolean paResolvido) {
+        this.paResolvido = paResolvido;
+    }
+
+    public boolean isCcoResolvido() {
+        return ccoResolvido;
+    }
+
+    public void setCcoResolvido(boolean ccoResolvido) {
+        this.ccoResolvido = ccoResolvido;
+    }
 
     public int getPosChaveReversora() {return posChaveReversora;}
     public void setPosChaveReversora(int pos) {this.posChaveReversora = pos;}

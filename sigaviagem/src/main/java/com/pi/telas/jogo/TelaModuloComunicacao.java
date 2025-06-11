@@ -31,7 +31,12 @@ public class TelaModuloComunicacao {
             App.primaryStage.getScene().widthProperty().multiply(300.0 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(150.31 / 1080),
             () -> {
-                if(estados.isAvisoCCO()){
+                if (estados.isCcoResolvido()){
+                    VBox aviso = avisoPaResolvido();
+                    camadaInterativa.getChildren().add(aviso);
+                    estados.setPaResolvido(true);
+                }
+                else if(estados.isAvisoCCO()){
                     VBox aviso = avisoProblema();
                     camadaInterativa.getChildren().add(aviso);
                     estados.setPaProblema(true);
@@ -51,11 +56,17 @@ public class TelaModuloComunicacao {
             App.primaryStage.getScene().widthProperty().multiply(300.0 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(550.31 / 1080),
             () -> {
-                if(estados.isBoleira() && estados.isPaSegurarPorta()){
+                if(estados.isPortaFechada()){
+                    VBox aviso = avisoCcoResolvido();
+                    camadaInterativa.getChildren().add(aviso);
+                    estados.setCcoResolvido(true);
+                }
+                else if(estados.isBoleira() && estados.isPaSegurarPorta()){
                     VBox aviso = avisoCCO();
                     camadaInterativa.getChildren().add(aviso);
                     estados.setAvisoCCO(true);
                 }
+                
                 
             }
         );
@@ -156,6 +167,55 @@ public class TelaModuloComunicacao {
 
         return aviso;
     }
-   
+    public static VBox avisoPaResolvido() {
+        VBox aviso = new VBox();
+        aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+
+        Label mensagem = new Label("Agradeço a paciencia. O problema já foi resolvido e iremos continuar com a viagem.");
+        mensagem.setWrapText(true);
+
+        HBox botoes = new HBox();
+        botoes.setStyle("-fx-alignment: bottom-right;");
+        Button fechar = new Button("Fechar");
+        fechar.setOnAction(e -> {
+            ((Pane) aviso.getParent()).getChildren().remove(aviso);
+        });
+        botoes.getChildren().add(fechar);
+
+        aviso.getChildren().addAll(mensagem, botoes);
+
+        
+        aviso.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().subtract(aviso.prefWidthProperty()).divide(2));
+        aviso.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().subtract(aviso.prefHeightProperty()).divide(2));
+
+        return aviso;
+    }
+    public static VBox avisoCcoResolvido() {
+        VBox aviso = new VBox();
+        aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+
+        Label mensagem = new Label("O problema já foi resolvido e irei continuar com a viagem.");
+        mensagem.setWrapText(true);
+
+        HBox botoes = new HBox();
+        botoes.setStyle("-fx-alignment: bottom-right;");
+        Button fechar = new Button("Fechar");
+        fechar.setOnAction(e -> {
+            ((Pane) aviso.getParent()).getChildren().remove(aviso);
+        });
+        botoes.getChildren().add(fechar);
+
+        aviso.getChildren().addAll(mensagem, botoes);
+
+        
+        aviso.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().subtract(aviso.prefWidthProperty()).divide(2));
+        aviso.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().subtract(aviso.prefHeightProperty()).divide(2));
+
+        return aviso;
+    }
 
 }
