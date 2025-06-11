@@ -46,12 +46,12 @@ public class TelaAdmin {
         StackPane overlayLoading = criarOverlayLoading();
 
         // Layout do formulário
-        VBox layout = new VBox(20, titulo, campoLogin, campoSenha, botaoEntrar, botaoVoltar);
+       // Layout principal
+        VBox layout = new VBox(15);
+        layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(50));
-        layout.setMaxWidth(360);
-        layout.setStyle("-fx-background-color: #2a71d0; -fx-background-radius: 15;");
-
+        layout.setStyle("-fx-background-color: #0066cc;");
+        layout.getChildren().addAll(titulo, campoLogin, campoSenha, botaoEntrar, botaoVoltar);
         // Root da cena
         StackPane raiz = new StackPane(layout, overlayLoading);
         raiz.setStyle("-fx-background-color: linear-gradient(to bottom right, #1a3b72, #102a4a);");

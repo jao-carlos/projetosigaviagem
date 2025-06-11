@@ -46,7 +46,7 @@ public class TelaAutenticacao {
         estilizarCampo(campoSenha);
 
        
-        Button botaoOk = criarBotao("OK", "#ffffff", "#0066cc");
+        Button botaoOk = criarBotao("Entrar", "#ffffff", "#2a71d0", "#1f56a1");
 
        
         ProgressIndicator spinner = new ProgressIndicator();
@@ -213,6 +213,17 @@ public class TelaAutenticacao {
             "-fx-text-fill: " + corTexto + ";" +
             "-fx-background-radius: 10;"
         );
+        return botao;
+    }
+     private static Button criarBotao(String texto, String corTexto, String corFundo, String corHover) {
+        Button botao = new Button(texto);
+        botao.setPrefWidth(200);
+        botao.setFont(Font.font("Segoe UI", FontWeight.BOLD, 16));
+        botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;");
+
+        botao.setOnMouseEntered(e -> botao.setStyle("-fx-background-color: " + corHover + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;"));
+        botao.setOnMouseExited(e -> botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;"));
+
         return botao;
     }
 }
