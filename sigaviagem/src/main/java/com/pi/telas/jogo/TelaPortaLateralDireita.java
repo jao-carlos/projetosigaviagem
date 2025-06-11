@@ -58,7 +58,7 @@ public class TelaPortaLateralDireita {
                     App.primaryStage.getScene().heightProperty().multiply(1060.0 / 1080),
                     App.primaryStage.getScene().widthProperty().multiply(750.7 / 1920),
                     App.primaryStage.getScene().heightProperty().multiply(10.00 / 1080),
-                    () -> FimTreinamento.exibir("Saiu do carro com a Chave reversora em Ré",estados)
+                    () -> FimTreinamento.exibir(-9999,estados,estados.tempoDecorridoEmSegundos())
                 );
             } else {
                 porta = null; 
