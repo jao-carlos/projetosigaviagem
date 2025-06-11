@@ -185,7 +185,7 @@ public class ControladorDeEstados {
         if (painelExternoAberto) pontos -= 2; // Deixou painel aberto
         if (!portaFechada) pontos -= 4; // Porta ainda aberta
         if (posChaveReversora == 2) pontos -= 3; // Chave em ré na partida
-        if (posChaveCBTC != 1) pontos -= 2; // CBTC fora de AM no final
+        if (posChaveCBTC != 0) pontos -= 2; // CBTC fora de AM no final
         if (!avisoCCO) pontos -= 1; // Não comunicou o CCO
         if (!paSegurarPorta && !paProblema) pontos -= 1; // Não deu nenhum PA
         if (!verificouAlgoNaPorta) pontos -= 2; // Não verificou a porta
