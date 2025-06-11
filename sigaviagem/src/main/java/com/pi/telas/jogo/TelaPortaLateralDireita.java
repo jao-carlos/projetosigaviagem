@@ -22,7 +22,7 @@ public class TelaPortaLateralDireita {
 
         Pane camadaInterativa = new Pane();
     
-        BotaoPersonalizado botaoAbrir = new BotaoPersonalizado(    //Acredito que isso é só um aviso não uma tela
+        BotaoPersonalizado botaoAbrir = new BotaoPersonalizado(
             App.primaryStage.getScene().widthProperty().multiply(70.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(60.0 / 1080),
             App.primaryStage.getScene().widthProperty().multiply(345.7 / 1920),
@@ -33,7 +33,7 @@ public class TelaPortaLateralDireita {
 
         );
         camadaInterativa.getChildren().add(botaoAbrir);
-        BotaoPersonalizado botaoFechar = new BotaoPersonalizado(    //Acredito que isso é só um aviso não uma tela
+        BotaoPersonalizado botaoFechar = new BotaoPersonalizado(   
             App.primaryStage.getScene().widthProperty().multiply(70.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(70.0 / 1080),
             App.primaryStage.getScene().widthProperty().multiply(350.7 / 1920),
@@ -42,14 +42,33 @@ public class TelaPortaLateralDireita {
         );
         camadaInterativa.getChildren().add(botaoFechar);
 
-        BotaoPersonalizado porta = new BotaoPersonalizado(
-            App.primaryStage.getScene().widthProperty().multiply(1100.07 / 1920),
-            App.primaryStage.getScene().heightProperty().multiply(1060.0 / 1080),
-            App.primaryStage.getScene().widthProperty().multiply(750.7 / 1920),
-            App.primaryStage.getScene().heightProperty().multiply(10.00 / 1080),
-            () -> TelaLadoDeFora.exibir(estados)
-        );
-        camadaInterativa.getChildren().add(porta);
+        if (estados.getPosChaveCBTC() == 2) {
+            BotaoPersonalizado porta;
+            if (estados.getPosChaveReversora() == 1) {
+                porta = new BotaoPersonalizado(
+                    App.primaryStage.getScene().widthProperty().multiply(1100.07 / 1920),
+                    App.primaryStage.getScene().heightProperty().multiply(1060.0 / 1080),
+                    App.primaryStage.getScene().widthProperty().multiply(750.7 / 1920),
+                    App.primaryStage.getScene().heightProperty().multiply(10.00 / 1080),
+                    () -> TelaLadoDeFora.exibir(estados)
+                );
+            } else if (estados.getPosChaveReversora() == 2) {
+                porta = new BotaoPersonalizado(
+                    App.primaryStage.getScene().widthProperty().multiply(1100.07 / 1920),
+                    App.primaryStage.getScene().heightProperty().multiply(1060.0 / 1080),
+                    App.primaryStage.getScene().widthProperty().multiply(750.7 / 1920),
+                    App.primaryStage.getScene().heightProperty().multiply(10.00 / 1080),
+                    () -> System.out.println("Game Over") 
+                );
+            } else {
+                porta = null; 
+            }
+
+            if (porta != null) {
+                camadaInterativa.getChildren().add(porta);
+            }
+        }
+
 
         Button voltar = Seta.buttonSeta("Voltar",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
