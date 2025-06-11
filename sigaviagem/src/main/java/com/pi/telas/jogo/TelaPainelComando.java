@@ -94,7 +94,7 @@ public class TelaPainelComando {
             App.primaryStage.getScene().heightProperty().multiply(630.00 / 1080),
             () -> {
                 App.root.getChildren().clear();
-                FimTreinamento.exibir("Alavanca de partida",estados);
+                FimTreinamento.exibir(estados.calcularPontuacaoFinal(),estados,estados.tempoDecorridoEmSegundos());
             }
         );
 
