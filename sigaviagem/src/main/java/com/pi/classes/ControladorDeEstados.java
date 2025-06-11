@@ -1,6 +1,6 @@
 package com.pi.classes;
 
-public class ControladorDeEstados {    // Verifica se o usuario verificou se algo esta impedindo da porta fechar
+public class ControladorDeEstados {    
     private boolean verificouAlgoNaPorta = false;
     private boolean portaFechada=false;
     private boolean portaComFita=false;
@@ -17,7 +17,7 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
 
 
     
-    //Porta do carro
+
     public boolean isPortaFechada() {
         return portaFechada;
     }
@@ -41,7 +41,7 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public void setVerificouAlgoNaPorta(boolean verificouAlgoNaPorta) {
         this.verificouAlgoNaPorta = verificouAlgoNaPorta;
     }
-    //Chave CBTC
+    
     public int getPosChaveCBTC() {
         return posChaveCBTC;
     }
@@ -49,7 +49,7 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
     public void setPosChaveCBTC(int pos) {
         this.posChaveCBTC = pos;
     }
-    // Painel Externo
+   
     private boolean painelExternoAberto = false;
 
     public boolean isPainelExternoAberto() {
@@ -89,7 +89,7 @@ public class ControladorDeEstados {    // Verifica se o usuario verificou se alg
         return (System.currentTimeMillis() - tempoInicio) / 1000;
     }
     
-    // Estados individuais das chaves
+    
 
     public boolean isPaSegurarPorta() {
         return paSegurarPorta;

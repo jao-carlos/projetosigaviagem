@@ -21,22 +21,22 @@ public class TelaInicial {
 
     public static void exibir(ControladorDeEstados estados) {
 
-        // Imagem do símbolo do metrô (substitua pelo caminho correto)
+        
         ImageView logoMetro = new ImageView(new Image(App.class.getResourceAsStream("/imagens/logometro.png")));
         logoMetro.setFitHeight(120);
         logoMetro.setPreserveRatio(true);
 
-        // Título
+        
         Label titulo = new Label("SIGA VIAGEM");
         titulo.setFont(Font.font("Helvetica", FontWeight.EXTRA_BOLD, 36));
         titulo.setTextFill(Color.WHITE);
         titulo.setEffect(new DropShadow(4, Color.BLACK));
 
-        // Botões
+        
         Button botaoIniciarJogo = criarBotao("Iniciar Jogo");
         Button botaoEstatisticas = criarBotao("Estatísticas");
 
-        // Ações dos botões
+        
         botaoIniciarJogo.setOnAction(e -> {
             estados.marcarInicio();
             App.root.getChildren().clear();
@@ -48,17 +48,17 @@ public class TelaInicial {
             TelaEstatisticas.exibir(estados);
         });
 
-        // Layout central
+       
         VBox layout = new VBox(30);
         layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(logoMetro, titulo, botaoIniciarJogo, botaoEstatisticas);
 
-        // Fundo azul oficial do metrô de São Paulo
+        
         StackPane conteudo = new StackPane();
         conteudo.setStyle("-fx-background-color: #004d99;");
         conteudo.getChildren().add(layout);
 
-        // Mostra na tela
+        
         App.root.getChildren().setAll(conteudo);
     }
 

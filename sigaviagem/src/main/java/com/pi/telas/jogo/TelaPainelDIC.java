@@ -1,7 +1,6 @@
 package com.pi.telas.jogo;
 
 import com.pi.App;
-import com.pi.classes.BotaoPersonalizado;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
 
@@ -49,7 +48,7 @@ public class TelaPainelDIC {
 
         camadaInterativa.getChildren().addAll(chaveView, btnChave);
 
-        // Botão de seta esquerda
+        
         Button voltar = Seta.buttonSeta("Esquerda",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
@@ -63,7 +62,7 @@ public class TelaPainelDIC {
 
         camadaInterativa.getChildren().add(voltar);
 
-        // Botão de seta direita
+        
         Button direita = Seta.buttonSeta("direita",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),

@@ -1,6 +1,10 @@
 package com.pi.classes;
 
-import javafx.animation.*;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -23,17 +27,15 @@ public class BotaoPersonalizado extends Button {
         setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: transparent;");
         setCursor(Cursor.DEFAULT);
 
-        // Bindings
         prefWidthProperty().bind(largura);
         prefHeightProperty().bind(altura);
         layoutXProperty().bind(posX);
         layoutYProperty().bind(posY);
 
-        // Inicializa sombra transparente
         sombraHover.setColor(Color.web("#FFD600", 0));
         setEffect(null);
 
-        // Animação para sombra (hover e foco)
+        
         sombraAnim = new Timeline(
             new KeyFrame(Duration.ZERO,
                 new KeyValue(sombraHover.colorProperty(), Color.web("#FFD600", 0)),
@@ -46,7 +48,7 @@ public class BotaoPersonalizado extends Button {
         );
         sombraAnim.setAutoReverse(false);
 
-        // Mouse entrou: animar borda e sombra
+   
         setOnMouseEntered(e -> {
             setCursor(Cursor.HAND);
             sombraAnim.setRate(1);
@@ -54,18 +56,18 @@ public class BotaoPersonalizado extends Button {
             setEffect(sombraHover);
         });
 
-        // Mouse saiu: reverter animação
+       
         setOnMouseExited(e -> {
             setCursor(Cursor.DEFAULT);
             sombraAnim.setRate(-1);
             sombraAnim.playFrom(sombraAnim.getTotalDuration());
-            // Só remove sombra se não tiver foco
+           
             if (!isFocused()) {
                 setEffect(null);
             }
         });
 
-        // Foco teclado: mantém sombra e borda ativa
+       
         focusedProperty().addListener((obs, oldV, newV) -> {
             if (newV) {
                 sombraAnim.stop();
@@ -79,10 +81,10 @@ public class BotaoPersonalizado extends Button {
             }
         });
 
-        // Ação click
+        
         setOnAction(e -> onClickAction.run());
 
-        // Suporte teclado ENTER e SPACE
+       
         setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE) {
                 fire();
@@ -95,7 +97,7 @@ public class BotaoPersonalizado extends Button {
         this(largura, altura, posX, posY, () -> {});
     }
 
-    // Rotação suave opcional
+   
     public void setRotacao(double angulo) {
         RotateTransition rt = new RotateTransition(Duration.millis(300), this);
         rt.setToAngle(angulo);
@@ -103,7 +105,7 @@ public class BotaoPersonalizado extends Button {
         rt.play();
     }
 
-    // Helper para animar a cor da borda via CSS (não oficial, hack necessário)
+   
     private javafx.beans.property.ObjectProperty<Color> borderColorProperty() {
         return new javafx.beans.property.SimpleObjectProperty<Color>() {
             @Override
@@ -114,7 +116,7 @@ public class BotaoPersonalizado extends Button {
 
             @Override
             public Color get() {
-                return null; // Não usado
+                return null;
             }
         };
     }
