@@ -29,7 +29,7 @@ public class ChaveToggle extends Button {
     public void alternar() {
         ativo = !ativo;
 
-        RotateTransition rt = new RotateTransition(Duration.millis(200), imagemView);
+        RotateTransition rt = new RotateTransition(Duration.millis(100), imagemView);
         rt.setByAngle(ativo ? 90 : -90);
         rt.play();
     }
