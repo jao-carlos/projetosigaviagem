@@ -4,7 +4,6 @@ import com.pi.App;
 import com.pi.classes.BotaoPersonalizado;
 import com.pi.classes.ControladorDeEstados;
 import com.pi.classes.Seta;
-import com.pi.telas.login.TelaInicial;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -95,7 +94,7 @@ public class TelaPainelComando {
             App.primaryStage.getScene().heightProperty().multiply(630.00 / 1080),
             () -> {
                 App.root.getChildren().clear();
-                TelaGameOver.exibir(estados, "Alavanca de partida");
+                FimTreinamento.exibir("Alavanca de partida",estados);
             }
         );
 
@@ -133,4 +132,7 @@ public class TelaPainelComando {
 
         App.root.getChildren().setAll(conteudo);
     }
+
+    
+
 }
