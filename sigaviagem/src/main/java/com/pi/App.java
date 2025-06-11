@@ -29,8 +29,9 @@ public class App extends Application {
         stage.show();
 
         ControladorDeEstados estados = new ControladorDeEstados();
-        String a = "aaaa";
-        TelaGameOver.exibir(estados,a); 
+        // String a = "aaaa";
+        // TelaGameOver.exibir(estados,a); 
+        TelaAutenticacao.exibir(estados);
     }
     
 

@@ -14,18 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.geometry.Insets;
 
 public class TelaGameOver {
@@ -44,7 +33,7 @@ public class TelaGameOver {
         painel.setBackground(new Background(new BackgroundFill(Color.web("#5B9BD5"), new CornerRadii(10), Insets.EMPTY)));
 
         // Título
-        Label titulo = new Label("Falha no treinamento");
+        Label titulo = new Label("Fim do treinamento");
         titulo.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         titulo.setTextFill(Color.RED);
         titulo.setTextAlignment(TextAlignment.CENTER);

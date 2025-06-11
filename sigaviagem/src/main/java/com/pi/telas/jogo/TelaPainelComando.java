@@ -95,7 +95,7 @@ public class TelaPainelComando {
             App.primaryStage.getScene().heightProperty().multiply(630.00 / 1080),
             () -> {
                 App.root.getChildren().clear();
-                TelaInicial.exibir(estados);
+                TelaGameOver.exibir(estados, "Alavanca de partida");
             }
         );
 
