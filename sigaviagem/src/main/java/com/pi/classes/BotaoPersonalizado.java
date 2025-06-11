@@ -13,63 +13,81 @@ public class BotaoPersonalizado extends Button {
 
     private static final Duration DURACAO_ANIMACAO = Duration.millis(250);
 
-    private final DropShadow sombraFoco = new DropShadow(15, Color.web("#FFD600"));
+    private final DropShadow sombraHover = new DropShadow(15, Color.web("#FFD600"));
+    private Timeline sombraAnim;
 
     public BotaoPersonalizado(DoubleBinding largura, DoubleBinding altura,
                              DoubleBinding posX, DoubleBinding posY,
                              Runnable onClickAction) {
 
-        // Estilo base: transparente, sem borda visível e cursor default
-        setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 3px;");
+        setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: transparent;");
         setCursor(Cursor.DEFAULT);
 
-        // Bind propriedades para responsividade
+        // Bindings
         prefWidthProperty().bind(largura);
         prefHeightProperty().bind(altura);
         layoutXProperty().bind(posX);
         layoutYProperty().bind(posY);
 
-        // Animações para borda e sombra (hover e foco)
-        Timeline bordaHover = new Timeline(
-            new KeyFrame(Duration.ZERO, new KeyValue(borderColorProperty(), Color.TRANSPARENT)),
-            new KeyFrame(DURACAO_ANIMACAO, new KeyValue(borderColorProperty(), Color.web("#FFD600")))
-        );
+        // Inicializa sombra transparente
+        sombraHover.setColor(Color.web("#FFD600", 0));
+        setEffect(null);
 
-        Timeline bordaExit = new Timeline(
-            new KeyFrame(Duration.ZERO, new KeyValue(borderColorProperty(), Color.web("#FFD600"))),
-            new KeyFrame(DURACAO_ANIMACAO, new KeyValue(borderColorProperty(), Color.TRANSPARENT))
+        // Animação para sombra (hover e foco)
+        sombraAnim = new Timeline(
+            new KeyFrame(Duration.ZERO,
+                new KeyValue(sombraHover.colorProperty(), Color.web("#FFD600", 0)),
+                new KeyValue(borderColorProperty(), Color.TRANSPARENT)
+            ),
+            new KeyFrame(DURACAO_ANIMACAO,
+                new KeyValue(sombraHover.colorProperty(), Color.web("#FFD600", 0.8)),
+                new KeyValue(borderColorProperty(), Color.web("#FFD600"))
+            )
         );
+        sombraAnim.setAutoReverse(false);
 
-        // Eventos mouse enter/exit
+        // Mouse entrou: animar borda e sombra
         setOnMouseEntered(e -> {
             setCursor(Cursor.HAND);
-            setStyle("-fx-background-color: transparent; -fx-border-color: yellow; -fx-border-width: 3px; -fx-transition: border-color 250ms ease-in-out;");
+            sombraAnim.setRate(1);
+            sombraAnim.playFromStart();
+            setEffect(sombraHover);
         });
 
+        // Mouse saiu: reverter animação
         setOnMouseExited(e -> {
             setCursor(Cursor.DEFAULT);
-            setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 3px; -fx-transition: border-color 250ms ease-in-out;");
-        });
-
-        // Sombras no foco para acessibilidade
-        focusedProperty().addListener((obs, oldVal, novo) -> {
-            if (novo) {
-                setEffect(sombraFoco);
-            } else {
+            sombraAnim.setRate(-1);
+            sombraAnim.playFrom(sombraAnim.getTotalDuration());
+            // Só remove sombra se não tiver foco
+            if (!isFocused()) {
                 setEffect(null);
             }
         });
 
-        // Ação de clique
-        setOnAction(e -> onClickAction.run());
-
-        // Suporte a teclado: ENTER e SPACE disparam clique
-        setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.SPACE) {
-                fire();
+        // Foco teclado: mantém sombra e borda ativa
+        focusedProperty().addListener((obs, oldV, newV) -> {
+            if (newV) {
+                sombraAnim.stop();
+                setEffect(sombraHover);
+                setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: #FFD600;");
+            } else {
+                if (!isHover()) {
+                    setEffect(null);
+                    setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: transparent;");
+                }
             }
         });
 
+        // Ação click
+        setOnAction(e -> onClickAction.run());
+
+        // Suporte teclado ENTER e SPACE
+        setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE) {
+                fire();
+            }
+        });
     }
 
     public BotaoPersonalizado(DoubleBinding largura, DoubleBinding altura,
@@ -77,7 +95,7 @@ public class BotaoPersonalizado extends Button {
         this(largura, altura, posX, posY, () -> {});
     }
 
-    // Rotação suave com animação, para usar quando quiser dar mais vida ao botão
+    // Rotação suave opcional
     public void setRotacao(double angulo) {
         RotateTransition rt = new RotateTransition(Duration.millis(300), this);
         rt.setToAngle(angulo);
@@ -85,18 +103,18 @@ public class BotaoPersonalizado extends Button {
         rt.play();
     }
 
-    // Propriedade auxiliar para alterar a cor da borda (para animação mais limpa)
+    // Helper para animar a cor da borda via CSS (não oficial, hack necessário)
     private javafx.beans.property.ObjectProperty<Color> borderColorProperty() {
         return new javafx.beans.property.SimpleObjectProperty<Color>() {
             @Override
             public void set(Color value) {
-                setStyle(String.format("-fx-background-color: transparent; -fx-border-color: %s; -fx-border-width: 3px;", toRgbString(value)));
+                String cor = toRgbString(value);
+                setStyle(String.format("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: %s;", cor));
             }
 
             @Override
             public Color get() {
-                // Não necessário implementar o get, pois não usamos
-                return null;
+                return null; // Não usado
             }
         };
     }
