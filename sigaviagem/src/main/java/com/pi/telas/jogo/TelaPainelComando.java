@@ -8,7 +8,6 @@ import com.pi.classes.Seta;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -124,16 +123,7 @@ public class TelaPainelComando {
         
         StackPane conteudo = new StackPane(fundo, camadaInterativa);
 
-        conteudo.setOnMouseClicked((MouseEvent event) -> {// função que da a posição e pixels 
-            try {
-                double x = event.getX();
-                double y = event.getY();
-                System.out.println("Clique em: (" + x + ", " + y + ")");
-                
-            } catch (Exception e) {
-                System.out.println("Clique fora da area");
-            }
-        });
+       
 
         App.root.getChildren().setAll(conteudo);
     }

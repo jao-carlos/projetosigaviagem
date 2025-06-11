@@ -19,8 +19,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -31,202 +29,138 @@ public class TelaAdmin {
 
     public static void exibir(ControladorDeEstados estados) {
         // Título
-        Label titulo = new Label("ADMINISTRADOR");
-        titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
+        Label titulo = new Label("Área do Administrador");
+        titulo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 32));
         titulo.setTextFill(Color.WHITE);
-        titulo.setEffect(new DropShadow(3, Color.BLACK));
+        titulo.setEffect(new DropShadow(4, Color.BLACK));
 
-        // Inputs personalizados
-        TextField campoLogin = criarCampoPersonalizado("Login");
-        PasswordField campoSenha = criarSenhaPersonalizada("Senha");
+        // Campos de entrada
+        TextField campoLogin = criarCampoTexto("Login");
+        PasswordField campoSenha = criarCampoSenha("Senha");
 
         // Botões
-        Button botaoLogin = criarBotao("Entrar", "#ffffff", "#0066cc", "#0052a3");
-        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#cc0000", "#a30000");
+        Button botaoEntrar = criarBotao("Entrar", "#ffffff", "#2a71d0", "#1f56a1");
+        Button botaoVoltar = criarBotao("Voltar", "#ffffff", "#d02a2a", "#a11f1f");
 
-        // Indicador de progresso circular com fundo escurecido
+        // Overlay loading
         StackPane overlayLoading = criarOverlayLoading();
 
-        // Container principal do formulário
-        VBox formLayout = new VBox(15, titulo, campoLogin, campoSenha, botaoLogin, botaoVoltar);
-        formLayout.setAlignment(Pos.CENTER);
-        formLayout.setPadding(new Insets(40));
-        formLayout.setMaxWidth(320);
-        formLayout.setStyle("-fx-background-color: #0066cc; -fx-background-radius: 16;");
+        // Layout do formulário
+        VBox layout = new VBox(20, titulo, campoLogin, campoSenha, botaoEntrar, botaoVoltar);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(50));
+        layout.setMaxWidth(360);
+        layout.setStyle("-fx-background-color: #2a71d0; -fx-background-radius: 15;");
 
-        // Root com overlay do loading
-        StackPane raiz = new StackPane(formLayout, overlayLoading);
-        raiz.setStyle("-fx-background-color: linear-gradient(to bottom right, #004080, #003366);");
+        // Root da cena
+        StackPane raiz = new StackPane(layout, overlayLoading);
+        raiz.setStyle("-fx-background-color: linear-gradient(to bottom right, #1a3b72, #102a4a);");
         StackPane.setAlignment(overlayLoading, Pos.CENTER);
 
-        // Evento login
-        botaoLogin.setOnAction(e -> {
+        // Ações dos botões
+        botaoEntrar.setOnAction(event -> {
             String login = campoLogin.getText().trim();
             String senha = campoSenha.getText().trim();
 
             if (login.isEmpty() || senha.isEmpty()) {
-                mostrarAlerta(Alert.AlertType.WARNING, "Erro", "Todos os campos devem ser preenchidos.");
+                mostrarAlerta(Alert.AlertType.WARNING, "Campos vazios", "Preencha todos os campos para continuar.");
                 return;
             }
 
-            // Desativa UI, mostra loading
-            setUIEnabled(formLayout, false);
+            setUIEnabled(layout, false);
             overlayLoading.setVisible(true);
 
-            Task<Boolean> taskLogin = new Task<>() {
+            Task<Boolean> tarefaLogin = new Task<>() {
                 @Override
                 protected Boolean call() throws Exception {
                     return validarAdmin(login, senha);
                 }
             };
 
-            taskLogin.setOnSucceeded(ev -> {
-                boolean valido = taskLogin.getValue();
+            tarefaLogin.setOnSucceeded(e -> {
                 overlayLoading.setVisible(false);
-                setUIEnabled(formLayout, true);
+                setUIEnabled(layout, true);
 
-                if (valido) {
+                if (tarefaLogin.getValue()) {
                     TelaInicial.exibir(estados);
                 } else {
-                    mostrarAlerta(Alert.AlertType.ERROR, "Acesso Negado", "Login ou senha incorretos.");
+                    mostrarAlerta(Alert.AlertType.ERROR, "Acesso negado", "Login ou senha incorretos.");
                 }
             });
 
-            taskLogin.setOnFailed(ev -> {
+            tarefaLogin.setOnFailed(e -> {
                 overlayLoading.setVisible(false);
-                setUIEnabled(formLayout, true);
-                mostrarAlerta(Alert.AlertType.ERROR, "Erro Técnico", "Erro ao conectar ao banco de dados. Tente novamente.");
+                setUIEnabled(layout, true);
+                mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Não foi possível conectar ao banco. Tente novamente.");
             });
 
-            new Thread(taskLogin).start();
+            new Thread(tarefaLogin).start();
         });
 
-        // Evento voltar
-        botaoVoltar.setOnAction(e -> TelaAutenticacao.exibir(estados));
+        botaoVoltar.setOnAction(event -> TelaAutenticacao.exibir(estados));
 
-        // Cena
-        Scene cena = new Scene(raiz, 600, 400);
+        // Mostrar tela
+        Scene cena = new Scene(raiz, 700, 480);
         App.root.getChildren().setAll(raiz);
     }
 
-    private static void setUIEnabled(Pane container, boolean habilitar) {
+    private static void setUIEnabled(VBox container, boolean habilitar) {
         container.setDisable(!habilitar);
-        container.setOpacity(habilitar ? 1.0 : 0.6);
+        container.setOpacity(habilitar ? 1 : 0.5);
     }
 
     private static StackPane criarOverlayLoading() {
-        ProgressIndicator loading = new ProgressIndicator();
-        loading.setPrefSize(100, 100);
+        ProgressIndicator indicador = new ProgressIndicator();
+        indicador.setPrefSize(90, 90);
 
-        StackPane overlay = new StackPane();
-        overlay.setStyle("-fx-background-color: rgba(0,0,0,0.5);");
-        overlay.getChildren().add(loading);
+        StackPane overlay = new StackPane(indicador);
+        overlay.setStyle("-fx-background-color: rgba(0,0,0,0.55); -fx-background-radius: 15;");
         overlay.setVisible(false);
         return overlay;
     }
 
-    private static TextField criarCampoPersonalizado(String placeholder) {
+    private static TextField criarCampoTexto(String placeholder) {
         TextField campo = new TextField();
         campo.setPromptText(placeholder);
-        campo.setFont(Font.font("Helvetica", 14));
-        campo.setStyle(
-            "-fx-background-radius: 12;" +
-            "-fx-background-color: white;" +
-            "-fx-padding: 10 14;" +
-            "-fx-border-radius: 12;" +
-            "-fx-border-color: transparent;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
-        );
-        campo.focusedProperty().addListener((obs, oldV, newV) -> {
-            if (newV) {
-                campo.setStyle(
-                    "-fx-background-radius: 12;" +
-                    "-fx-background-color: white;" +
-                    "-fx-padding: 10 14;" +
-                    "-fx-border-radius: 12;" +
-                    "-fx-border-color: #3399ff;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,153,255,0.5), 8, 0.7, 0, 2);"
-                );
-            } else {
-                campo.setStyle(
-                    "-fx-background-radius: 12;" +
-                    "-fx-background-color: white;" +
-                    "-fx-padding: 10 14;" +
-                    "-fx-border-radius: 12;" +
-                    "-fx-border-color: transparent;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
-                );
-            }
+        campo.setFont(Font.font("Segoe UI", 16));
+        campo.setStyle(criarEstiloCampo(false));
+
+        campo.focusedProperty().addListener((obs, antigo, novo) -> {
+            campo.setStyle(novo ? criarEstiloCampo(true) : criarEstiloCampo(false));
         });
+
         return campo;
     }
 
-    private static PasswordField criarSenhaPersonalizada(String placeholder) {
+    private static PasswordField criarCampoSenha(String placeholder) {
         PasswordField campo = new PasswordField();
         campo.setPromptText(placeholder);
-        campo.setFont(Font.font("Helvetica", 14));
-        campo.setStyle(
-            "-fx-background-radius: 12;" +
-            "-fx-background-color: white;" +
-            "-fx-padding: 10 14;" +
-            "-fx-border-radius: 12;" +
-            "-fx-border-color: transparent;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
-        );
-        campo.focusedProperty().addListener((obs, oldV, newV) -> {
-            if (newV) {
-                campo.setStyle(
-                    "-fx-background-radius: 12;" +
-                    "-fx-background-color: white;" +
-                    "-fx-padding: 10 14;" +
-                    "-fx-border-radius: 12;" +
-                    "-fx-border-color: #3399ff;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,153,255,0.5), 8, 0.7, 0, 2);"
-                );
-            } else {
-                campo.setStyle(
-                    "-fx-background-radius: 12;" +
-                    "-fx-background-color: white;" +
-                    "-fx-padding: 10 14;" +
-                    "-fx-border-radius: 12;" +
-                    "-fx-border-color: transparent;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 4, 0.7, 0, 2);"
-                );
-            }
+        campo.setFont(Font.font("Segoe UI", 16));
+        campo.setStyle(criarEstiloCampo(false));
+
+        campo.focusedProperty().addListener((obs, antigo, novo) -> {
+            campo.setStyle(novo ? criarEstiloCampo(true) : criarEstiloCampo(false));
         });
+
         return campo;
+    }
+
+    private static String criarEstiloCampo(boolean focado) {
+        if (focado) {
+            return "-fx-background-radius: 12; -fx-background-color: white; -fx-border-radius: 12; -fx-border-color: #5599ff; -fx-border-width: 2; -fx-padding: 10 14;";
+        } else {
+            return "-fx-background-radius: 12; -fx-background-color: white; -fx-border-radius: 12; -fx-border-color: transparent; -fx-padding: 10 14;";
+        }
     }
 
     private static Button criarBotao(String texto, String corTexto, String corFundo, String corHover) {
         Button botao = new Button(texto);
-        botao.setPrefWidth(180);
-        botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        botao.setStyle(
-            "-fx-background-color: " + corFundo + ";" +
-            "-fx-text-fill: " + corTexto + ";" +
-            "-fx-background-radius: 12;" +
-            "-fx-cursor: hand;"
-        );
+        botao.setPrefWidth(200);
+        botao.setFont(Font.font("Segoe UI", FontWeight.BOLD, 16));
+        botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;");
 
-        botao.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->
-            botao.setStyle(
-                "-fx-background-color: " + corHover + ";" +
-                "-fx-text-fill: " + corTexto + ";" +
-                "-fx-background-radius: 12;" +
-                "-fx-cursor: hand;"
-            )
-        );
-
-        botao.addEventHandler(MouseEvent.MOUSE_EXITED, e ->
-            botao.setStyle(
-                "-fx-background-color: " + corFundo + ";" +
-                "-fx-text-fill: " + corTexto + ";" +
-                "-fx-background-radius: 12;" +
-                "-fx-cursor: hand;"
-            )
-        );
+        botao.setOnMouseEntered(e -> botao.setStyle("-fx-background-color: " + corHover + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;"));
+        botao.setOnMouseExited(e -> botao.setStyle("-fx-background-color: " + corFundo + "; -fx-text-fill: " + corTexto + "; -fx-background-radius: 12;"));
 
         return botao;
     }

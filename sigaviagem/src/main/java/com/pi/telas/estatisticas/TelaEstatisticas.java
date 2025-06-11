@@ -22,16 +22,16 @@ import javafx.scene.text.FontWeight;
 public class TelaEstatisticas {
 
     public static void exibir(ControladorDeEstados estados) {
-        // Eixos personalizados
+     
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setTickLabelFill(Color.WHITE);
-        xAxis.setOpacity(0); // Eixo X invisível para layout mais limpo
+        xAxis.setOpacity(0);
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setTickLabelsVisible(false);
         yAxis.setOpacity(0);
 
-        // Gráfico de barras estilizado
+       
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setLegendVisible(false);
         barChart.setHorizontalGridLinesVisible(false);
@@ -56,12 +56,10 @@ public class TelaEstatisticas {
             item.getNode().setOnMouseExited(e -> item.getNode().setStyle("-fx-bar-fill: white;"));
         }
 
-        // Título
         Label titulo = new Label("ESTATÍSTICAS");
         titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
         titulo.setTextFill(Color.WHITE);
 
-        // Botão voltar
         Button botaoVoltar = new Button("Voltar");
         botaoVoltar.setPrefWidth(150);
         botaoVoltar.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));

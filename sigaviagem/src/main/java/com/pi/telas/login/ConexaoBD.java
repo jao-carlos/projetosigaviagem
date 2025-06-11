@@ -10,12 +10,12 @@ public class ConexaoBD {
 
     private static final Logger LOGGER = Logger.getLogger(ConexaoBD.class.getName());
 
-    // Troca essas variáveis pelos seus dados do Supabase
+   
     private static final String DB_HOST = "aws-0-us-east-2.pooler.supabase.com";
     private static final String DB_PORT = "6543";
-    private static final String DB_NAME = "postgres";  // padrão Supabase
-    private static final String USUARIO = "postgres.dqzsugrhokpychwsaxon";  // <--- seu usuário do Supabase
-    private static final String SENHA = "Mauaehlegal123";  // <--- sua senha do Supabase
+    private static final String DB_NAME = "postgres";  
+    private static final String USUARIO = "postgres.dqzsugrhokpychwsaxon";  
+    private static final String SENHA = "Mauaehlegal123"; 
 
     public static Connection conectar() throws SQLException {
         validarVariaveisAmbiente();
