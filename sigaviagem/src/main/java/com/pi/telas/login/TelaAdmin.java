@@ -14,9 +14,6 @@ import javafx.scene.effect.DropShadow;
 <<<<<<< Updated upstream
 =======
 import javafx.scene.input.MouseEvent;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -28,7 +25,6 @@ import javafx.util.Duration;
 public class TelaAdmin   {
 
     public static void exibir(ControladorDeEstados estados) {
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         // Título
         Label titulo = new Label("Área do Administrador");
@@ -270,113 +266,6 @@ public class TelaAdmin   {
 
     private static Button criarBotao(String texto, String corTexto, String corFundo) {
         Button botao = new Button(texto);
-=======
-        Label titulo = new Label("ADMINISTRADOR");
-        titulo.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
-        titulo.setTextFill(Color.WHITE);
-        titulo.setEffect(new DropShadow(2, Color.BLACK));
-
-        TextField campoExemplo = new TextField();
-        campoExemplo.setPromptText("Digite algo aqui");
-        estilizarCampo(campoExemplo);
-
-        Button botaoOk = criarBotao("CONFIRMAR", "#ffffff", "#cc0000");
-
-        ProgressIndicator spinner = new ProgressIndicator();
-        spinner.setVisible(false);
-        spinner.setPrefSize(50, 50);
-
-        Label erroIcone = new Label("\u2716"); 
-        erroIcone.setTextFill(Color.web("#FF4C4C"));
-        erroIcone.setFont(Font.font("Arial Black", FontWeight.BOLD, 40));
-        erroIcone.setEffect(new DropShadow(5, Color.rgb(255, 0, 0, 0.7)));
-        erroIcone.setVisible(false);
-        erroIcone.setPrefSize(50, 50);
-        erroIcone.setAlignment(Pos.CENTER);
-
-        StackPane stackCarregamento = new StackPane(botaoOk, spinner, erroIcone);
-        stackCarregamento.setMaxSize(150, 60);
-        StackPane.setAlignment(botaoOk, Pos.CENTER);
-        StackPane.setAlignment(spinner, Pos.CENTER);
-        StackPane.setAlignment(erroIcone, Pos.CENTER);
-
-        VBox containerBotao = new VBox(10, stackCarregamento);
-        containerBotao.setAlignment(Pos.CENTER);
-
-        botaoOk.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-            botaoOk.setStyle("-fx-background-color: #0055b5; -fx-text-fill: white; -fx-background-radius: 10;");
-        });
-        botaoOk.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-            botaoOk.setStyle("-fx-background-color: #0055b5; -fx-text-fill: white; -fx-background-radius: 10;");
-        });
-
-        botaoOk.setOnAction(e -> {
-            String texto = campoExemplo.getText().trim();
-
-            erroIcone.setVisible(false);
-            botaoOk.setVisible(false);
-            spinner.setVisible(true);
-
-            if (texto.isEmpty()) {
-                spinner.setVisible(false);
-                erroIcone.setVisible(true);
-
-                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-                pause.setOnFinished(ev -> {
-                    erroIcone.setVisible(false);
-                    botaoOk.setVisible(true);
-                });
-                pause.play();
-                return;
-            }
-
-            // Simula uma tarefa assincrona qualquer (exemplo)
-            PauseTransition tarefaSimulada = new PauseTransition(Duration.seconds(1));
-            tarefaSimulada.setOnFinished(ev -> {
-                spinner.setVisible(false);
-                // Aqui você pode decidir o que fazer depois, por enquanto só volta o botão
-                botaoOk.setVisible(true);
-            });
-            tarefaSimulada.play();
-        });
-
-        Label textoVoltar = new Label("Voltar para tela anterior");
-        textoVoltar.setFont(Font.font("Helvetica", FontWeight.NORMAL, 13));
-        textoVoltar.setTextFill(Color.WHITE);
-        textoVoltar.setUnderline(true);
-
-        textoVoltar.setOnMouseEntered(ev -> {
-            textoVoltar.setTextFill(Color.LIGHTGRAY);
-            textoVoltar.setScaleX(1.03);
-            textoVoltar.setScaleY(1.03);
-        });
-        textoVoltar.setOnMouseExited(ev -> {
-            textoVoltar.setTextFill(Color.WHITE);
-            textoVoltar.setScaleX(1.0);
-            textoVoltar.setScaleY(1.0);
-        });
-
-        textoVoltar.setOnMouseClicked(ev -> {
-            // Ajuste aqui para onde quer voltar, por exemplo:
-            TelaAdmin.exibir(estados);
-        });
-
-        VBox layout = new VBox(15);
-        layout.setPadding(new Insets(40));
-        layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #0066cc;");
-        layout.getChildren().addAll(titulo, campoExemplo, containerBotao, textoVoltar);
-
-        App.root.getChildren().setAll(layout);
-    }
-
-    private static void estilizarCampo(TextField campo) {
-        campo.setStyle("-fx-background-radius: 10; -fx-padding: 8; -fx-font-size: 14;");
-    }
-
-    private static Button criarBotao(String texto, String corTexto, String corFundo) {
-        Button botao = new Button(texto);
->>>>>>> Stashed changes
         botao.setPrefWidth(150);
         botao.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         botao.setStyle(
@@ -384,9 +273,6 @@ public class TelaAdmin   {
             "-fx-text-fill: " + corTexto + ";" +
             "-fx-background-radius: 10;"
         );
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
         return botao;
     }
