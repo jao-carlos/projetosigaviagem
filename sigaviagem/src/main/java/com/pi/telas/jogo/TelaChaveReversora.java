@@ -34,11 +34,11 @@ public class TelaChaveReversora {
         Image chaveImg = new Image(App.class.getResource("/imagens/SoChaveReversora.png").toExternalForm());
         ImageView chaveView = new ImageView(chaveImg);
 
-        chaveView.setFitWidth(App.primaryStage.getScene().getWidth() * (1000.0 / 1920));
+        chaveView.setFitWidth(App.primaryStage.getScene().getWidth() * (1550.0 / 1920));
         chaveView.setPreserveRatio(true);
 
-        chaveView.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.0 / 1920));
-        chaveView.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(200.0 / 1080));
+        chaveView.layoutXProperty().bind(App.primaryStage.getScene().widthProperty().multiply(220.0 / 1920));
+        chaveView.layoutYProperty().bind(App.primaryStage.getScene().heightProperty().multiply(50 / 1080));
 
         double[] angulos = {0, -90, 90};
 

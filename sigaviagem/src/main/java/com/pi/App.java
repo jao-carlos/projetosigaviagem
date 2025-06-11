@@ -1,6 +1,7 @@
 package com.pi;
 
 import com.pi.classes.ControladorDeEstados;
+import com.pi.telas.jogo.TelaChaveReversora;
 import com.pi.telas.jogo.TelaModuloComunicacao;
 import com.pi.telas.jogo.TelaPainelExterno;
 import com.pi.telas.login.TelaAutenticacao;
@@ -28,7 +29,7 @@ public class App extends Application {
 
         ControladorDeEstados estados = new ControladorDeEstados();
 
-        TelaAutenticacao.exibir(estados); 
+        TelaChaveReversora.exibir(estados); 
     }
     
 
