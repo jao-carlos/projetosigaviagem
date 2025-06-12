@@ -26,7 +26,7 @@ public class TelaMesa {
         
         Pane camadaInterativa = new Pane();
 
-        Button direita = Seta.buttonSeta("direita",
+        Button direita = Seta.buttonSeta("Direita",
             App.primaryStage.getScene().widthProperty().multiply(180.07 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(145.0 / 1080),
             "dir");
