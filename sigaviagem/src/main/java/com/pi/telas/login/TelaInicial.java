@@ -35,6 +35,11 @@ public class TelaInicial {
         
         Button botaoIniciarJogo = criarBotao("Iniciar Jogo");
         Button botaoEstatisticas = criarBotao("Estatísticas");
+        Button fecharTela =criarBotao("Fechar jogo");
+
+        fecharTela.setOnAction(e -> {
+            javafx.application.Platform.exit();
+        });
 
         
         botaoIniciarJogo.setOnAction(e -> {
@@ -53,7 +58,7 @@ public class TelaInicial {
        
         VBox layout = new VBox(30);
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(logoMetro, titulo, botaoIniciarJogo, botaoEstatisticas);
+        layout.getChildren().addAll(logoMetro, titulo, botaoIniciarJogo, botaoEstatisticas, fecharTela);
 
         
         StackPane conteudo = new StackPane();
