@@ -93,8 +93,8 @@ public class TelaModuloComunicacao {
     public static VBox avisoPorta() {
         VBox aviso = new VBox();
         aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
-        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(400.00/1920));
-        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00 / 1080));
 
         Label mensagem = new Label("Não segurem as portas do trem, isso causa atrasos em todo o sistema.");
         mensagem.setWrapText(true);
@@ -119,8 +119,8 @@ public class TelaModuloComunicacao {
     public static VBox avisoCCO() {
         VBox aviso = new VBox();
         aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
-        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(400.00/1920));
-        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00 / 1080));
 
         Label mensagem = new Label("Foi avisado ao CCO o problema e você foi instruido a sair para verificar o problema.");
         mensagem.setWrapText(true);
@@ -145,8 +145,8 @@ public class TelaModuloComunicacao {
     public static VBox avisoProblema() {
         VBox aviso = new VBox();
         aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
-        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.00/1920));
-        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00 / 1080));
 
         Label mensagem = new Label("Paramos devido a uma falha neste trem, estamos trabalhando para a normalização, agradecemos a compreensão.");
         mensagem.setWrapText(true);
@@ -170,8 +170,8 @@ public class TelaModuloComunicacao {
     public static VBox avisoPaResolvido() {
         VBox aviso = new VBox();
         aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
-        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.00/1920));
-        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00 / 1080));
 
         Label mensagem = new Label("Agradeço a paciencia. O problema já foi resolvido e iremos continuar com a viagem.");
         mensagem.setWrapText(true);
@@ -195,8 +195,8 @@ public class TelaModuloComunicacao {
     public static VBox avisoCcoResolvido() {
         VBox aviso = new VBox();
         aviso.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue; -fx-font-size: 15px; -fx-padding: 15; -fx-spacing: 10;");
-        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(500.00/1920));
-        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(120.00 / 1080));
+        aviso.prefWidthProperty().bind(App.primaryStage.getScene().widthProperty().multiply(600.00/1920));
+        aviso.prefHeightProperty().bind(App.primaryStage.getScene().heightProperty().multiply(150.00 / 1080));
 
         Label mensagem = new Label("O problema já foi resolvido e irei continuar com a viagem.");
         mensagem.setWrapText(true);
