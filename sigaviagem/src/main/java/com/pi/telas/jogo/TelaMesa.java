@@ -66,7 +66,6 @@ public class TelaMesa {
             adesivo.setOnAction(e -> {
                 estados.setAdesivoRemovido(true);
                 camadaInterativa.getChildren().remove(adesivo);
-                System.out.println("Adesivo clicado e removido");
             });
             
             camadaInterativa.getChildren().add(adesivo);
@@ -94,7 +93,6 @@ public class TelaMesa {
             cinturao.setOnAction(e -> {
                 estados.setCinturaoRemovido(true);
                 camadaInterativa.getChildren().remove(cinturao);
-                System.out.println("Cinturao clicado e removido");
             });
 
             camadaInterativa.getChildren().add(cinturao);

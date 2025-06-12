@@ -53,8 +53,6 @@ public class TelaPainelComando {
             App.primaryStage.getScene().widthProperty().multiply(597.00 / 1920),
             App.primaryStage.getScene().heightProperty().multiply(570.04 / 1080),
             () -> {
-                long tempo = estados.tempoDecorridoEmSegundos();
-                System.out.println("Tempo decorrido: " + tempo + " segundos.");
                 App.root.getChildren().clear();
                 TelaChaveReversora.exibir(estados);
             }
