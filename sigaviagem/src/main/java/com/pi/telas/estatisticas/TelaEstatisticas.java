@@ -20,7 +20,7 @@ public class TelaEstatisticas {
         titulo.setTextFill(Color.WHITE);
         titulo.setStyle("-fx-effect: dropshadow(gaussian, black, 3, 0.5, 1, 1);");
 
-        Label tempo = criarLabel("Tempo total: " + estados.tempoDecorridoEmSegundos() + " segundos");
+        Label tempo = criarLabel("Tempo total: " + estados.getTempoFinal()+ " segundos");
         Label cco = criarLabel("Aviso ao CCO: " + (estados.isAvisoCCO() ? "Enviado" : "Não enviado"));
         Label pa = criarLabel("PA emitido: " + (estados.isPaSegurarPorta() || estados.isPaProblema() ? "Sim" : "Não"));
         Label chaveReversora = criarLabel("Posição da Chave Reversora: " + estados.getPosChaveReversora());

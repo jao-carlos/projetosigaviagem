@@ -18,6 +18,7 @@ public class ControladorDeEstados {
     private int posChaveCBTC = 0;
     private int pontuacao = 0;
 
+
     public void setPontuacao(int pontos) {
         this.pontuacao = pontos;
     }
@@ -92,13 +93,24 @@ public class ControladorDeEstados {
     }
 
     private long tempoInicio;
+    private long tempoFinal;
 
     public void marcarInicio() {
         tempoInicio = System.currentTimeMillis();
     }
 
     public long tempoDecorridoEmSegundos() {
-        return (System.currentTimeMillis() - tempoInicio) / 1000;
+        long x =(System.currentTimeMillis() - tempoInicio) / 1000;
+        setTempoFinal(x);
+        return x;
+    }
+
+    public void setTempoFinal(long tempoFinal) {
+        this.tempoFinal = tempoFinal;
+    }
+
+    public long getTempoFinal() {
+        return tempoFinal;
     }
     
     
